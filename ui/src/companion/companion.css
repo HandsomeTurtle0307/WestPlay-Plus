@@ -97,7 +97,7 @@ button {
   letter-spacing: -0.01em;
 }
 
-/* Where WestPlay is now: a dot, and a line. */
+/* Where WestPlay Plus is now: a dot, and a line. */
 .cp-state {
   display: flex;
   align-items: center;
@@ -196,7 +196,7 @@ button {
   transform: scale(0.97);
 }
 
-/* WestPlay's pages elsewhere, at the foot: each a round of glass with its mark, in the site's colour as it's
+/* WestPlay Plus's pages elsewhere, at the foot: each a round of glass with its mark, in the site's colour as it's
    pointed at. */
 .cp-socials {
   display: flex;
@@ -490,7 +490,7 @@ button {
   margin-top: 4px;
 }
 
-/* WestPlay leaving: the whole room fades to black. */
+/* WestPlay Plus leaving: the whole room fades to black. */
 .cp[data-leaving-pc] > * {
   opacity: 0;
   transition: opacity 1600ms ease 200ms;
@@ -766,7 +766,7 @@ button {
   object-fit: cover;
 }
 
-/* Where a set has no icon of its own: WestPlay's, faded. */
+/* Where a set has no icon of its own: WestPlay Plus's, faded. */
 .cz-set:not(:first-child) .cz-strip img[data-own] {
   opacity: 0.35;
 }

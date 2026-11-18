@@ -15,10 +15,8 @@ import { MapPage } from './pages/MapPage'
 import { screenState } from './pages/page'
 import { ScreenPage } from './pages/ScreenPage'
 import { Setup } from './pages/Setup'
-import { Support } from './pages/Support'
 import { LanguageSheet } from './pages/LanguageSheet'
 import { UninstallSheet } from './pages/UninstallSheet'
-import { FinishUpdate, UpdateSheet } from './pages/UpdateSheet'
 import { GameStoppedSheet } from './pages/GameStoppedSheet'
 import { useGameStopped } from './gameStopped'
 import { type CompanionWords, companionWords, type SectionId } from './pages/words'
@@ -30,14 +28,13 @@ import { useDemo } from './room/useDemo'
 import './companion.css'
 import { defaultMapAddress, GAME_KINDS, GAME_SHORT_NAMES, type GameCheck, type SetupState, setupState } from './setup'
 import { FILES_BASE, useCustomizations } from './customize'
-import { type Offer, useUpdateOffer } from './update'
-import { type HostStatus, openSocial, type Social, useHostStatus } from './useHostStatus'
+import { type HostStatus, useHostStatus } from './useHostStatus'
 import { useKeyName } from './keys'
 import { DEFAULT_KEY, type SettingsState, useSettings } from './useSettings'
 
 /**
  * The companion window: its onboarding on the first run (until it's gone through), then the room it ends in.
- * The truck's screen stays in its dark room, turned aside at the right, the live WestPlay on it; the
+ * The truck's screen stays in its dark room, turned aside at the right, the live WestPlay Plus on it; the
  * sections are a list at the left, each with what it is now; the page in between. Each section shows on the
  * screen what it's about (its app, its banner, the cursor using it), as the onboarding's steps did.
  */
@@ -94,7 +91,6 @@ const SECTIONS: SectionId[][] = [
   ['screen', 'controls', 'customize'],
   ['accounts', 'map'],
   ['setup', 'about'],
-  ['support'],
 ]
 /** The sections in order: the tutorial's tour goes through them. */
 const TOUR = SECTIONS.flat()
@@ -166,17 +162,13 @@ function Room({
   // Who's signed in, known at once (what was last known), and asked as the companion opens if never known.
   const signedIn = useSignedIn(status)
   useAskOnce()
-  // The uninstall sheet over the room, and the room fading as WestPlay leaves.
+  // The uninstall sheet over the room, and the room fading as WestPlay Plus leaves.
   const [uninstalling, setUninstalling] = useState(false)
   // The language sheet (Setup).
   const [choosingLanguage, setChoosingLanguage] = useState(false)
   const [leavingPc, setLeavingPc] = useState(false)
-  // An update found, offered in its sheet once per version (Later puts it off; About opens it again).
-  const update = useUpdateOffer()
   // The player's wallpapers and icon sets, for Customize and the room's screen.
   const { custom, refresh: refreshCustom } = useCustomizations()
-  const [updateShown, setUpdateShown] = useState(false)
-  const offered = useRef<string | null>(null)
   const root = useRef<HTMLDivElement>(null)
   const arrived = useRef(performance.now() + ARRIVE_MS)
 
@@ -228,7 +220,7 @@ function Room({
     settling: () => Math.max(0, arrived.current - performance.now()),
   }
 
-  // On as soon as WestPlay in it is ready: it's been on all along (the player dove into it).
+  // On as soon as WestPlay Plus in it is ready: it's been on all along (the player dove into it).
   useEffect(() => {
     if (!demo.ready || powered) return
     send({ type: 'power', on: true })
@@ -268,11 +260,6 @@ function Room({
     else open(TOUR[at + 1])
   }
   const roomShown = phase === 'tour' || phase === 'room'
-  useEffect(() => {
-    if (!update || phase !== 'room' || offered.current === update.version) return
-    offered.current = update.version
-    setUpdateShown(true)
-  }, [update, phase])
 
   // The maps being prepared, worked out once: the Map page's bar and the sidebar show the same.
   const mapProgress = useMapProgress(status)
@@ -288,8 +275,6 @@ function Room({
     signedIn,
     uninstall: () => setUninstalling(true),
     chooseLanguage: () => setChoosingLanguage(true),
-    update,
-    showUpdate: () => setUpdateShown(true),
     custom,
     refreshCustom,
     tutorial: () => setPhase('lesson'),
@@ -347,7 +332,6 @@ function Room({
                 signedIn={signedIn}
                 settings={settings}
                 setup={setup}
-                update={update}
                 mapProgress={mapProgress}
               />
             )}
@@ -358,7 +342,6 @@ function Room({
             {roomShown && section === 'map' && <MapPage {...page} />}
             {roomShown && section === 'setup' && <Setup {...page} />}
             {roomShown && section === 'about' && <About {...page} />}
-            {roomShown && section === 'support' && <Support {...page} />}
             {phase === 'tour' && (
               <TourCard cw={cw} section={section} last={section === TOUR[TOUR.length - 1]} next={nextInTour} />
             )}
@@ -373,10 +356,6 @@ function Room({
             {uninstalling && (
               <UninstallSheet cw={cw} close={() => setUninstalling(false)} farewell={() => setLeavingPc(true)} />
             )}
-            {updateShown && update && !uninstalling && (
-              <UpdateSheet cw={cw} offer={update} close={() => setUpdateShown(false)} />
-            )}
-            {phase === 'room' && <FinishUpdate cw={cw} setup={setup} />}
             {over}
           </ScreenContext.Provider>
         </RoomText.Provider>
@@ -386,8 +365,8 @@ function Room({
 }
 
 /**
- * The sections, at the left: WestPlay's name and where it is now, then each section with what it is now
- * (WestPlay on or off, the key, who's signed in, the map, the game's version, WestPlay's own or an update), in
+ * The sections, at the left: WestPlay Plus's name and where it is now, then each section with what it is now
+ * (WestPlay Plus on or off, the key, who's signed in, the map, the game's version, WestPlay Plus's own or an update), in
  * groups. The one that's open is lit by a capsule of glass that glides from section to section.
  */
 function SectionList({
@@ -399,7 +378,6 @@ function SectionList({
   signedIn,
   settings,
   setup,
-  update,
   mapProgress,
 }: {
   section: SectionId
@@ -410,7 +388,6 @@ function SectionList({
   signedIn: SignedIn
   settings: SettingsState
   setup: SetupState
-  update: Offer | null
   mapProgress: MapProgress
 }) {
   const list = useRef<HTMLElement>(null)
@@ -448,17 +425,17 @@ function SectionList({
     setup: GAME_KINDS.filter((kind) => setup.games.some((game) => game.kind === kind))
       .map((kind) => GAME_SHORT_NAMES[kind])
       .join(' & '),
-    about: update ? cw.update.badge : version,
+    about: version,
     support: '',
   }
 
   let place = 2
   return (
-    <nav ref={list} className="cp-list" aria-label="WestPlay">
+    <nav ref={list} className="cp-list" aria-label="WestPlay Plus">
       <header className="cp-brand ob-in" style={n(0)}>
         <img src="/westplay.png" alt="" />
         <span>
-          <b>WestPlay</b>
+          <b>WestPlay Plus</b>
           <span className="cp-state" data-state={state}>
             <i />
             {cw.state[state]}
@@ -484,49 +461,10 @@ function SectionList({
           ))}
         </div>
       ))}
-      <footer className="cp-socials ob-in" style={n(place++)}>
-        {SOCIALS.map(({ site, name, glyph }) => (
-          <button
-            key={site}
-            type="button"
-            data-site={site}
-            title={name}
-            aria-label={name}
-            onClick={() => {
-              openSocial(site).catch((error: unknown) => console.error(`${name} could not be opened`, error))
-            }}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d={glyph} />
-            </svg>
-          </button>
-        ))}
-      </footer>
     </nav>
   )
 }
 
-/** WestPlay's pages elsewhere, at the foot of the list: each by its own name and mark (Simple Icons' glyphs, CC0). */
-const SOCIALS: { site: Social; name: string; glyph: string }[] = [
-  {
-    site: 'youtube',
-    name: 'YouTube',
-    glyph:
-      'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
-  },
-  {
-    site: 'discord',
-    name: 'Discord',
-    glyph:
-      'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z',
-  },
-  {
-    site: 'patreon',
-    name: 'Patreon',
-    glyph:
-      'M22.957 7.21c-.004-3.064-2.391-5.576-5.191-6.482-3.478-1.125-8.064-.962-11.384.604C2.357 3.231 1.093 7.391 1.046 11.54c-.039 3.411.302 12.396 5.369 12.46 3.765.047 4.326-4.804 6.068-7.141 1.24-1.662 2.836-2.132 4.801-2.618 3.376-.836 5.678-3.501 5.673-7.031Z',
-  },
-]
 
 function mapValue(status: HostStatus | null, progress: MapProgress, cw: CompanionWords, words: Words): string {
   const map = status?.map
@@ -546,7 +484,7 @@ function mapValue(status: HostStatus | null, progress: MapProgress, cw: Companio
   }
 }
 
-/** WestPlay's version, once the app has said. */
+/** WestPlay Plus's version, once the app has said. */
 function useVersion(): string {
   const [version, setVersion] = useState('')
   useEffect(() => {

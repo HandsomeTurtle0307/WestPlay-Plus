@@ -23,7 +23,7 @@ const ROLES: AppIconRole[] = [
 ]
 
 describe('appIcon', () => {
-  it('gives every role WestPlay’s icon in the look asked for, and each file is there', () => {
+  it('gives every role WestPlay Plus’s icon in the look asked for, and each file is there', () => {
     for (const role of ROLES) {
       for (const look of ['light', 'dark'] as const) {
         expect(FILES).toContain(appIcon(role, look))

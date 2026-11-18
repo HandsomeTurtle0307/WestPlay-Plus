@@ -14,7 +14,7 @@ export const GAME_NAMES: Record<GameKind, string> = {
 /** Each game's short name, as players say it (the list's line under Setup). */
 export const GAME_SHORT_NAMES: Record<GameKind, string> = { ets2: 'ETS2', ats: 'ATS' }
 
-/** The games WestPlay works with, in the order the companion lists them. */
+/** The games WestPlay Plus works with, in the order the companion lists them. */
 export const GAME_KINDS: GameKind[] = ['ets2', 'ats']
 
 export interface GameInfo {
@@ -22,7 +22,7 @@ export interface GameInfo {
   dir: string
   foundBy: 'steam' | 'installed' | 'chosen'
   version: string | null
-  /** WestPlay has been tried with this version. */
+  /** WestPlay Plus has been tried with this version. */
   tested: boolean
   dlcs: number
 }
@@ -31,12 +31,12 @@ export interface GameInfo {
 export interface SetupState {
   /** The onboarding was gone through: the companion opens on its own pages. */
   finished: boolean
-  /** The game WestPlay is set up in, if it is: ETS2's, else the one set up (until the companion shows each). */
+  /** The game WestPlay Plus is set up in, if it is: ETS2's, else the one set up (until the companion shows each). */
   game: GameInfo | null
-  /** Every game WestPlay is set up in. */
+  /** Every game WestPlay Plus is set up in. */
   games: GameInfo[]
-  /** WestPlay was updated since it put its plugin and mod into that game: the new ones go in once it's
-   * closed (`FinishUpdate`). */
+  /** WestPlay Plus was updated since it put its plugin and mod into that game: the new ones go in once it's
+   * closed (`Setup` reinstall puts them in). */
   updated: boolean
   /** Those games, each to put the new plugin and mod into. */
   outdated: GameInfo[]
@@ -57,9 +57,9 @@ export interface GameCheck {
   mapDlcs: string[]
   /** The most recently saved first. */
   profiles: ProfileCheck[]
-  /** The trucks WestPlay is made for, and whether the player can have it in each. */
+  /** The trucks WestPlay Plus is made for, and whether the player can have it in each. */
   trucks: TruckCheck[]
-  /** Why WestPlay's mod can't be built from this game, if it can't. */
+  /** Why WestPlay Plus's mod can't be built from this game, if it can't. */
   modProblem: string | null
   plugin: 'missing' | 'current' | 'different'
   /** Other CarPlay apps installed in the game, which take the trucks' screens: to be removed. */
@@ -71,7 +71,7 @@ export interface TruckCheck {
   id: string
   /** In English. */
   name: string
-  /** `notYet`: in the game, but WestPlay doesn't draw on its screen yet. */
+  /** `notYet`: in the game, but WestPlay Plus doesn't draw on its screen yet. */
   fit: 'ready' | 'notInGame' | 'notYet'
   /** A mod's truck, not the game's. */
   fromMod: boolean
@@ -85,9 +85,9 @@ export interface ProfileCheck {
   map: string
   /** The mods that change its map, as the game names them. */
   mapMods: string[]
-  /** Map mods WestPlay couldn't read. */
+  /** Map mods WestPlay Plus couldn't read. */
   unreadable: number
-  /** It plays HVT's map, which WestPlay doesn't allow. */
+  /** It plays HVT's map, which WestPlay Plus doesn't allow. */
   hvtMap: boolean
 }
 
@@ -103,7 +103,7 @@ export type PluginOutcome =
 export interface InstallReport {
   plugin: PluginOutcome
   modError: string | null
-  /** WestPlay is set up in this game: its map is built next. */
+  /** WestPlay Plus is set up in this game: its map is built next. */
   done: boolean
 }
 
@@ -126,23 +126,23 @@ export function defaultMapAddress(status: HostStatus | null): { base: string; bu
   return status?.mapFolder ? { base: `${MAPS}/${encodeURIComponent(status.mapFolder)}`, built: status.mapBuilt } : null
 }
 
-/** What taking WestPlay out of the game did. Mirrors the app's `setup::UninstallReport`; its `plugin` is
+/** What taking WestPlay Plus out of the game did. Mirrors the app's `setup::UninstallReport`; its `plugin` is
  * `installed` once the plugin is gone (the install's outcomes, the other way round). */
 export interface UninstallReport {
   plugin: PluginOutcome
   modError: string | null
   profilesChanged: number
   profilesFailed: number
-  /** WestPlay is out of the game: it can leave the PC next. */
+  /** WestPlay Plus is out of the game: it can leave the PC next. */
   done: boolean
 }
 
-/** Takes WestPlay out of the game (its profiles' mods, its screens, the plugin), the game closed. */
+/** Takes WestPlay Plus out of the game (its profiles' mods, its screens, the plugin), the game closed. */
 export const uninstallFromGame = (administrator: boolean) =>
   call<UninstallReport>('uninstall_from_game', { administrator })
-/** WestPlay's data goes while the uninstall shows it going (it can take a while): its engine stops, then the
+/** WestPlay Plus's data goes while the uninstall shows it going (it can take a while): its engine stops, then the
  * sign-ins, and unless `keep`, the maps, the player's own looks and the settings. */
 export const removeData = (keep: boolean) => call<void>('remove_data', { keep })
-/** WestPlay leaves the PC (what was in use until it ends, and the app if it was installed), keeping settings
+/** WestPlay Plus leaves the PC (what was in use until it ends, and the app if it was installed), keeping settings
  * and maps if `keep`, and quits. */
 export const leavePc = (keep: boolean) => call<void>('leave_pc', { keep })

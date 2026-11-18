@@ -6,7 +6,7 @@ import type { SettingsState } from '../useSettings'
 import type { CompanionWords } from './words'
 
 /**
- * The language WestPlay speaks, in the cab and here (owner 2026-11-03: the player may choose one over the
+ * The language WestPlay Plus speaks, in the cab and here (owner 2026-11-03: the player may choose one over the
  * game's), in a sheet over the room as iOS lists languages: Automatic (the game's), then each of the game's by
  * its own name, with its name in the language now shown under it; a tick on the chosen. Choosing one closes the
  * sheet, and the companion and the cab change to it at once.

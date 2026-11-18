@@ -22,7 +22,7 @@ import { pixelsPerMetre } from './projection'
  * map has the game's picture of its world, the sea beyond the picture and the picture's own sea: `world-sea`); `land`
  * polygons over it (everything the sea doesn't cover); `water` polygons, painted by the game; `area` polygons with `color` (0 paved, 1 light, 2 dark, 3 green)
  * and `over`; `road` lines with `class` and `width` in metres. Labels are drawn by the page (MapLabels), in
- * WestPlay's own type.
+ * WestPlay Plus's own type.
  */
 
 export const MAP_SOURCE = 'westplay-map'

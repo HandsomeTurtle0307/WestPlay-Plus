@@ -15,7 +15,7 @@ async function inFront(): Promise<boolean> {
   return document.visibilityState === 'visible' && windowInFront()
 }
 
-/** The live WestPlay in the screen (cabin.html in demo mode, cabin/demo.ts): commands to it, its icons'
+/** The live WestPlay Plus in the screen (cabin.html in demo mode, cabin/demo.ts): commands to it, its icons'
  * places from it. While the window isn't in front, the room and the demo in it hold still (`away`: what never
  * ends paused, nothing drawn), and go on as it comes back. */
 export function useDemo(): {

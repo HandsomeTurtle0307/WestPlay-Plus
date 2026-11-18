@@ -100,7 +100,7 @@ interface CabinState {
   /** Whether its roads rise to their real heights, as set there too. */
   mapRoads: boolean
   /** The player's own tone curve (Settings › Equalizer), and whether it plays (Custom) or the speakers as tuned
-   * (Recommended, flat): kept with WestPlay's settings, the host sends them. */
+   * (Recommended, flat): kept with WestPlay Plus's settings, the host sends them. */
   equalizer: Equalizer
   equalizerCustom: boolean
   /** The screen's brightness (Settings › Appearance): the slider's place, 0 to 1, full at 1. The host scales the
@@ -108,9 +108,9 @@ interface CabinState {
   brightness: number
   power: PowerState
   /**
-   * The screen is handed back to the truck (its stock screen shows, with WestPlay's button to come back),
-   * like CarPlay's car button. Not kept: WestPlay comes back with every power-up, like CarPlay reconnecting.
-   * Never on WestPlay's tablet, which is no truck's screen: nothing would show there (owner 2026-11-11).
+   * The screen is handed back to the truck (its stock screen shows, with WestPlay Plus's button to come back),
+   * like CarPlay's car button. Not kept: WestPlay Plus comes back with every power-up, like CarPlay reconnecting.
+   * Never on WestPlay Plus's tablet, which is no truck's screen: nothing would show there (owner 2026-11-11).
    */
   truckScreen: boolean
   navigate(action: NavigationAction): void
@@ -123,7 +123,7 @@ interface CabinState {
   setTextSize(step: number): void
   setReduceTransparency(on: boolean): void
   /** One band of the curve, set in Settings › Equalizer (choosing Custom): played by every player, and kept with
-   * WestPlay's settings. */
+   * WestPlay Plus's settings. */
   setEqualizerBand(band: keyof Equalizer, db: number): void
   /** Custom (the curve plays) or Recommended (flat), the curve kept either way. */
   chooseEqualizer(custom: boolean): void
@@ -131,7 +131,7 @@ interface CabinState {
   resetEqualizer(): void
   setBrightness(level: number): void
   setOemMode(mode: OemMode): void
-  /** The player's choice, in Settings: applied, and kept with WestPlay's settings. */
+  /** The player's choice, in Settings: applied, and kept with WestPlay Plus's settings. */
   chooseOemMode(mode: OemMode): void
   powerEvent(event: PowerEvent): void
   setTruckScreen(shown: boolean): void
@@ -177,7 +177,7 @@ export const useCabin = create<CabinState>()(
       setAppearanceMode: (appearanceMode) => set({ appearanceMode }),
       setWallpaper: (id) => {
         set({ wallpaperId: id })
-        // Kept with WestPlay's settings, where the companion's Customize sees it.
+        // Kept with WestPlay Plus's settings, where the companion's Customize sees it.
         if (isInHost()) postToHost({ type: 'wallpaper', id })
       },
       setDashboardWidget: (widget, shown) =>
@@ -243,7 +243,7 @@ export const useCabin = create<CabinState>()(
         reduceTransparency: state.reduceTransparency,
         brightness: state.brightness,
       }),
-      // Stored data comes from an earlier version of WestPlay (or was edited): keep only what is valid.
+      // Stored data comes from an earlier version of WestPlay Plus (or was edited): keep only what is valid.
       merge: (stored, current) => ({ ...current, ...sanitize(stored as Partial<Persisted> | undefined) }),
     },
   ),
@@ -257,7 +257,7 @@ function sanitize(stored: Partial<Persisted> | undefined): Partial<Persisted> {
     result.navigation = {
       route,
       recents: recents.filter(isReleasedApp),
-      // Saved before WestPlay remembered it: the screen shown, or the Dashboard (where it starts).
+      // Saved before WestPlay Plus remembered it: the screen shown, or the Dashboard (where it starts).
       base: base === 'home' || base === 'dashboard' ? base : route.kind === 'home' ? 'home' : 'dashboard',
     }
   }
@@ -295,13 +295,13 @@ export interface LiveState {
   truck: TruckInfo | null
   /** The player's job (`null`: none). */
   job: JobInfo | null
-  /** The kind of screen the game draws WestPlay on; `null` until it has drawn one. */
+  /** The kind of screen the game draws WestPlay Plus on; `null` until it has drawn one. */
   screenLayout: ScreenLayoutId | null
   /** The cities whose garages the player owns, and their headquarters' (none until the host has read their
    * save). */
   ownedGarages: string[]
   headquarters: string | null
-  /** The player plays on a map by HVT, which WestPlay doesn't allow: the game's language to say so in.
+  /** The player plays on a map by HVT, which WestPlay Plus doesn't allow: the game's language to say so in.
    * `null`: not (or not known yet). */
   hvtMap: { language: string | null } | null
   /** The game's language (its `g_lang_init`, e.g. `tr_tr`; `null` until the host has read it). */
@@ -411,7 +411,7 @@ function previewLayout(): ScreenLayoutId | null {
 }
 
 /**
- * Feeds host messages into the stores, and tells the host whether WestPlay is open on the truck's screen
+ * Feeds host messages into the stores, and tells the host whether WestPlay Plus is open on the truck's screen
  * (as the page connects, and whenever it opens or closes). Returns the unsubscribe function; call once at
  * startup. The power sequence follows the truck's electrics (and only changes when they change).
  */
@@ -549,7 +549,7 @@ function receiveHostMessage(now: () => number): (message: HostMessage) => void {
         const cabin = useCabin.getState()
         cabin.setOemMode(message.truckStrip === 'off' ? 'off' : 'auto')
         if (message.wallpaper) useCabin.setState({ wallpaperId: message.wallpaper })
-        // Chosen here before WestPlay kept it with its settings: kept now.
+        // Chosen here before WestPlay Plus kept it with its settings: kept now.
         else if (cabin.wallpaperId !== DEFAULT_WALLPAPER_ID) postToHost({ type: 'wallpaper', id: cabin.wallpaperId })
         useCabin.setState({
           equalizer: toEqualizer(message.equalizer),

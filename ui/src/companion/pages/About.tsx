@@ -1,38 +1,30 @@
 import { useEffect, useState } from 'react'
 import { appVersion } from '../bridge'
-import { Button, Group, Panel, Row } from '../room/parts'
+import { Button, Group, Note, Panel, Row } from '../room/parts'
 import { banner } from '../room/room'
 import { GLOW, useScreenAt } from '../room/screen'
-import { lookForUpdate } from '../update'
 import { GAME_NAMES, type GameInfo } from '../setup'
-import { appLogPlace, type HostStatus } from '../useHostStatus'
+import { appLogPlace, type HostStatus, openReleasePage } from '../useHostStatus'
 import { type PageProps, screenState } from './page'
 
 /** How long the screen says the report was copied. */
 const COPIED_MS = 3200
 
 /**
- * WestPlay itself: its version and whether there's an update (looked for as the page opens; one found opens
- * its sheet), and the live details of WestPlay and the game for when something isn't
- * right, with a report of them to copy for whoever helps, and where the logs are (app.log in WestPlay's own
- * folder where Documents refused it). On the room's screen, the Dashboard; a banner says when the report's
- * copied.
+ * WestPlay Plus itself: its version and where its releases are (this branch has no automatic updates), and
+ * the live details of WestPlay Plus and the game for when something isn't right, with a report of them to copy for
+ * whoever helps, and where the logs are (app.log in WestPlay Plus's own folder where Documents refused it). On the
+ * room's screen, the Dashboard; a banner says when the report's copied.
  */
-export function About({ status, setup, cw, update, showUpdate }: PageProps) {
+export function About({ status, setup, cw }: PageProps) {
   const w = cw.about
   const [version, setVersion] = useState('')
   const [copied, setCopied] = useState(false)
-  // Whether there's an update: the one found, or none after looking again.
-  const [looked, setLooked] = useState(false)
   // Where this run's app.log is; null if it couldn't be made anywhere.
   const [appLog, setAppLog] = useState<string | null>(null)
   useEffect(() => {
     appVersion().then(setVersion, () => setVersion(''))
     appLogPlace().then(setAppLog, () => setAppLog(null))
-    lookForUpdate().then(
-      () => setLooked(true),
-      () => setLooked(true),
-    )
   }, [])
   useEffect(() => {
     if (!copied) return
@@ -62,18 +54,17 @@ export function About({ status, setup, cw, update, showUpdate }: PageProps) {
     >
       <Group place={4}>
         <Row title={w.version} value={version} />
-        {update ? (
-          <Row
-            title={cw.update.row}
-            value={cw.update.available.replace('{version}', update.version)}
-            link
-            onClick={showUpdate}
-          />
-        ) : (
-          <Row title={cw.update.row} value={looked ? cw.update.upToDate : undefined} />
-        )}
       </Group>
-      <Group title={w.diagnostics} place={5}>
+      <Group title={w.updateNote.title} place={5}>
+        <Note tone="calm">{w.updateNote.text}</Note>
+        <Row
+          title={w.updateNote.releases}
+          detail="github.com/HandsomeTurtle0307/WestPlay-Plus/releases"
+          link
+          onClick={() => void openReleasePage()}
+        />
+      </Group>
+      <Group title={w.diagnostics} place={6}>
         <Row
           title={w.frames}
           value={status?.screenDrawing ? w.perSecond.replace('{n}', String(status.framesPerSecond)) : '—'}
@@ -82,7 +73,7 @@ export function About({ status, setup, cw, update, showUpdate }: PageProps) {
         <Row title={w.cabGpu} detail={status?.cabAdapter ?? '—'} />
         <Row title={w.gameGpu} detail={status?.gameAdapter ?? w.waitingForGame} />
         <Row title={w.webview} value={status?.webviewVersion || '—'} />
-        <Row title={w.log} detail="Documents\WestPlay\logs\plugin.log" />
+        <Row title={w.log} detail="Documents\WestPlay Plus\logs\plugin.log" />
         <Row title={w.appLog} detail={appLog ?? '—'} />
       </Group>
     </Panel>
@@ -92,7 +83,7 @@ export function About({ status, setup, cw, update, showUpdate }: PageProps) {
 /** The report to copy: plain facts, in English (for whoever helps), nothing of the player's accounts. */
 function report(version: string, status: HostStatus | null, games: GameInfo[], appLog: string | null): string {
   return [
-    `WestPlay ${version}`,
+    `WestPlay Plus ${version}`,
     ...(games.length
       ? games.map((game) => `Game: ${GAME_NAMES[game.kind]} ${game.version ?? 'unknown'} (${game.dir})`)
       : ['Game: none set up']),

@@ -34,7 +34,7 @@ const PAGE_ZOOM = 1.3
  * open over it (Shell.tsx), the cab's covers over it left (hole.ts): the keyboard rises over it, as over everything
  * (owner 2026-11-08), the page scrolling the field typed into into sight (safari.js). The page isn't part of
  * the cab, so it can't move with it: while Safari's window grows or shrinks, or its screen comes or goes, the
- * tab's picture stands in, and the page takes over where it stops. Outside WestPlay (a plain browser) the
+ * tab's picture stands in, and the page takes over where it stops. Outside WestPlay Plus (a plain browser) the
  * picture is all there is.
  */
 export function WebPage({ tab, url }: { tab: number; url: string }) {

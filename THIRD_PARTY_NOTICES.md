@@ -1,6 +1,6 @@
 # Third-party notices
 
-WestPlay uses or follows the work below. Each notice is reproduced as its licence requires.
+WestPlay Plus uses or follows the work below. Each notice is reproduced as its licence requires.
 
 ## ts-map
 
@@ -227,10 +227,10 @@ specific language governing permissions and limitations under the License.
 
 ## The tablet's model
 
-WestPlay's tablet accessory is made from "Ipad Air 5 (FREE)" by Art_bor
+WestPlay Plus's tablet accessory is made from "Ipad Air 5 (FREE)" by Art_bor
 (<https://sketchfab.com/3d-models/ipad-air-5-free-628ab0359d774af480be8eda9de70272>), licensed under
 Creative Commons Attribution 4.0 (<https://creativecommons.org/licenses/by/4.0/>). Changed: turned into the
 game's model format and turned landscape (`tools/dev/tablet_model.py`); its ground plane and its screen's
-picture left out; its parts coloured from one small texture; WestPlay's screen shown on its glass, and a stand
+picture left out; its parts coloured from one small texture; WestPlay Plus's screen shown on its glass, and a stand
 and a hanging bar added (`crates/setup/src/tablet.rs`). The tablet's model descriptor is laid out as Kedi739's
 tablet mod's was, used with his permission.

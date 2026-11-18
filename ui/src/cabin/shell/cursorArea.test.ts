@@ -23,7 +23,7 @@ describe("the host's cursor's area", () => {
     })
   })
 
-  it('is the whole frame while the screen is handed to the truck (WestPlay’s button over it)', () => {
+  it('is the whole frame while the screen is handed to the truck (WestPlay Plus’s button over it)', () => {
     expect(cursorArea({ left: 600, top: 300, right: 700, bottom: 350, radius: 6 }, frame, true)).toEqual({
       left: 2,
       top: 2,

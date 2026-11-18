@@ -8,7 +8,7 @@ import { loadSeaTiles, seaTilesUrl } from './seaTiles'
  * profile they play: crates/host maps.rs): vector tiles, and a small manifest with their zooms and bounds,
  * where the map starts, and the place names.
  *
- * In WestPlay the host names the map's folder (`map` messages), served at `https://westplay.maps/`; it names
+ * In WestPlay Plus the host names the map's folder (`map` messages), served at `https://westplay.maps/`; it names
  * another when the player plays another profile (another map, other map mods), and none until a map is built.
  * A plain browser (development) has the map exported into public/dev-map/ (git-ignored, never shipped).
  */
@@ -57,10 +57,10 @@ export interface MapData {
   /** Where the player can be routed (places.ts): the file's address, `null` without one. */
   places: string | null
   /** Which country each part of the map is in, and their time zones (state/timeZone.ts): the file's address,
-   * `null` without one (a map built before WestPlay read them). */
+   * `null` without one (a map built before WestPlay Plus read them). */
   countries: string | null
   /** The game's map scale between cities (its world this much smaller than the distances its GPS gives): the
-   * map's own (ETS2's 19, ATS's 20), ETS2's for a map built before WestPlay read it. */
+   * map's own (ETS2's 19, ATS's 20), ETS2's for a map built before WestPlay Plus read it. */
   scale: number
 }
 
@@ -83,7 +83,7 @@ export function cameraBounds(data: Pick<MapData, 'bounds' | 'world'>): [[number,
   ]
 }
 
-/** ETS2's map scale between cities: a map's before WestPlay read its own. */
+/** ETS2's map scale between cities: a map's before WestPlay Plus read its own. */
 const ETS2_SCALE = 19
 
 /** Where the map is: its folder's address (absolute: MapLibre fetches tiles from its worker), and which
@@ -94,7 +94,7 @@ const useMapFolder = create<{ base: string | null | undefined; built: number | n
   built: null,
 }))
 
-/** In WestPlay, not known until the host says; in a browser, the development map; elsewhere (tests), none. */
+/** In WestPlay Plus, not known until the host says; in a browser, the development map; elsewhere (tests), none. */
 function firstBase(): string | null | undefined {
   if (typeof window === 'undefined') return null
   return isInHost() ? undefined : `${location.origin}${DEV_MAP}`

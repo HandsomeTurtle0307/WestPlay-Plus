@@ -1,4 +1,4 @@
-/* Player (PlayerApp.tsx): WestPlay's own player for the game's music folder, in the cab's iOS 26 colours
+/* Player (PlayerApp.tsx): WestPlay Plus's own player for the game's music folder, in the cab's iOS 26 colours
    (shell/apple.css) with its own key colour, orange (its icon's). Scoped under .shell: the shell's button reset
    outranks single-class rules. */
 

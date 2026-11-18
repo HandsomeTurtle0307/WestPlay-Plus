@@ -1,8 +1,8 @@
 import type { CustomWallpaper, IconSet } from './customize'
 
 /**
- * Messages from the WestPlay host to the cabin page (WebView2 web messages). Mirrors the Rust side:
- * `westplay_shared::Telemetry`, `westplay_shared::TruckInfo`, the screen layout the game draws WestPlay on
+ * Messages from the WestPlay Plus host to the cabin page (WebView2 web messages). Mirrors the Rust side:
+ * `westplay_shared::Telemetry`, `westplay_shared::TruckInfo`, the screen layout the game draws WestPlay Plus on
  * (an id from crates/shared/screen_layouts.txt), and the app's dev commands.
  */
 
@@ -95,11 +95,11 @@ export type HostMessage =
   | { type: 'telemetry'; data: Telemetry }
   | { type: 'truck'; data: TruckInfo }
   | { type: 'job'; data: JobInfo }
-  /** `null` until the game has drawn a WestPlay screen. Checked against the known ids on arrival. */
+  /** `null` until the game has drawn a WestPlay Plus screen. Checked against the known ids on arrival. */
   | { type: 'screen'; layout: string | null }
-  /** The settings the page applies: whether the truck's own strip stays beside WestPlay
+  /** The settings the page applies: whether the truck's own strip stays beside WestPlay Plus
    * (`westplay_host::settings::TruckStrip`), the wallpaper (`null`: none chosen yet) and the player's icon set
-   * (`null`: WestPlay's own). Sent as the page loads and whenever they change. */
+   * (`null`: WestPlay Plus's own). Sent as the page loads and whenever they change. */
   | {
       type: 'settings'
       truckStrip: string
@@ -129,7 +129,7 @@ export type HostMessage =
   | { type: 'garages'; owned: string[]; headquarters: string | null }
   /** The game's answer to the page's `route` request `id`. */
   | { type: 'routeAnswer'; id: number; answer: RouteAnswer }
-  /** WestPlay's own routes for the page's `routes` request `id` (none: no road graph, or no way there). */
+  /** WestPlay Plus's own routes for the page's `routes` request `id` (none: no road graph, or no way there). */
   | { type: 'routes'; id: number; routes: PlannedRoute[] }
   /** What route `index` offered for the page's `routes` request `id` is drawn from, read from the game's files as the
    * game's route is (`route` and `routePaths`): its map nodes, `[x, z, forward x, forward z]`, the ways through its
@@ -152,7 +152,7 @@ export type HostMessage =
   | { type: 'typed'; events: TypedEvent[] }
   /** Whether the player's own keyboard types into the field selected. */
   | { type: 'typingState'; state: TypingState }
-  /** Whether the player plays on a map by HVT, which WestPlay doesn't allow; and the game's language. */
+  /** Whether the player plays on a map by HVT, which WestPlay Plus doesn't allow; and the game's language. */
   | { type: 'mapBlock'; hvt: boolean; language: string | null }
   /** Whether the player's profile has the game's time zones on (its clock the time where the truck is). */
   | { type: 'timeZones'; on: boolean }
@@ -177,7 +177,7 @@ export type HostMessage =
     }
   /** The truck's progress along the route: the index of the map node ahead of it. */
   | { type: 'routeNext'; next: number }
-  /** Open (or close) WestPlay on the truck's screen: the companion window's switch. */
+  /** Open (or close) WestPlay Plus on the truck's screen: the companion window's switch. */
   | { type: 'westplay'; open: boolean }
   /** The game's weather (`null` when it can't be read: no game, or a game version whose weather the host
    * doesn't know). */
@@ -189,7 +189,7 @@ export type HostMessage =
   /** Whether the game's window shows (`false`: minimised, or on another desktop; in front or not: Lossless
    * Scaling's window is in front of it). */
   | { type: 'gameShown'; shown: boolean }
-  /** The player's stops along the route `id`: their map nodes' indices in it, ascending (not WestPlay's own
+  /** The player's stops along the route `id`: their map nodes' indices in it, ascending (not WestPlay Plus's own
    * waypoints, nor the destination). */
   | { type: 'routeStops'; id: number | null; stops: number[] }
   /** The game's menu gone while it's still paused: its still picture before the truck moves on. */
@@ -210,7 +210,7 @@ export type HostMessage =
   | { type: 'youtubeAccount'; signedIn: boolean; avatar: string | null }
   /** Whether Google's sign-in window is open on the PC's desktop. */
   | { type: 'youtubeSignIn'; open: boolean }
-  /** The map the cab shows: its folder in WestPlay's maps (served at `https://westplay.maps/`), and when it
+  /** The map the cab shows: its folder in WestPlay Plus's maps (served at `https://westplay.maps/`), and when it
    * was built; `null` for none (none built yet). */
   | { type: 'map'; folder: string | null; built: number | null }
   /** Spotify's web player: whether it's signed in and playing (`null`: not running), and whether its sign-in
@@ -218,7 +218,7 @@ export type HostMessage =
   | { type: 'spotify'; signedIn: boolean | null; playing: boolean | null; signingIn: boolean }
   /** Spotify's answer to the Spotify app's question `id` (`failed`: Spotify didn't answer). */
   | ({ type: 'spotifyAnswer'; id: number; failed?: boolean } & Partial<SpotifyAnswers>)
-  /** What Spotify plays (on WestPlay, or elsewhere on the account through Spotify Connect); `null`: nothing. */
+  /** What Spotify plays (on WestPlay Plus, or elsewhere on the account through Spotify Connect); `null`: nothing. */
   | { type: 'spotifyPlayback'; playback: SpotifyPlayback | null }
   /** Apple Music's web player: whether it's signed in and playing (`null`: not running), and whether its
    * sign-in window is open on the PC. */
@@ -314,15 +314,15 @@ export type PageMessage =
   /** The cab's guidance (the next turn it shows and how far), every 30 s while there's a route, for the host's log
    * (cabin/maps/guidanceLog.ts). */
   | { type: 'guidance'; line: string }
-  /** Whether WestPlay is open on the truck's screen (or the truck's original screen shows): posted as the
+  /** Whether WestPlay Plus is open on the truck's screen (or the truck's original screen shows): posted as the
    * page connects and whenever it changes, for the companion window. */
   | { type: 'westplay'; open: boolean }
-  /** The wallpaper chosen in Settings (wallpapers.ts), kept with WestPlay's settings (the companion's too). */
+  /** The wallpaper chosen in Settings (wallpapers.ts), kept with WestPlay Plus's settings (the companion's too). */
   | { type: 'wallpaper'; id: string }
   /** The Vehicle Bar (the truck's strip) kept or not, chosen in Settings › Appearance, kept the same way. */
   | { type: 'truckStrip'; strip: 'auto' | 'off' }
   /** The players' tone, set in Settings › Equalizer: the player's curve, and whether it plays (Custom) or the
-   * speakers as tuned (Recommended); kept with WestPlay's settings and played by every player. */
+   * speakers as tuned (Recommended); kept with WestPlay Plus's settings and played by every player. */
   | ({ type: 'equalizer'; custom: boolean } & Equalizer)
   /** The music's spectrum wanted (Settings › Equalizer open) or not: the host answers `spectrum` as it plays. */
   | { type: 'spectrum'; on: boolean }
@@ -633,7 +633,7 @@ export interface SpotifyPlayback {
   repeat: SpotifyRepeat
   /** The playing device's volume, 0 to 1 (`null`: none Spotify can set). */
   volume: number | null
-  /** Playing on WestPlay's own device, not another of the account's (a phone); missing: taken as here. */
+  /** Playing on WestPlay Plus's own device, not another of the account's (a phone); missing: taken as here. */
   here?: boolean
   next: SpotifyTrack[]
 }
@@ -1142,7 +1142,7 @@ export type TypingState = 'off' | 'typing' | 'paused'
  * alone (not on a job), or no more stops. */
 export type RouteAction = 'addStop' | 'go' | 'end'
 
-/** A route WestPlay planned (crates/host planner.rs): what it's planned for, its length (metres) and time
+/** A route WestPlay Plus planned (crates/host planner.rs): what it's planned for, its length (metres) and time
  * (seconds), both on the map's ground (the page gives them in the game's scale), and its line through its
  * map nodes (`[x, z]`, metres). */
 export interface PlannedRoute {
@@ -1153,7 +1153,7 @@ export interface PlannedRoute {
 }
 
 /** How the game answered: done, or why not (`noAnswer`: no game to ask, or it didn't answer in time;
- * `elevated`: the game runs as administrator, so WestPlay can't see its route, a `followed` answer's). */
+ * `elevated`: the game runs as administrator, so WestPlay Plus can't see its route, a `followed` answer's). */
 export type RouteAnswer =
   'done' | 'alreadyThere' | 'onJob' | 'full' | 'noSuchNode' | 'unsupported' | 'unexpected' | 'noAnswer' | 'elevated'
 
@@ -1173,7 +1173,7 @@ declare global {
  * even inside a WebView2 (the companion's own). See cabin/demo.ts. */
 export const IS_DEMO = typeof location !== 'undefined' && new URLSearchParams(location.search).has('demo')
 
-/** Whether the page runs inside the WestPlay host (and not in a plain browser preview, nor as the demo). */
+/** Whether the page runs inside the WestPlay Plus host (and not in a plain browser preview, nor as the demo). */
 export function isInHost(): boolean {
   return !IS_DEMO && window.chrome?.webview !== undefined
 }

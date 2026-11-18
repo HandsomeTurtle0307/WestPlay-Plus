@@ -18,7 +18,7 @@ import {
 import './player.css'
 
 /**
- * Player (owner 2026-11-04): WestPlay's own player for the game's music folder, the song files the player put
+ * Player (owner 2026-11-04): WestPlay Plus's own player for the game's music folder, the song files the player put
  * there (one folder for all the game's profiles). The folder's songs in one list, Play and Shuffle over it; a song
  * without tags shows its file's name. At the foot the mini player; pressed, Now Playing rises over all. The host
  * lists and plays them (player.ts), through the truck's own speakers.

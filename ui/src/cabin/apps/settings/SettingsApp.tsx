@@ -39,7 +39,7 @@ import { cabClock, EQUALIZER_BANDS, EQUALIZER_MOST, type Equalizer, isInHost, po
 /**
  * The Settings app, in iOS 26's Settings look: a large title, inset grouped cards, coloured tiles, chevrons
  * and pill switches, in Apple's colours (shell/apple.css). Only the player's own CarPlay choices live here;
- * WestPlay's management (the cab's sound, the companion's options) belongs to the companion window.
+ * WestPlay Plus's management (the cab's sound, the companion's options) belongs to the companion window.
  *
  * Appearance (with Text Size), Wallpaper, the Dashboard's widgets, Now Playing's album art, the Equalizer, and the
  * clock's 24-hour time.
@@ -241,7 +241,7 @@ function SearchEnginePage() {
   )
 }
 
-/** Date & Time: 24-Hour Time, as iOS's (owner 2026-10-28); off, every time WestPlay shows is 12-hour, with AM and
+/** Date & Time: 24-Hour Time, as iOS's (owner 2026-10-28); off, every time WestPlay Plus shows is 12-hour, with AM and
  * PM but in the sidebar. */
 function DateTimePage() {
   const text = useText()
@@ -262,7 +262,7 @@ function AppearancePage() {
   const mode = useCabin((state) => state.appearanceMode)
   const setMode = useCabin((state) => state.setAppearanceMode)
   const wanted = useWantedAppearance()
-  // The Vehicle Bar: only on a screen that has one (the truck's own bar, beside WestPlay).
+  // The Vehicle Bar: only on a screen that has one (the truck's own bar, beside WestPlay Plus).
   const hasBar = useScreenProfile().oemStrip !== null
   const oemMode = useCabin((state) => state.oemMode)
   const chooseOemMode = useCabin((state) => state.chooseOemMode)

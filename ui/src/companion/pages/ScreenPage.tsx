@@ -7,8 +7,8 @@ import { type PageProps, screenState } from './page'
 import type { CoachSpeakers } from '../useSettings'
 
 /**
- * The truck's screen: where WestPlay is now (its headline), WestPlay on it or the truck's own, and the
- * connection from WestPlay to the game to the screen. On the room's screen, Home, and WestPlay saying the
+ * The truck's screen: where WestPlay Plus is now (its headline), WestPlay Plus on it or the truck's own, and the
+ * connection from WestPlay Plus to the game to the screen. On the room's screen, Home, and WestPlay Plus saying the
  * same in a banner.
  */
 export function ScreenPage({ status, settings, setup, cw }: PageProps) {
@@ -47,7 +47,7 @@ export function ScreenPage({ status, settings, setup, cw }: PageProps) {
               disabled={open === null || !status?.screenDrawing}
               label={w.show}
               change={(on) => {
-                setWestplayOpen(on).catch((error: unknown) => console.error('WestPlay could not be switched', error))
+                setWestplayOpen(on).catch((error: unknown) => console.error('WestPlay Plus could not be switched', error))
               }}
             />
           }
@@ -101,9 +101,9 @@ export function ScreenPage({ status, settings, setup, cw }: PageProps) {
 }
 
 /**
- * The graphics card WestPlay's screen is drawn on: WestPlay's pick (the game's), or one the player chooses
+ * The graphics card WestPlay Plus's screen is drawn on: WestPlay Plus's pick (the game's), or one the player chooses
  * when that one stutters, as iOS lists choices (a tick on the chosen, as the onboarding's game folders). The
- * one drawing it now says so; a choice starts WestPlay's screen again on that card. Only with more than one
+ * one drawing it now says so; a choice starts WestPlay Plus's screen again on that card. Only with more than one
  * card to choose from.
  */
 function GpuChooser({ status, settings: state, cw }: Pick<PageProps, 'status' | 'settings' | 'cw'>) {

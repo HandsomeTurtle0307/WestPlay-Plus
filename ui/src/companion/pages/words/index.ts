@@ -1,7 +1,7 @@
 /**
  * The companion's own words, past the onboarding: its sections, their pages, the tutorial and the uninstall,
  * in each of the game's 43 languages (by the game's codes, as the onboarding's words), in the game's language
- * as WestPlay speaks it in the cab; English for a language the game doesn't have. Each language says "you"
+ * as WestPlay Plus speaks it in the cab; English for a language the game doesn't have. Each language says "you"
  * as its onboarding does (informally or not) and names things as it does (the truck, the game's Mod Manager).
  * What the onboarding already says (the keys, the sign-ins, the map's stages, the game's summary) is the
  * onboarding's words.
@@ -10,12 +10,12 @@
  */
 export interface CompanionWords {
   sections: Record<SectionId, string>
-  /** The list's line under WestPlay's name: where WestPlay is now. */
+  /** The list's line under WestPlay Plus's name: where WestPlay Plus is now. */
   state: {
     starting: string
     stopped: string
     noGame: string
-    /** The player's truck isn't one WestPlay shows in. */
+    /** The player's truck isn't one WestPlay Plus shows in. */
     unsupported: string
     notInCab: string
     live: string
@@ -63,10 +63,10 @@ export interface CompanionWords {
     truckScreen: string
     /** `{fps}` */
     screenLive: string
-    /** The truck screen's row, in a truck WestPlay doesn't show in. */
+    /** The truck screen's row, in a truck WestPlay Plus doesn't show in. */
     screenUnsupported: string
     screenNotInView: string
-    /** The graphics card the screen is drawn on (its group is titled with `about.gpu`): WestPlay's pick, or
+    /** The graphics card the screen is drawn on (its group is titled with `about.gpu`): WestPlay Plus's pick, or
      * one the player chose. */
     gpuAuto: string
     gpuAutoDetail: string
@@ -82,8 +82,8 @@ export interface CompanionWords {
     coachPassengersDetail: string
     coachNote: string
     coachNoteAny: string
-    /** The game runs as administrator: WestPlay can't read its route, guidance or weather (owner 2026-10-28:
-     * WestPlay doesn't reach into an elevated game; the player is told). */
+    /** The game runs as administrator: WestPlay Plus can't read its route, guidance or weather (owner 2026-10-28:
+     * WestPlay Plus doesn't reach into an elevated game; the player is told). */
     elevated: { title: string; text: string }
     banners: {
       live: { title: string; text: string }
@@ -170,7 +170,7 @@ export interface CompanionWords {
     closeGame: { title: string; text: string }
     checking: { title: string; text: string }
     checked: { title: string; text: string }
-    /** The language WestPlay speaks (a row, and its list): one chosen, or Automatic, the game's (`{name}`). */
+    /** The language WestPlay Plus speaks (a row, and its list): one chosen, or Automatic, the game's (`{name}`). */
     language: string
     languageAutomatic: string
     languageAutomaticDetail: string
@@ -193,10 +193,12 @@ export interface CompanionWords {
     webview: string
     waitingForGame: string
     log: string
-    /** The app's own log (app.log), with where it is: Documents, or WestPlay's folder where Documents refused it. */
+    /** The app's own log (app.log), with where it is: Documents, or WestPlay Plus's folder where Documents refused it. */
     appLog: string
     copy: string
     copied: { title: string; text: string }
+    /** This branch's updates: it has none automatic, its Releases page instead (owner 2026-11-18). */
+    updateNote: { title: string; text: string; releases: string }
   }
   /** Customize: the player's own wallpapers and app icons. `{n}`: a count; `{names}`: names, listed. */
   customize: {
@@ -225,7 +227,7 @@ export interface CompanionWords {
     nothingAdded: string
     problems: { notAnImage: string; tooLarge: string; unknownName: string; twice: string; unreadable: string }
   }
-  /** WestPlay's updates: the About page's row, the list's note, the sheet offering one, and finishing one
+  /** WestPlay Plus's updates: the About page's row, the list's note, the sheet offering one, and finishing one
    * (its plugin and mod into the game). `{version}`: the update's. */
   update: {
     row: string
@@ -244,7 +246,7 @@ export interface CompanionWords {
     banners: { updating: { title: string; text: string }; updated: { title: string; text: string } }
     finish: { title: string; text: string; button: string }
   }
-  /** Support me: WestPlay's development, supported on its maker's Kreosus page (opened in the browser). */
+  /** Support me: WestPlay Plus's development, supported on its maker's Kreosus page (opened in the browser). */
   support: {
     title: string
     sub: string

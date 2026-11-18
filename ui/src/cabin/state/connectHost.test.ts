@@ -23,7 +23,7 @@ afterEach(() => {
 })
 
 describe('connectHost', () => {
-  it('tells the host whether WestPlay is open, and opens or closes it when the host asks', async () => {
+  it('tells the host whether WestPlay Plus is open, and opens or closes it when the host asks', async () => {
     const webview = fakeWebView()
     vi.stubGlobal('window', { chrome: { webview: webview.bridge } })
     const { connectHost, useCabin } = await import('./store')
@@ -43,7 +43,7 @@ describe('connectHost', () => {
     webview.send({ type: 'westplay', open: false })
     expect(westplay()).toHaveLength(2)
 
-    // Opened in the cab (its WestPlay button): reported too.
+    // Opened in the cab (its WestPlay Plus button): reported too.
     useCabin.getState().setTruckScreen(false)
     expect(useCabin.getState().truckScreen).toBe(false)
     expect(westplay().at(-1)).toEqual({ type: 'westplay', open: true })
@@ -71,7 +71,7 @@ describe('connectHost', () => {
     disconnect()
   })
 
-  it("never hands WestPlay's tablet to the truck: it's no truck's screen", async () => {
+  it("never hands WestPlay Plus's tablet to the truck: it's no truck's screen", async () => {
     const webview = fakeWebView()
     vi.stubGlobal('window', { chrome: { webview: webview.bridge } })
     const { connectHost, useCabin } = await import('./store')

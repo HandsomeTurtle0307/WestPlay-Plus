@@ -78,7 +78,7 @@ export interface Strings {
     full: string
     onJob: string
     noAnswer: string
-    /** The game runs as administrator: WestPlay can't see its route. */
+    /** The game runs as administrator: WestPlay Plus can't see its route. */
     elevated: string
     unsupported: string
     failed: string
@@ -355,7 +355,7 @@ export interface Strings {
     mute: string
     unmute: string
   }
-  /** YouTube Music: WestPlay's own app, in the look of YouTube Music's tablet app. */
+  /** YouTube Music: WestPlay Plus's own app, in the look of YouTube Music's tablet app. */
   youtubeMusic: {
     tabs: { home: string; explore: string; library: string; search: string }
     searchHint: string
@@ -434,7 +434,7 @@ export interface Strings {
     roads: string
     roadStates: { dry: string; damp: string; wet: string }
     roadTrends: { drying: string; gettingWet: string }
-    /** No game, or one whose weather WestPlay can't read. */
+    /** No game, or one whose weather WestPlay Plus can't read. */
     unavailable: string
   }
   /** The Settings app: its pages, rows and the words under them. */
@@ -444,7 +444,7 @@ export interface Strings {
     dark: string
     automatic: string
     automaticFooter: string
-    /** The truck's information bar beside WestPlay (the DAF's, the Scania Smart Dash's), and what it is. */
+    /** The truck's information bar beside WestPlay Plus (the DAF's, the Scania Smart Dash's), and what it is. */
     vehicleBar: string
     vehicleBarFooter: string
     textSize: string

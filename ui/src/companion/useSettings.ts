@@ -13,13 +13,13 @@ export interface Settings {
     /** Cursor speed multiplier, `SENSITIVITY.min`..`SENSITIVITY.max`. */
     sensitivity: number
   }
-  /** What WestPlay does from the game, by the player's keys. */
+  /** What WestPlay Plus does from the game, by the player's keys. */
   keybinds: Record<KeybindId, Binding>
   screen: {
     truckStrip: TruckStrip
   }
   /** How the screen looks (Customize): a wallpaper's id and one of the player's icon sets, by name; `null`:
-   * none chosen (the cab's default wallpaper, WestPlay's own icons). */
+   * none chosen (the cab's default wallpaper, WestPlay Plus's own icons). */
   look: {
     wallpaper: string | null
     iconSet: string | null
@@ -27,7 +27,7 @@ export interface Settings {
     iconStyle: IconStyle
   }
   /** The graphics card the screen is drawn on: one the player chose (an `Adapter`'s id), or `null`:
-   * WestPlay picks (the game's). */
+   * WestPlay Plus picks (the game's). */
   graphics: {
     gpu: string | null
   }
@@ -45,7 +45,7 @@ export interface Settings {
     roads: boolean
     fast: boolean
   }
-  /** The language WestPlay speaks in the cab and here: one of the game's (`de_de`), or `null`: the game's. */
+  /** The language WestPlay Plus speaks in the cab and here: one of the game's (`de_de`), or `null`: the game's. */
   language: string | null
 }
 
@@ -53,7 +53,7 @@ export interface Settings {
  * unit over the passengers' seats. */
 export type CoachSpeakers = 'driver' | 'passengers'
 
-/** Mirrors `westplay_host::settings::TruckStrip`: the truck's own strip beside WestPlay, kept or not. */
+/** Mirrors `westplay_host::settings::TruckStrip`: the truck's own strip beside WestPlay Plus, kept or not. */
 export type TruckStrip = 'auto' | 'off'
 
 /** Mirrors `westplay_host::settings::KeyCode`: a key of the keyboard or a button of the mouse, as Windows
@@ -70,7 +70,7 @@ export const KEY_PRESETS: Record<KeyPreset, KeyCode> = {
   mouseForward: 0x06,
 }
 
-/** The key WestPlay starts with: Left Alt. */
+/** The key WestPlay Plus starts with: Left Alt. */
 export const DEFAULT_KEY = KEY_PRESETS.leftAlt
 
 /** Mirrors `westplay_host::settings::InteractionMode`. */

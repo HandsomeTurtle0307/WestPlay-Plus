@@ -37,7 +37,7 @@ export function Sidebar() {
         ))}
       </nav>
       <div className="sidebar-actions">
-        {/* Not on WestPlay's tablet: it's no truck's screen, nothing to hand back to (owner 2026-11-11). */}
+        {/* Not on WestPlay Plus's tablet: it's no truck's screen, nothing to hand back to (owner 2026-11-11). */}
         {!tablet && (
           <button
             type="button"

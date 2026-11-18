@@ -2,7 +2,7 @@ import type { TruckInfo } from '../../shared/host'
 import type { OemStripId } from './oem'
 
 /**
- * The kinds of in-cabin screen WestPlay is drawn on: the game's GPS layouts the mod patches, in the order of
+ * The kinds of in-cabin screen WestPlay Plus is drawn on: the game's GPS layouts the mod patches, in the order of
  * crates/shared/screen_layouts.txt (the order sets each layout's screen texture size; a test checks it). The
  * plugin reports which one the game is drawing.
  */
@@ -59,7 +59,7 @@ export function pageRows(rows: number, layout: ScreenLayoutId | null): number {
   return (rows * pageHeight(layout)) / SCREEN_HEIGHT
 }
 
-/** How WestPlay fits one truck's screen. */
+/** How WestPlay Plus fits one truck's screen. */
 export interface ScreenProfile {
   /** For development notices, e.g. "Scania Smart Dash". */
   name: string
@@ -83,7 +83,7 @@ export interface ScreenProfile {
    * the truck and Home buttons' symbols (36). */
   sidebarGaps?: { apps?: number; homeBottom?: number; buttons?: number }
   /**
-   * Where WestPlay's button sits while the screen is handed to the truck (its centre, in frame pixels), if
+   * Where WestPlay Plus's button sits while the screen is handed to the truck (its centre, in frame pixels), if
    * the default spot (the CarPlay area's top-left corner) covers part of the truck's own screen.
    */
   returnButton?: { x: number; y: number }
@@ -100,11 +100,11 @@ export interface ScreenProfile {
   edge?: number
 }
 
-/** The WestPlay button's size, and its margin from the CarPlay area's corner (shell.css --edge). */
+/** The WestPlay Plus button's size, and its margin from the CarPlay area's corner (shell.css --edge). */
 export const RETURN_BUTTON_SIZE = 72
 const RETURN_BUTTON_MARGIN = 32
 
-/** The WestPlay button's centre while the screen is handed to the truck, in the page's pixels on `layout`'s
+/** The WestPlay Plus button's centre while the screen is handed to the truck, in the page's pixels on `layout`'s
  * screen. `areaLeft`: where CarPlay starts. */
 export function returnButtonCentre(
   profile: ScreenProfile,
@@ -132,7 +132,7 @@ const SMART_DASH: ScreenProfile = {
   // A larger display than the DAF's: everything a little smaller, so the Home grid gets a fifth column.
   scale: 0.9,
   // The stock map has round buttons in a column right of the strip (menu and search at the top, recentre
-  // below; ui/dashboard/scania_2025_gps.sii, x 137-197 of 1440): WestPlay's goes in the free stretch
+  // below; ui/dashboard/scania_2025_gps.sii, x 137-197 of 1440): WestPlay Plus's goes in the free stretch
   // between them, like one of the dash's own.
   returnButton: { x: 148, y: 308 },
   // Its rim (the screen beyond the image) in the colour of the dash's own strip below the screen
@@ -189,13 +189,13 @@ const PROFILES: readonly ProfileEntry[] = [
   },
   // Volvo FH 2021 and 2024: the whole screen, at the DAF's sizing until tuned in the cab (owner 2026-10-21).
   { layout: 'volvo-fh', profile: { name: 'Volvo FH', oemStrip: null, scale: 1 } },
-  // WestPlay's tablet, in any truck: an iPad Air's glass, 23.2 x 16.3 cm, the page laid out at its 1.425:1
+  // WestPlay Plus's tablet, in any truck: an iPad Air's glass, 23.2 x 16.3 cm, the page laid out at its 1.425:1
   // (crates/shared page_height), at the DAF's sizing. Its glass shows the frame whole. Its sidebar's icons a quarter
   // larger and its Home button twice the size, chosen by the owner from drawings of it (2026-11-11: smaller than a
   // finger could touch).
   {
     layout: 'tablet',
-    profile: { name: 'WestPlay tablet', oemStrip: null, scale: 1, sidebarIcons: 1.25, sidebarButtons: 2 },
+    profile: { name: 'WestPlay Plus tablet', oemStrip: null, scale: 1, sidebarIcons: 1.25, sidebarButtons: 2 },
   },
   // Oyuncuyusbis' coaches (mods), each on its Gps part (owner 2026-11-16: "all four busses get them in their GPS tablet
   // part just like Setra"): the Setra S 516 HD/2's and the Travego's tablet (20.1 x 12.2 cm), the Setra S 531 DT's
@@ -228,7 +228,7 @@ export const SIDEBAR_BUTTONS = 1.6
 /** Screens not tuned yet: CarPlay on the whole screen, its layout adapting to the space (responsive). */
 export const FALLBACK_PROFILE: ScreenProfile = { name: 'Default', oemStrip: null, scale: 1 }
 
-/** The profile for the screen the game draws WestPlay on (`layout` is null until it has drawn one). */
+/** The profile for the screen the game draws WestPlay Plus on (`layout` is null until it has drawn one). */
 export function screenProfile(layout: ScreenLayoutId | null, truck: TruckInfo | null): ScreenProfile {
   return findProfile(PROFILES, layout, truck)
 }

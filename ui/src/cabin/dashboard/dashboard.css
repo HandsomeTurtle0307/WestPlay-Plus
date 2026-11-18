@@ -71,7 +71,7 @@
   transition: transform var(--motion-duration) var(--motion-ease);
 }
 
-/* A map WestPlay doesn't allow (MapView.tsx): only its words, beside the column (no growing). */
+/* A map WestPlay Plus doesn't allow (MapView.tsx): only its words, beside the column (no growing). */
 .has-widgets:not(.map-grown) .map-blocked {
   margin-right: calc(34.5% + var(--tile-gap, 16px));
 }

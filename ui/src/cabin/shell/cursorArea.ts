@@ -15,7 +15,7 @@ export interface RoundedArea {
 /**
  * Where the host's cursor may be seen (crates/host cursor.rs): `corners`, the CarPlay area's black corners'
  * rectangle and radius, a little inside the frame (`frame`, the page's size) and its corners as round less that;
- * the whole frame (square, that little inside) while the screen is handed to the truck (`handedOver`: WestPlay's
+ * the whole frame (square, that little inside) while the screen is handed to the truck (`handedOver`: WestPlay Plus's
  * button is over the truck's screen). Owner 2026-11-03: the cursor goes under the black corners at all times.
  */
 export function cursorArea(

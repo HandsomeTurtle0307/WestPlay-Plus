@@ -8,7 +8,7 @@ import './boot.css'
 /**
  * Full-screen boot visuals for the power phases before `on` (see state/power.ts):
  * - `splash`: the truck's own boot screen, its brand logo on black.
- * - `connecting`: the WestPlay intro: the W mark appears, then "WestPlay" unrolls out of it to the right.
+ * - `connecting`: the WestPlay Plus intro: the W mark appears, then "WestPlay Plus" unrolls out of it to the right.
  * - `off`: black (the game hides the screen anyway while the electrics are off).
  */
 export function BootScreen({ phase }: { phase: Exclude<PowerPhase, 'on'> }) {
@@ -72,7 +72,7 @@ function BrandSplash() {
 }
 
 /**
- * The W mark scales in at the centre, then glides left while "WestPlay" is revealed out of it to the
+ * The W mark scales in at the centre, then glides left while "WestPlay Plus" is revealed out of it to the
  * right, ending as a centred pair. The mark's starting offset is half the width the text adds, measured
  * before the first paint (and again once the web font has loaded), so the mark starts exactly at the
  * centre whatever the font renders.
@@ -103,7 +103,7 @@ function WestPlayIntro() {
         <img src="/westplay.png" alt="" />
       </span>
       <span ref={wordmark} className="boot-intro-wordmark">
-        WestPlay
+        WestPlay Plus
       </span>
     </div>
   )

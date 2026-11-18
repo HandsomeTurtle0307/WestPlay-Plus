@@ -102,7 +102,7 @@ const POSES: Record<StepId, Pose> = {
 
 /** How long the words take to leave before the next step's arrive. */
 const LEAVE_MS = 240
-/** The WestPlay intro on the screen, from power on to Home (cabin/state/power.ts CONNECTING_MS, and a
+/** The WestPlay Plus intro on the screen, from power on to Home (cabin/state/power.ts CONNECTING_MS, and a
  * beat). */
 const BOOT_MS = 2900
 /** How long the screen takes to move to another place (onboarding.css `.ts` transform). */
@@ -114,11 +114,11 @@ const POSE_OVERLAP_MS = 250
 const DIVE_MS = 1100
 
 /**
- * The companion's first run. The truck's screen stands in a dark room, the live WestPlay on it (the cabin
- * page in its demo mode): it boots, steps aside while the player sets WestPlay up, and tells them how it's
+ * The companion's first run. The truck's screen stands in a dark room, the live WestPlay Plus on it (the cabin
+ * page in its demo mode): it boots, steps aside while the player sets WestPlay Plus up, and tells them how it's
  * going through banners as CarPlay would; it opens what each step is about (their map as it's made, an app
  * tapped with the key they choose), and comes back to centre stage on the Dashboard, the player diving into
- * it as they finish. The game stays closed until the end: WestPlay installs into it and builds its map
+ * it as they finish. The game stays closed until the end: WestPlay Plus installs into it and builds its map
  * while it's closed.
  */
 export function Onboarding({
@@ -141,7 +141,7 @@ export function Onboarding({
   const [step, setStep] = useState<StepId>('welcome')
   const [leaving, setLeaving] = useState(false)
   const [finishing, setFinishing] = useState(false)
-  // The games to set WestPlay up in (one install of each), each one's check and what installing did, kept while
+  // The games to set WestPlay Plus up in (one install of each), each one's check and what installing did, kept while
   // the player moves between steps (until they choose another install of it).
   const [games, setGames] = useState<GameInfo[]>(() => chosenAtFirst(initial))
   const [checks, setChecks] = useState<Record<string, GameCheck>>({})
@@ -154,7 +154,7 @@ export function Onboarding({
   const [cursor, setCursor] = useState<{ x: number; y: number; pressing: boolean } | null>(null)
   const root = useRef<HTMLDivElement>(null)
   const index = STEPS.indexOf(step)
-  // The language chosen in Setup (WestPlay installed again), or the game's, as WestPlay speaks in the cab (and
+  // The language chosen in Setup (WestPlay Plus installed again), or the game's, as WestPlay Plus speaks in the cab (and
   // the map's place names are in); Windows' for a game never started.
   const code = chosenLanguage(settings.settings?.language, initial.language)
   const words = wordsFor(code)
@@ -202,7 +202,7 @@ export function Onboarding({
     settling: () => Math.max(0, moveEnds.current - POSE_OVERLAP_MS - performance.now()),
   }
 
-  // The screen comes on once WestPlay in it is ready: the intro, then Home.
+  // The screen comes on once WestPlay Plus in it is ready: the intro, then Home.
   useEffect(() => {
     if (!demo.ready || powered) return
     const timer = window.setTimeout(() => {
@@ -212,7 +212,7 @@ export function Onboarding({
     return () => window.clearTimeout(timer)
   }, [demo.ready, powered, send])
 
-  // WestPlay on the screen speaks the same language.
+  // WestPlay Plus on the screen speaks the same language.
   useEffect(() => {
     if (demo.ready) send({ type: 'language', code })
   }, [demo.ready, code, send])
@@ -323,7 +323,7 @@ export function Onboarding({
 
 function Welcome({ next }: { next(): void }) {
   const screen = useScreen()
-  // The words come once WestPlay has booted on the screen.
+  // The words come once WestPlay Plus has booted on the screen.
   const [booted, setBooted] = useState(false)
   useEffect(() => {
     if (!screen.powered) return
@@ -352,7 +352,7 @@ function Welcome({ next }: { next(): void }) {
   )
 }
 
-/** The games to set WestPlay up in: one install of each game found (owner 2026-10-28: both in one go), those
+/** The games to set WestPlay Plus up in: one install of each game found (owner 2026-10-28: both in one go), those
  * set up before kept. */
 function chosenAtFirst(initial: SetupState): GameInfo[] {
   return GAME_KINDS.flatMap((kind) => {
@@ -667,7 +667,7 @@ function Install({
         }
       }
       if (all) {
-        // WestPlay in the games: the screen boots it again.
+        // WestPlay Plus in the games: the screen boots it again.
         screen.reboot()
         window.setTimeout(() => setCelebrated(true), BOOT_MS + 450)
       }
@@ -715,7 +715,7 @@ function Install({
       place="side"
       title={done ? w.titleDone : w.title}
       sub={w.sub}
-      // While WestPlay boots again on the screen, the player waits for it: the next step opens an app there.
+      // While WestPlay Plus boots again on the screen, the player waits for it: the next step opens an app there.
       back={installing || (done && !celebrated) ? undefined : back}
       action={
         done ? (
@@ -859,7 +859,7 @@ function MapStep({ status, next, back }: { status: HostStatus | null; next(): vo
 }
 
 /**
- * Before WestPlay is installed (its maps are drawn as soon as it is: `MapWatch`, the game set up): whether they're
+ * Before WestPlay Plus is installed (its maps are drawn as soon as it is: `MapWatch`, the game set up): whether they're
  * drawn faster, on the whole processor and up to 80% of the memory, off unless the player turns it on; and a box
  * to tick saying they've read the page, Continue waiting for it (owner 2026-11-06: "people don't read"). The
  * choice is the Map page's Prepare Maps Faster, changed there later.

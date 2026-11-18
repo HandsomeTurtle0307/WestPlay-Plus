@@ -16,7 +16,7 @@ const GROW_MS = 900
  * The picture isn't part of the page, so it can't slide or fade with it: while its screen comes or goes
  * (Home and the Dashboard trading places), the video's thumbnail stands in, moving with the screen, and the
  * picture takes over where it stops. So too on the Dashboard while its column of widgets slides away for the map
- * to grow, and back (owner 2026-11-11: the picture stayed where it was, over the grown map). Outside WestPlay (a
+ * to grow, and back (owner 2026-11-11: the picture stayed where it was, over the grown map). Outside WestPlay Plus (a
  * plain browser) the thumbnail is all there is.
  */
 export function VideoHole({ className, crop = false }: { className: string; crop?: boolean }) {

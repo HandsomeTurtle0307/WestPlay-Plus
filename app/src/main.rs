@@ -6,7 +6,6 @@
 mod customize;
 mod maps;
 mod setup;
-mod update;
 
 use std::path::PathBuf;
 use std::sync::Arc;
@@ -127,34 +126,15 @@ fn apple_music_check(accounts: State<Accounts>) {
     accounts.0.apple_music.request(AccountAction::Check);
 }
 
-/// The maker's Kreosus page, where players support WestPlay's development.
-const SUPPORT_PAGE: &str = "https://kreosus.com/enes-less";
+/// This branch's Releases page, where players check for a newer WestPlay Plus: this branch has no automatic
+/// updates of its own.
+const RELEASE_PAGE: &str = "https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases";
 
-/// Opens the support page (Support me) in the player's browser. The address is fixed here, so the companion
-/// can't open any other.
+/// Opens the Releases page (About) in the player's browser. The address is fixed here, so the companion can't
+/// open any other.
 #[tauri::command]
-fn open_support_page() {
-    westplay_host::browser::open(SUPPORT_PAGE);
-}
-
-/// WestPlay's pages elsewhere, at the foot of the companion's list.
-#[derive(serde::Deserialize)]
-#[serde(rename_all = "lowercase")]
-enum Social {
-    YouTube,
-    Discord,
-    Patreon,
-}
-
-/// Opens one of WestPlay's pages elsewhere (its YouTube channel, its Discord, its Patreon) in the player's browser.
-/// The addresses are fixed here, as the support page's.
-#[tauri::command]
-fn open_social(site: Social) {
-    westplay_host::browser::open(match site {
-        Social::YouTube => "https://www.youtube.com/@tyraness",
-        Social::Discord => "https://discord.com/invite/Jt34SmwU6",
-        Social::Patreon => "https://www.patreon.com/c/westmods",
-    });
+fn open_release_page() {
+    westplay_host::browser::open(RELEASE_PAGE);
 }
 
 /// Where this run's `app.log` is (the About page): Documents\WestPlay\logs, or WestPlay's own data folder where
@@ -203,8 +183,6 @@ fn main() {
     let open_request = Arc::new(OpenRequest::default());
     let accounts = Arc::new(AccountRequests::default());
     let app = tauri::Builder::default()
-        .plugin(tauri_plugin_updater::Builder::new().build())
-        .manage(update::Updates::default())
         .manage(WestplayOpen(open_request.clone()))
         .manage(Accounts(accounts.clone()))
         .register_asynchronous_uri_scheme_protocol(maps::SCHEME, maps::serve)
@@ -223,17 +201,13 @@ fn main() {
             apple_music_sign_in,
             apple_music_sign_out,
             apple_music_check,
-            open_support_page,
-            open_social,
             app_log_place,
+            open_release_page,
             customize::customize_list,
             customize::add_wallpapers,
             customize::add_icon_set,
             customize::remove_wallpaper,
             customize::remove_icon_set,
-            update::update_offer,
-            update::look_for_update,
-            update::install_update,
             get_settings,
             update_settings,
             key_name,
@@ -281,7 +255,6 @@ fn main() {
             app.manage(SettingsStore { file, shared });
             app.manage(setup);
             app.manage(std::sync::Mutex::new(host));
-            update::watch(app.handle());
             Ok(())
         })
         .build(tauri::generate_context!())

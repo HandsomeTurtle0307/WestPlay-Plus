@@ -137,7 +137,7 @@ const WIDGET_BACKDROPS: Record<Look, Backdrop> = {
 /**
  * Now Playing's music: a source's track, tinted by its album art (a blurred copy behind the glass). Track
  * changes animate (the new cover waited for, the text sliding, cover and tint crossfading). The track opens
- * its app (if WestPlay has one for it); the controls work in place, on what's playing now. Over a cover the
+ * its app (if WestPlay Plus has one for it); the controls work in place, on what's playing now. Over a cover the
  * look's words wouldn't read on, the other look's (a light cover: dark words); the glass and tint stay.
  */
 function MusicWidget({

@@ -205,7 +205,7 @@
   color: #ff453a;
 }
 
-/* A map WestPlay doesn't allow: the tile says so instead of showing it (MapView). */
+/* A map WestPlay Plus doesn't allow: the tile says so instead of showing it (MapView). */
 .map-blocked {
   overflow: hidden;
   background: var(--map-ground);

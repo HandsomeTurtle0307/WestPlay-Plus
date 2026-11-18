@@ -3,7 +3,7 @@
  * (crates/mapdata countries.rs, `countries.json` beside the tiles): for the cab's clock (state/timeZone.ts).
  */
 
-/** Central Europe's time zone, minutes: the one ETS2's SDK game time is in (a map's before WestPlay wrote its game's). */
+/** Central Europe's time zone, minutes: the one ETS2's SDK game time is in (a map's before WestPlay Plus wrote its game's). */
 const ETS2_ZONE = 120
 
 /** The map's countries on a grid (`countries.json`), and their time zones. */
@@ -58,7 +58,7 @@ export function parseGrid(json: unknown): CountryGrid | null {
   const bytes = new Uint8Array(width * height)
   for (let i = 0; i < bytes.length; i++) bytes[i] = parseInt(cells.slice(i * 2, i * 2 + 2), 16) || 0
   const zoneMap = new Map(Object.entries(zones ?? {}).map(([id, minutes]) => [Number(id), Number(minutes)]))
-  // Each area that is one; none from a map built before WestPlay read them.
+  // Each area that is one; none from a map built before WestPlay Plus read them.
   const isArea = (area: unknown): area is ZoneArea => {
     const { country, x, z, zone } = (area ?? {}) as Partial<ZoneArea>
     const pair = (value: unknown) => Array.isArray(value) && value.length === 2 && value.every(Number.isFinite)

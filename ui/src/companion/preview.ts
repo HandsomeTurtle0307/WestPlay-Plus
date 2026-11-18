@@ -1,7 +1,6 @@
 import type { GameCheck, GameInfo, InstallReport, SetupState } from './setup'
 import type { Customizations } from '../shared/customize'
 import type { Added } from './customize'
-import type { Offer } from './update'
 import type { HostStatus, MapStatus } from './useHostStatus'
 import type { Settings } from './useSettings'
 
@@ -11,16 +10,15 @@ import type { Settings } from './useSettings'
  *
  * - `?onboarding`: the first run, from its start.
  * - `?ats`: American Truck Simulator installed too (both games set up, or found by the onboarding); `?ats=found`:
- *   found, ETS2 alone set up (as one who had WestPlay before ATS was supported).
+ *   found, ETS2 alone set up (as one who had WestPlay Plus before ATS was supported).
  * - `?game=off|on|live|unsupported`: the game not running, running (the cab not on the screen), the screen live, or
- *   the player in a truck WestPlay doesn't show in.
+ *   the player in a truck WestPlay Plus doesn't show in.
  * - `?map=building|ready|waiting|stopped|memory|failed`: the map's state (`building` runs to `ready`; `stopped`: its
  *   preparation ended by the game starting).
- * - `?update`: an update found (its sheet offers it; installing it downloads, then stays installing).
  * - `?custom`: some wallpapers and an icon set of the player's (adding gives more, with a file left out).
  * - `?leftOut`: the played profile's map made without a map mod it couldn't read.
- * - `?elevated`: the game run as administrator (WestPlay can't read its route, guidance or weather).
- * - `?updated` (or `?updated=admin`): WestPlay updated since it was set up: the new plugin goes into the game
+ * - `?elevated`: the game run as administrator (WestPlay Plus can't read its route, guidance or weather).
+ * - `?updated` (or `?updated=admin`): WestPlay Plus updated since it was set up: the new plugin goes into the game
  *   once it's closed (with `admin`, Windows' permission is asked for first).
  *
  * Nothing here is ever in the app.
@@ -59,18 +57,6 @@ const setup: SetupState = {
   language: query.get('lang'),
 }
 
-const UPDATE: Offer | null = query.has('update')
-  ? {
-      version: '1.1.0',
-      notes: [
-        '- Song lyrics on the Now Playing screen.',
-        '- The map follows the route around roundabouts.',
-        '- **Fixed:** YouTube Music skipping the first song.',
-      ].join('\n'),
-      date: '2026-11-02',
-    }
-  : null
-
 let settings: Settings = {
   interaction: { key: 0xa4, mode: 'hold', sensitivity: 1.4 },
   keybinds: {
@@ -88,7 +74,7 @@ let settings: Settings = {
   language: null,
 }
 
-// The player's own, made up from WestPlay's files (the preview's address: `FILES_BASE` is `/` here).
+// The player's own, made up from WestPlay Plus's files (the preview's address: `FILES_BASE` is `/` here).
 const custom: Customizations = query.has('custom')
   ? {
       wallpapers: [{ id: 'custom:Logo', name: 'Logo', dark: 'westplay.png', light: 'westplay.png' }],
@@ -141,7 +127,7 @@ function status(): HostStatus {
   return {
     webviewVersion: '141.0.3537.71',
     adapter: gameState === 'off' ? null : ADAPTERS[0].name,
-    // The one chosen, or WestPlay's pick: the game's.
+    // The one chosen, or WestPlay Plus's pick: the game's.
     cabAdapter: (ADAPTERS.find((adapter) => adapter.id === settings.graphics.gpu) ?? ADAPTERS[0]).name,
     gameAdapter: gameState === 'off' ? null : ADAPTERS[0].name,
     adapters: ADAPTERS,
@@ -150,7 +136,7 @@ function status(): HostStatus {
     gameConnected: gameState !== 'off',
     game: gameState === 'off' ? null : 'ets2',
     screenDrawing: live,
-    // `?game=unsupported`: in a truck WestPlay doesn't show in.
+    // `?game=unsupported`: in a truck WestPlay Plus doesn't show in.
     truckSupported: gameState === 'unsupported' ? false : live ? true : null,
     // `?coach=26`: in a coach whose passengers' set plays through 26 speakers.
     coachSpeakers: live && query.has('coach') ? Number(query.get('coach')) : null,
@@ -263,14 +249,14 @@ const CHECK: GameCheck = {
     { id: 'volvo-fh-2024', name: 'Volvo FH (2024)', fit: 'ready', fromMod: false },
     { id: 'scania-touring', name: 'Scania Touring', fit: 'ready', fromMod: false },
     { id: 'man-lions-coach-2024', name: "MAN Lion's Coach (2024)", fit: 'ready', fromMod: false },
-    { id: 'any-truck-tablet', name: 'Any truck – with the WestPlay tablet', fit: 'ready', fromMod: false },
+    { id: 'any-truck-tablet', name: 'Any truck – with the WestPlay Plus tablet', fit: 'ready', fromMod: false },
   ],
   modProblem: null,
   plugin: 'current',
   otherApps: [],
 }
 
-/** ATS's, as a check of it finds it (its trucks' screens not WestPlay's yet). */
+/** ATS's, as a check of it finds it (its trucks' screens not WestPlay Plus's yet). */
 const ATS_CHECK: GameCheck = {
   ...CHECK,
   game: ATS,
@@ -283,7 +269,7 @@ const ATS_CHECK: GameCheck = {
     { id: 'volvo-vnl-2025', name: 'Volvo VNL (2025)', fit: 'notYet', fromMod: false },
     { id: 'western-star-57x', name: 'Western Star 57X', fit: 'notYet', fromMod: false },
     { id: 'peterbilt-579', name: 'Peterbilt 579', fit: 'notInGame', fromMod: false },
-    { id: 'any-truck-tablet', name: 'Any truck – with the WestPlay tablet', fit: 'ready', fromMod: false },
+    { id: 'any-truck-tablet', name: 'Any truck – with the WestPlay Plus tablet', fit: 'ready', fromMod: false },
   ],
 }
 
@@ -366,22 +352,8 @@ export function answer(command: string, args?: Record<string, unknown>): Promise
     case 'apple_music_sign_in':
       signIn('appleMusic')
       return later(undefined)
-    case 'open_support_page':
-      window.open('https://kreosus.com/enes-less', '_blank', 'noopener')
-      return later(undefined)
-    case 'open_social':
-      window.open(
-        args?.site === 'youtube'
-          ? 'https://www.youtube.com/@tyraness'
-          : args?.site === 'patreon'
-            ? 'https://www.patreon.com/c/westmods'
-            : 'https://discord.com/invite/Jt34SmwU6',
-        '_blank',
-        'noopener',
-      )
-      return later(undefined)
     case 'app_log_place':
-      return later('C:\\Users\\Player\\Documents\\WestPlay\\logs\\app.log')
+      return later('C:\\Users\\Player\\Documents\\WestPlay Plus\\logs\\app.log')
     case 'youtube_sign_out':
       setTimeout(() => {
         accounts.youtube = false
@@ -440,19 +412,6 @@ export function answer(command: string, args?: Record<string, unknown>): Promise
       custom.iconSets = custom.iconSets.filter((set) => set.name !== args?.name)
       if (settings.look.iconSet === args?.name) setLook({ iconSet: null })
       return later(undefined)
-    case 'update_offer':
-      return later(UPDATE)
-    case 'look_for_update':
-      if (UPDATE) emit('update-found', UPDATE)
-      return later(UPDATE, 700)
-    case 'install_update': {
-      const total = 48_000_000
-      for (let step = 1; step <= 20; step++) {
-        setTimeout(() => emit('update-progress', { done: (total * step) / 20, total }), step * 150)
-      }
-      // The app quits for the installer: nothing comes back.
-      return new Promise(() => {})
-    }
     default:
       return Promise.reject(new Error(`preview: no answer for ${command}`))
   }

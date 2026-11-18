@@ -7,10 +7,10 @@ import { checkGame, GAME_KINDS, GAME_NAMES, type GameInfo, type InstallReport, i
 import { allChecked, type PageProps, useGameCheck } from './page'
 
 /**
- * Where WestPlay is installed and how to put it right: each game it's in (ETS2's, ATS's), the plugin as it is
+ * Where WestPlay Plus is installed and how to put it right: each game it's in (ETS2's, ATS's), the plugin as it is
  * there, and a reinstall into each (the onboarding's install, again, while the games are closed); and a game found
  * but not set up (ATS beside an ETS2 set up before it), to install into. On the room's
- * screen, the checks' scan while the games are looked at, and WestPlay booting again after a reinstall.
+ * screen, the checks' scan while the games are looked at, and WestPlay Plus booting again after a reinstall.
  */
 export function Setup(props: PageProps) {
   const { setup, refreshSetup, cw, checked, uninstall, tutorial, chooseLanguage, settings } = props
@@ -164,7 +164,7 @@ export function Setup(props: PageProps) {
   )
 }
 
-/** One game set up: its folder and version, WestPlay's plugin in it, and what its check found wrong. Titled with
+/** One game set up: its folder and version, WestPlay Plus's plugin in it, and what its check found wrong. Titled with
  * its name when there are two. */
 function GameSetUp({
   game,

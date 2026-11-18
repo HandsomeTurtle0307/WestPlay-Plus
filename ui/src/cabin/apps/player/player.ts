@@ -12,7 +12,7 @@ import type { MediaSource } from '../../../shared/media'
 import { SONGS } from './mock'
 
 /**
- * Player: WestPlay's own player for the game's music folder (`westplay_host::music_folder`). The host lists the
+ * Player: WestPlay Plus's own player for the game's music folder (`westplay_host::music_folder`). The host lists the
  * folder's songs (`musicFolder`) and plays them in a player of its own, its sound through the truck's speakers;
  * this follows what it says plays (`playerPlayback`) and asks it to play. In a plain browser (no host), made-up
  * songs stand in for the folder (mock.ts), and nothing plays.

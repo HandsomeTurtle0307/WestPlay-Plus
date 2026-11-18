@@ -8,6 +8,6 @@ export const words: CompanionWords = {
   uninstall: {
     ...polish.uninstall,
     profilesFailed:
-      'Profile, których nie udało się zmienić: {n}. Nadal mają WestPlay na liście – usuń go z nich w menu „Mynedżer modōw”.',
+      'Profile, których nie udało się zmienić: {n}. Nadal mają WestPlay Plus na liście – usuń go z nich w menu „Mynedżer modōw”.',
   },
 }
