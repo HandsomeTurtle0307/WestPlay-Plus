@@ -960,7 +960,7 @@ function Accounts({ status, next, back }: { status: HostStatus | null; next(): v
       sub={w.sub}
       back={back}
       action={
-        <Button onClick={next} disabled={checking}>
+        <Button onClick={next}>
           {signedIn ? words.continue : w.notNow}
         </Button>
       }
@@ -1042,7 +1042,7 @@ function ServiceSignIn({
       sub={s.sub}
       back={back}
       action={
-        <Button onClick={next} disabled={checking}>
+        <Button onClick={next}>
           {signedIn ? words.continue : w.notNow}
         </Button>
       }
