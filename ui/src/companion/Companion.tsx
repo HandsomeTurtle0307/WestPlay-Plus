@@ -22,6 +22,7 @@ import { useGameStopped } from './gameStopped'
 import { type CompanionWords, companionWords, type SectionId } from './pages/words'
 import { RoomText, n, WordsContext } from './room/room'
 import './room/room.css'
+import { Button } from './room/parts'
 import { GLOW, type Screen, ScreenContext } from './room/screen'
 import { type Banner, GlassCursor, type Pose, TruckScreen } from './room/TruckScreen'
 import { useDemo } from './room/useDemo'
@@ -45,6 +46,8 @@ export function Companion() {
   const [setupError, setSetupError] = useState<string | null>(null)
   // After the onboarding, its tutorial (from its start, or skipped to its end), before setup's finished.
   const [tutorial, setTutorial] = useState<'lesson' | 'launch' | null>(PREVIEW_TUTORIAL)
+  // The developer preview: the onboarding's welcome skips setup and shows the room as it is, for its pages.
+  const [devPreview, setDevPreview] = useState(false)
   useEffect(() => {
     setupState()
       .then(setSetup)
@@ -61,7 +64,7 @@ export function Companion() {
       close={closeGameStopped}
     />
   )
-  if (!setup.finished && !tutorial) {
+  if (!setup.finished && !tutorial && !devPreview) {
     // The onboarding set the game up: what's set up is read again (the companion read it before), then its
     // tutorial.
     const onboarded = (start: 'lesson' | 'launch') => {
@@ -69,7 +72,16 @@ export function Companion() {
         .then(setSetup, () => {})
         .finally(() => setTutorial(start))
     }
-    return <Onboarding initial={setup} status={status} settings={settings} onFinished={onboarded} over={over} />
+    return (
+      <Onboarding
+        initial={setup}
+        status={status}
+        settings={settings}
+        onFinished={onboarded}
+        onDeveloper={() => setDevPreview(true)}
+        over={over}
+      />
+    )
   }
   return (
     <Room
@@ -78,6 +90,8 @@ export function Companion() {
       status={status}
       settings={settings}
       tutorial={tutorial}
+      devPreview={devPreview}
+      exitDevPreview={() => setDevPreview(false)}
       tutorialDone={() => {
         setTutorial(null)
         setupState().then(setSetup, () => setSetup({ ...setup, finished: true }))
@@ -125,6 +139,8 @@ function Room({
   status,
   settings,
   tutorial = null,
+  devPreview = false,
+  exitDevPreview,
   tutorialDone,
   over,
 }: {
@@ -135,6 +151,10 @@ function Room({
   settings: SettingsState
   /** The tutorial, from where it starts; `null`: the companion. */
   tutorial?: 'lesson' | 'launch' | null
+  /** The developer preview: setup and the plugin skipped, its pages shown as they are. */
+  devPreview?: boolean
+  /** Leaves the developer preview, back to the onboarding. */
+  exitDevPreview?: () => void
   tutorialDone?: () => void
   /** A sheet over everything (`GameStoppedSheet`). */
   over?: ReactNode
@@ -290,6 +310,17 @@ function Room({
       style={{ '--section-glow': SECTION_GLOW[section] } as CSSProperties}
       onPointerMove={tilt}
     >
+      {devPreview && (
+        <div className="cp-dev" role="note">
+          <b>{words.dev.title}</b>
+          <p>{words.dev.text}</p>
+          {exitDevPreview && (
+            <Button glass small onClick={exitDevPreview}>
+              {words.dev.exit}
+            </Button>
+          )}
+        </div>
+      )}
       <TruckScreen frame={demo.frame} ready={demo.ready} pose={pose} glow={glow} banner={banner} scanning={scanning}>
         <GlassCursor
           x={cursor?.x ?? 640}

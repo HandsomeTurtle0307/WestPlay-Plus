@@ -126,6 +126,7 @@ export function Onboarding({
   status,
   settings,
   onFinished,
+  onDeveloper,
   mapAddress = defaultMapAddress,
   over,
 }: {
@@ -134,6 +135,8 @@ export function Onboarding({
   settings: SettingsState
   /** The onboarding's done: its tutorial next, from its start or skipped to its end. */
   onFinished(start: 'lesson' | 'launch'): void
+  /** Skip setup and open the companion's room as it is, for working on its pages (no plugin, no game set up). */
+  onDeveloper(): void
   mapAddress?: (status: HostStatus | null) => { base: string; built: number | null } | null
   /** A sheet over everything (`GameStoppedSheet`). */
   over?: ReactNode
@@ -266,7 +269,7 @@ export function Onboarding({
       <WordsContext.Provider value={{ words, code }}>
         <RoomText.Provider value={{ locale: words.locale, back: words.back }}>
           <ScreenContext.Provider value={screen}>
-            {step === 'welcome' && <Welcome next={next} />}
+            {step === 'welcome' && <Welcome next={next} onDeveloper={onDeveloper} />}
             {step === 'game' && (
               <ChooseGame
                 found={initial.found}
@@ -321,7 +324,7 @@ export function Onboarding({
   )
 }
 
-function Welcome({ next }: { next(): void }) {
+function Welcome({ next, onDeveloper }: { next(): void; onDeveloper(): void }) {
   const screen = useScreen()
   // The words come once WestPlay Plus has booted on the screen.
   const [booted, setBooted] = useState(false)
@@ -347,7 +350,14 @@ function Welcome({ next }: { next(): void }) {
       place="below"
       title={words.welcome.title}
       sub={words.welcome.sub}
-      action={<Button onClick={next}>{words.welcome.start}</Button>}
+      action={
+        <div className="ob-welcome-actions">
+          <Button glass onClick={onDeveloper}>
+            {words.dev.button}
+          </Button>
+          <Button onClick={next}>{words.welcome.start}</Button>
+        </div>
+      }
     />
   )
 }

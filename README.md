@@ -81,11 +81,11 @@ later (they get it the next time you start the game).
 **In American Truck Simulator**, WestPlay Plus is on the tablet in every truck for now. The trucks whose real
 counterparts have CarPlay get WestPlay Plus on their own screens later.
 
-|  | Truck's own screen | WestPlay Plus tablet |
-|---|---|---|
-| Trucks | The ETS2 trucks above | Every other truck, and every ATS truck for now |
-| To get it | Nothing: it's there | Fit it in the truck shop |
-| The game's navigation | Replaced by WestPlay Plus | Stays on the truck's screen |
+|                       | Truck's own screen        | WestPlay Plus tablet                           |
+| --------------------- | ------------------------- | ---------------------------------------------- |
+| Trucks                | The ETS2 trucks above     | Every other truck, and every ATS truck for now |
+| To get it             | Nothing: it's there       | Fit it in the truck shop                       |
+| The game's navigation | Replaced by WestPlay Plus | Stays on the truck's screen                    |
 
 ### Sound
 
@@ -172,6 +172,6 @@ grateful for what he built. If you enjoy this project, please also have a look a
 
 本项目的绝大部分设计、代码与素材来自原项目 **WestPlay**（作者 [enes-less](https://github.com/enes-less/WestPlay)），
 这是一个极其优秀的欧卡 2 / 美卡车内中控屏模组。本分支只是在它之上做了适合中文玩家的修改，并对原作者表示由衷感谢。
-建议同时支持原项目。
+建议同时支持原项目（如果可以的话能支持支持我嘛😭😭😭，开发软件不易啊~）
 
 <sub>WestPlay Plus is an independent project, not affiliated with or endorsed by Apple, SCS Software, Spotify, Google or the truck makers. CarPlay, Apple Music, Spotify, YouTube, YouTube Music and the truck makers' names and logos are trademarks of their owners, used to name what WestPlay Plus works with.</sub>

@@ -31,6 +31,13 @@ export interface Words {
     sub: string
     start: string
   }
+  /** The developer preview: the welcome's button that skips setup, and the note over the room it opens. */
+  dev: {
+    button: string
+    title: string
+    text: string
+    exit: string
+  }
   /** A game install, in a line: "Version 1.61.1.9 · Steam · 34 DLCs". */
   summary: {
     /** `{version}` */
