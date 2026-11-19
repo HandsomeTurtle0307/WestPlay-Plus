@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus sætter CarPlay på lastbilens skærm i Euro Truck Simulator 2 og American Truck Simulator. Opsætningen tager kun et par minutter.',
     start: 'Kom i gang',
   },
+  dev: {
+    button: 'Udviklerforhåndsvisning',
+    title: 'Udviklerforhåndsvisning',
+    text: 'Opsætningen springes over: der installeres intet i dit spil, så kun disse sider og skærmforhåndsvisningen virker. Installer pluginnet på siden Opsætning for at bruge det rigtigt.',
+    exit: 'Afslut forhåndsvisning',
+  },
   summary: {
     version: 'Version {version}',
     versionUnknown: 'Ukendt version',

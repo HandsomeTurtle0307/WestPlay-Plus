@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus는 Euro Truck Simulator 2와 American Truck Simulator의 트럭 화면에 CarPlay를 띄워 줘요. 설정은 몇 분이면 끝나요.',
     start: '시작하기',
   },
+  dev: {
+    button: '개발자 미리보기',
+    title: '개발자 미리보기',
+    text: '설정을 건너뛰었어요. 게임에는 아무것도 설치되지 않아서 이 페이지와 화면 미리보기만 사용할 수 있어요. 실제로 사용하려면 설정에서 플러그인을 설치하세요.',
+    exit: '미리보기 종료',
+  },
   summary: {
     version: '버전 {version}',
     versionUnknown: '알 수 없는 버전',

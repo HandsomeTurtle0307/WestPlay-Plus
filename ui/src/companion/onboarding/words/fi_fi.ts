@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus tuo CarPlayn rekan näytölle Euro Truck Simulator 2:ssa ja American Truck Simulatorissa. Käyttöönotto vie vain muutaman minuutin.',
     start: 'Aloita',
   },
+  dev: {
+    button: 'Kehittäjän esikatselu',
+    title: 'Kehittäjän esikatselu',
+    text: 'Asennus ohitetaan: peliisi ei asenneta mitään, joten vain nämä sivut ja näytön esikatselu toimivat. Asenna laajennus Asennus-kohdasta, jos haluat käyttää sitä oikeasti.',
+    exit: 'Poistu esikatselusta',
+  },
   summary: {
     version: 'Versio {version}',
     versionUnknown: 'Versio ei tiedossa',

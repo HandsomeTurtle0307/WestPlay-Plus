@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'A WestPlay Plus CarPlayt hoz a kamion képernyőjére az Euro Truck Simulator 2-ben és az American Truck Simulatorban. A beállítás csak pár perc.',
     start: 'Kezdjük',
   },
+  dev: {
+    button: 'Fejlesztői előnézet',
+    title: 'Fejlesztői előnézet',
+    text: 'A beállítás kimarad: a játékodba semmi sem települ, ezért csak ezek az oldalak és a képernyő-előnézet működik. A valódi használathoz telepítsd a bővítményt a Beállítás oldalon.',
+    exit: 'Kilépés az előnézetből',
+  },
   summary: {
     version: '{version} verzió',
     versionUnknown: 'Ismeretlen verzió',

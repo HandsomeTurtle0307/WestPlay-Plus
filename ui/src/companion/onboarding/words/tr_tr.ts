@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus, Euro Truck Simulator 2 ve American Truck Simulator’da CarPlay’i çekicinin ekranına taşır. Kurulumu birkaç dakika sürer.',
     start: 'Başla',
   },
+  dev: {
+    button: 'Geliştirici Önizlemesi',
+    title: 'Geliştirici önizlemesi',
+    text: 'Kurulum atlandı: oyununa hiçbir şey kurulmadı, bu yüzden yalnızca bu sayfalar ve ekran önizlemesi çalışır. Gerçekten kullanmak için Kurulum’dan eklentiyi kur.',
+    exit: 'Önizlemeden Çık',
+  },
   summary: {
     version: 'Sürüm {version}',
     versionUnknown: 'Sürüm bilinmiyor',

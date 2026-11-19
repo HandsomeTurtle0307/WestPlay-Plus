@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus prinese CarPlay na zaslon tovornjaka v igrah Euro Truck Simulator 2 in American Truck Simulator. Nastavitev traja le nekaj minut.',
     start: 'Začni',
   },
+  dev: {
+    button: 'Razvijalski predogled',
+    title: 'Razvijalski predogled',
+    text: 'Nastavitev se preskoči: v igro se nič ne namesti, zato delujejo samo te strani in predogled zaslona. Vtičnik namesti v razdelku Nastavitev, da ga boš lahko uporabljal za res.',
+    exit: 'Končaj predogled',
+  },
   summary: {
     version: 'Različica {version}',
     versionUnknown: 'Neznana različica',

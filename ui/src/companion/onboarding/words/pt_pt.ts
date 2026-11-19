@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'O WestPlay Plus leva o CarPlay ao ecrã do camião no Euro Truck Simulator 2 e no American Truck Simulator. A configuração demora só alguns minutos.',
     start: 'Começar',
   },
+  dev: {
+    button: 'Pré-visualização para programadores',
+    title: 'Pré-visualização para programadores',
+    text: 'A configuração é ignorada: nada é instalado no seu jogo, por isso só estas páginas e a pré-visualização do ecrã funcionam. Instale o plugin em Configuração para o utilizar a sério.',
+    exit: 'Sair da pré-visualização',
+  },
   summary: {
     version: 'Versão {version}',
     versionUnknown: 'Versão desconhecida',

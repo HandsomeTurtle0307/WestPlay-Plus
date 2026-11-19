@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus toob CarPlay veoki ekraanile mängudes Euro Truck Simulator 2 ja American Truck Simulator. Seadistamine võtab vaid mõne minuti.',
     start: 'Alusta',
   },
+  dev: {
+    button: 'Arendaja eelvaade',
+    title: 'Arendaja eelvaade',
+    text: 'Seadistamine jäetakse vahele: sinu mängu ei paigaldata midagi, seega töötavad ainult need lehed ja ekraani eelvaade. Päriselt kasutamiseks paigalda pistikprogramm Seadistuse jaotisest.',
+    exit: 'Välju eelvaatest',
+  },
   summary: {
     version: 'Versioon {version}',
     versionUnknown: 'Versioon teadmata',

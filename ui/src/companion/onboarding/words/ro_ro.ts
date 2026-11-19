@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus aduce CarPlay pe ecranul camionului în Euro Truck Simulator 2 și American Truck Simulator. Configurarea durează doar câteva minute.',
     start: 'Să începem',
   },
+  dev: {
+    button: 'Previzualizare dezvoltator',
+    title: 'Previzualizare dezvoltator',
+    text: 'Configurarea este omisă: nu se instalează nimic în joc, așa că funcționează doar aceste pagini și previzualizarea ecranului. Instalează pluginul din Configurare pentru a-l folosi cu adevărat.',
+    exit: 'Ieși din previzualizare',
+  },
   summary: {
     version: 'Versiunea {version}',
     versionUnknown: 'Versiune necunoscută',

@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop'
+﻿$ErrorActionPreference = 'Stop'
 Set-Location 'D:\Projects\WestPlay-CN-Plus'
 $dir = (Resolve-Path 'ui\src\companion\onboarding\words').Path
 $enc = New-Object System.Text.UTF8Encoding($false)

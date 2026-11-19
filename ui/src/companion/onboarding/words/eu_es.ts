@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus-k CarPlay kamioiaren pantailara eramaten du Euro Truck Simulator 2 eta American Truck Simulator jokoetan. Konfigurazioak minutu gutxi batzuk besterik ez ditu behar.',
     start: 'Hasi',
   },
+  dev: {
+    button: 'Garatzaileentzako aurrebista',
+    title: 'Garatzaileentzako aurrebista',
+    text: 'Konfigurazioa saltatzen da: ez da ezer instalatzen zure jokoan, beraz orri hauek eta pantailaren aurrebista baino ez dute funtzionatzen. Instalatu plugina Konfiguraziotik benetan erabiltzeko.',
+    exit: 'Irten aurrebistatik',
+  },
   summary: {
     version: '{version} bertsioa',
     versionUnknown: 'Bertsio ezezaguna',

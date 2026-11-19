@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus wyświetla CarPlay na ekranie ciężarówki w Euro Truck Simulator 2 i American Truck Simulator. Konfiguracja zajmie tylko kilka minut.',
     start: 'Zaczynajmy',
   },
+  dev: {
+    button: 'Podgląd deweloperski',
+    title: 'Podgląd deweloperski',
+    text: 'Konfiguracja jest pomijana: w grze nic nie zostanie zainstalowane, więc działają tylko te strony i podgląd ekranu. Zainstaluj wtyczkę w sekcji Konfiguracja, aby korzystać z WestPlay Plus w pełni.',
+    exit: 'Zakończ podgląd',
+  },
   summary: {
     version: 'Wersja {version}',
     versionUnknown: 'Nieznana wersja',

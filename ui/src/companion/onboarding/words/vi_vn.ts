@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus đưa CarPlay lên màn hình xe tải trong Euro Truck Simulator 2 và American Truck Simulator. Chỉ mất vài phút để thiết lập.',
     start: 'Bắt đầu',
   },
+  dev: {
+    button: 'Bản xem trước',
+    title: 'Bản xem trước dành cho nhà phát triển',
+    text: 'Đã bỏ qua phần thiết lập: không có gì được cài vào trò chơi, nên chỉ các trang này và bản xem trước màn hình hoạt động. Hãy cài plugin trong mục Thiết lập để dùng thật.',
+    exit: 'Thoát xem trước',
+  },
   summary: {
     version: 'Phiên bản {version}',
     versionUnknown: 'Không rõ phiên bản',

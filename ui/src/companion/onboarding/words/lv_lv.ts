@@ -11,6 +11,12 @@ export const words: Words = {
     sub: 'WestPlay Plus ienes CarPlay automobiļa ekrānā spēlēs Euro Truck Simulator 2 un American Truck Simulator. Iestatīšana aizņem tikai dažas minūtes.',
     start: 'Sākt',
   },
+  dev: {
+    button: 'Izstrādātāja priekšskatījums',
+    title: 'Izstrādātāja priekšskatījums',
+    text: 'Iestatīšana tiek izlaista: tavā spēlē nekas netiek instalēts, tāpēc darbojas tikai šīs lapas un ekrāna priekšskatījums. Lai to izmantotu īsti, instalē spraudni sadaļā “Iestatīšana”.',
+    exit: 'Iziet no priekšskatījuma',
+  },
   summary: {
     version: 'Versija {version}',
     versionUnknown: 'Versija nav zināma',

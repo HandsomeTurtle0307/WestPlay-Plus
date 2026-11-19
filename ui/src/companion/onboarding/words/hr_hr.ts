@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus donosi CarPlay na zaslon kamiona u igrama Euro Truck Simulator 2 i American Truck Simulator. Postavljanje traje svega nekoliko minuta.',
     start: 'Započni',
   },
+  dev: {
+    button: 'Razvijateljski pregled',
+    title: 'Razvijateljski pregled',
+    text: 'Postavljanje se preskače: u igru se ništa ne instalira, pa rade samo ove stranice i pregled zaslona. Da biste ga koristili u igri, instalirajte dodatak u odjeljku Postavljanje.',
+    exit: 'Izađi iz pregleda',
+  },
   summary: {
     version: 'Verzija {version}',
     versionUnknown: 'Nepoznata verzija',

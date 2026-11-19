@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus bringt CarPlay auf den Bildschirm im Lkw – in Euro Truck Simulator 2 und American Truck Simulator. Die Einrichtung dauert nur ein paar Minuten.',
     start: 'Los geht’s',
   },
+  dev: {
+    button: 'Entwicklervorschau',
+    title: 'Entwicklervorschau',
+    text: 'Die Einrichtung wird übersprungen: Es wird nichts in deinem Spiel installiert, daher funktionieren nur diese Seiten und die Bildschirmvorschau. Installiere das Plug-in auf der Seite Einrichtung, um es richtig zu nutzen.',
+    exit: 'Vorschau beenden',
+  },
   summary: {
     version: 'Version {version}',
     versionUnknown: 'Unbekannte Version',

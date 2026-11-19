@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus brings CarPlay to your truck’s screen in Euro Truck Simulator 2 and American Truck Simulator. Setup only takes a few minutes.',
     start: 'Get Started',
   },
+  dev: {
+    button: 'Developer Preview',
+    title: 'Developer preview',
+    text: 'Setup is skipped: nothing is installed in your game, so only these pages and the screen preview work. Install the plugin from Setup to use it for real.',
+    exit: 'Exit Preview',
+  },
   summary: {
     version: 'Version {version}',
     versionUnknown: 'Unknown version',

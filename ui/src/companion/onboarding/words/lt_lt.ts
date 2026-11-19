@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus perkelia CarPlay į sunkvežimio ekraną žaidimuose „Euro Truck Simulator 2“ ir „American Truck Simulator“. Sąranka užtrunka vos kelias minutes.',
     start: 'Pradėti',
   },
+  dev: {
+    button: 'Kūrėjo peržiūra',
+    title: 'Kūrėjo peržiūra',
+    text: 'Sąranka praleidžiama: į tavo žaidimą nieko neįdiegiama, todėl veikia tik šie puslapiai ir ekrano peržiūra. Kad galėtum naudoti iš tikrųjų, įdiek papildinį skiltyje „Sąranka“.',
+    exit: 'Išeiti iš peržiūros',
+  },
   summary: {
     version: 'Versija {version}',
     versionUnknown: 'Versija nežinoma',

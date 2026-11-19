@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus 把 CarPlay 帶到 Euro Truck Simulator 2 和 American Truck Simulator 的卡車螢幕上。設定只需要幾分鐘。',
     start: '開始',
   },
+  dev: {
+    button: '開發者預覽',
+    title: '開發者預覽模式',
+    text: '已跳過設定：遊戲裡沒有安裝任何東西，所以這裡只有頁面和螢幕預覽可用。要正式使用，請在「設定」頁安裝外掛。',
+    exit: '退出預覽',
+  },
   summary: {
     version: '版本 {version}',
     versionUnknown: '版本不明',

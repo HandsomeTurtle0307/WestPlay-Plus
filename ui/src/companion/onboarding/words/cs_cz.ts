@@ -9,6 +9,12 @@ export const words: Words = {
     sub: 'WestPlay Plus přináší CarPlay na obrazovku tahače v Euro Truck Simulator 2 a American Truck Simulator. Nastavení zabere jen pár minut.',
     start: 'Začít',
   },
+  dev: {
+    button: 'Vývojářský náhled',
+    title: 'Vývojářský náhled',
+    text: 'Instalace se přeskakuje: do hry se nic nenainstaluje, takže fungují jen tyto stránky a náhled obrazovky. Chcete-li WestPlay Plus používat doopravdy, nainstalujte plugin v části Instalace.',
+    exit: 'Ukončit náhled',
+  },
   summary: {
     version: 'Verze {version}',
     versionUnknown: 'Neznámá verze',
