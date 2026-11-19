@@ -2,6 +2,12 @@
 
 <h1 align="center">WestPlay Plus</h1>
 
+<!-- languages:start -->
+<p align="center">
+  <b>English</b> · <a href="docs/readme/README.zh-CN.md">Chinese (Simplified)</a> · <a href="docs/readme/README.zh-TW.md">Chinese (Traditional)</a> · <a href="docs/readme/README.ja.md">Japanese</a> · <a href="docs/readme/README.ko.md">Korean</a> · <a href="docs/readme/README.de.md">German</a> · <a href="docs/readme/README.fr.md">French</a> · <a href="docs/readme/README.fr-CA.md">French (Canada)</a> · <a href="docs/readme/README.es.md">Spanish</a> · <a href="docs/readme/README.es-419.md">Spanish (Latin America)</a> · <a href="docs/readme/README.it.md">Italian</a> · <a href="docs/readme/README.pt-BR.md">Portuguese (Brazil)</a> · <a href="docs/readme/README.pt-PT.md">Portuguese (Portugal)</a> · <a href="docs/readme/README.ru.md">Russian</a> · <a href="docs/readme/README.pl.md">Polish</a> · <a href="docs/readme/README.szl.md">Silesian</a> · <a href="docs/readme/README.nl.md">Dutch</a> · <a href="docs/readme/README.tr.md">Turkish</a> · <a href="docs/readme/README.uk.md">Ukrainian</a> · <a href="docs/readme/README.cs.md">Czech</a> · <a href="docs/readme/README.sk.md">Slovak</a> · <a href="docs/readme/README.hu.md">Hungarian</a> · <a href="docs/readme/README.ro.md">Romanian</a> · <a href="docs/readme/README.bg.md">Bulgarian</a> · <a href="docs/readme/README.hr.md">Croatian</a> · <a href="docs/readme/README.sr-Latn.md">Serbian (Latin)</a> · <a href="docs/readme/README.sr-Cyrl.md">Serbian (Cyrillic)</a> · <a href="docs/readme/README.sl.md">Slovenian</a> · <a href="docs/readme/README.mk.md">Macedonian</a> · <a href="docs/readme/README.el.md">Greek</a> · <a href="docs/readme/README.sv.md">Swedish</a> · <a href="docs/readme/README.da.md">Danish</a> · <a href="docs/readme/README.no.md">Norwegian</a> · <a href="docs/readme/README.fi.md">Finnish</a> · <a href="docs/readme/README.et.md">Estonian</a> · <a href="docs/readme/README.lt.md">Lithuanian</a> · <a href="docs/readme/README.lv.md">Latvian</a> · <a href="docs/readme/README.ca.md">Catalan</a> · <a href="docs/readme/README.gl.md">Galician</a> · <a href="docs/readme/README.eu.md">Basque</a> · <a href="docs/readme/README.ka.md">Georgian</a> · <a href="docs/readme/README.vi.md">Vietnamese</a>
+</p>
+<!-- languages:end -->
+
 <p align="center">
   <b>A CarPlay-style screen for the trucks of Euro Truck Simulator 2 and American Truck Simulator.</b><br>
   Your map, your music and YouTube, on your truck's own dashboard screen.
@@ -37,7 +43,7 @@ game's own music folder.
 **Light and dark, and your own look.** It turns dark at night or when you switch your headlights on, like a car's
 light sensor. Bring your own wallpapers and app icons.
 
-**The companion app** on your PC sets everything up: it finds your games, ETS2, ATS or both, installs WestPlay CN
+**The companion app** on your PC sets everything up: it finds your games, ETS2, ATS or both, installs WestPlay
 Plus into each, builds their maps, and stays out of the way after that.
 
 ## How it works
@@ -170,8 +176,10 @@ CarPlay-style screen mod for Euro Truck Simulator 2 and American Truck Simulator
 of the original design, code and assets are his work; this branch keeps its own changes on top of it and is
 grateful for what he built. If you enjoy this project, please also have a look at the original.
 
-本项目的绝大部分设计、代码与素材来自原项目 **WestPlay**（作者 [enes-less](https://github.com/enes-less/WestPlay)），
-这是一个极其优秀的欧卡 2 / 美卡车内中控屏模组。本分支只是在它之上做了适合中文玩家的修改，并对原作者表示由衷感谢。
-建议同时支持原项目（如果可以的话能支持支持我嘛😭😭😭，开发软件不易啊~）
+Please support the original project too (and if you can, support me as well 😭😭😭 — making software is not easy~).
+
+<!-- translated:start -->
+<sub>Every other language version of this README is translated from this one. The author does not speak all 43 languages 😭😭 — not even close — so those translations may be incomplete here and there. Sorry about that. If you speak one of them and spot something off, corrections are very welcome.</sub>
+<!-- translated:end -->
 
 <sub>WestPlay Plus is an independent project, not affiliated with or endorsed by Apple, SCS Software, Spotify, Google or the truck makers. CarPlay, Apple Music, Spotify, YouTube, YouTube Music and the truck makers' names and logos are trademarks of their owners, used to name what WestPlay Plus works with.</sub>
