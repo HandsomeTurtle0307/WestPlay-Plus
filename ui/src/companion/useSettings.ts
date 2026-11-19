@@ -45,6 +45,17 @@ export interface Settings {
     roads: boolean
     fast: boolean
   }
+  /** How hard WestPlay Plus works for the screen (the Performance group of the Truck Screen page), for weaker
+   * graphics cards: the frames a second sent to the game, how much of its look the cabin page draws, and whether it
+   * pauses while the game isn't showing it. */
+  performance: {
+    /** 60, or 30 (half the frames: the map and the glass update half as often). */
+    frameRate: FrameRate
+    /** Full, or reduced (flat glass, still decorative motion). */
+    effects: PageEffects
+    /** Pause the page's drawing while the game isn't showing the screen. */
+    pauseHidden: boolean
+  }
   /** The language WestPlay Plus speaks in the cab and here: one of the game's (`de_de`), or `null`: the game's. */
   language: string | null
 }
@@ -52,6 +63,12 @@ export interface Settings {
 /** Mirrors `westplay_host::settings::CoachSpeakers`: a coach plays through its driver's pair, or through every
  * unit over the passengers' seats. */
 export type CoachSpeakers = 'driver' | 'passengers'
+
+/** Mirrors `westplay_host::settings::FrameRate`: the frames a second the cabin's frames go to the game. */
+export type FrameRate = 'fps60' | 'fps30'
+
+/** Mirrors `westplay_host::settings::PageEffects`: how much of its look the cabin page draws. */
+export type PageEffects = 'full' | 'reduced'
 
 /** Mirrors `westplay_host::settings::TruckStrip`: the truck's own strip beside WestPlay Plus, kept or not. */
 export type TruckStrip = 'auto' | 'off'

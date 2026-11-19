@@ -99,6 +99,15 @@ interface CabinState {
   mapBuildings: boolean
   /** Whether its roads rise to their real heights, as set there too. */
   mapRoads: boolean
+  /** The companion's Performance setting: how often the map draws and the frames go to the game (`30` halves both,
+   * for weaker graphics cards); 60 until the host sends it. */
+  pageFrameRate: 60 | 30
+  /** The companion's Performance setting: flat glass and still decorative motion (`reduced`), for weaker graphics
+   * cards; `full` draws everything. */
+  pageEffects: 'full' | 'reduced'
+  /** Whether the page pauses its drawing: the game isn't showing WestPlay Plus's screen (companion's Performance
+   * setting, Pause When Hidden), so the host sends no frames. */
+  hostIdle: boolean
   /** The player's own tone curve (Settings › Equalizer), and whether it plays (Custom) or the speakers as tuned
    * (Recommended, flat): kept with WestPlay Plus's settings, the host sends them. */
   equalizer: Equalizer
@@ -166,6 +175,9 @@ export const useCabin = create<CabinState>()(
       hours24: true,
       textSize: DEFAULT_TEXT_SIZE,
       reduceTransparency: false,
+      pageFrameRate: 60,
+      pageEffects: 'full',
+      hostIdle: false,
       oemMode: 'auto',
       mapBuildings: true,
       mapRoads: true,
@@ -545,6 +557,9 @@ function receiveHostMessage(now: () => number): (message: HostMessage) => void {
         // A layout this UI doesn't know yet (newer plugin) is treated like a screen without a profile.
         useLive.setState({ screenLayout: isScreenLayoutId(message.layout) ? message.layout : null })
         break
+      case 'idle':
+        useCabin.setState({ hostIdle: message.idle })
+        break
       case 'settings': {
         const cabin = useCabin.getState()
         cabin.setOemMode(message.truckStrip === 'off' ? 'off' : 'auto')
@@ -556,6 +571,8 @@ function receiveHostMessage(now: () => number): (message: HostMessage) => void {
           equalizerCustom: message.equalizerCustom === true,
           mapBuildings: message.buildings !== false,
           mapRoads: message.roads !== false,
+          pageFrameRate: message.frameRate === 'fps30' ? 30 : 60,
+          pageEffects: message.effects === 'reduced' ? 'reduced' : 'full',
         })
         useLive.setState({ chosenLanguage: typeof message.language === 'string' ? message.language : null })
         setIcons({

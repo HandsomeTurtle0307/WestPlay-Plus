@@ -1,7 +1,7 @@
 import maplibregl, { type GeoJSONSource } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-csp-worker.js?url'
-import { displayClock, mapFrameDue } from './frameCap'
+import { displayClock, LEAST_PACE, mapFrameDue } from './frameCap'
 import { create as createStore } from 'zustand'
 import type { Telemetry } from '../../shared/host'
 import type { Appearance } from '../state/appearance'
@@ -749,7 +749,15 @@ function place() {
       // 3D building in view (a player's log, 2026-10-27: the cab page's share up to 4x in towns), and the host hands
       // the game a new one in each of its 60 a second only if they come evenly and more often than that.
       const frameMs = display.tick(now)
-      if (!mapFrameDue(now, lastFrame, frameMs)) return
+      // The host pauses the page while the game isn't showing the screen (the companion's Performance setting, Pause
+      // When Hidden): nothing to draw, and no frame goes anywhere.
+      if (useCabin.getState().hostIdle) {
+        lastFrame = now
+        return
+      }
+      // Half the map frames at the Performance setting's 30 a second (frameCap.ts), for a weaker graphics card.
+      const pace = useCabin.getState().pageFrameRate >= 60 ? LEAST_PACE : LEAST_PACE / 2
+      if (!mapFrameDue(now, lastFrame, frameMs, pace)) return
       const dt = Math.min(now - lastFrame, 100)
       lastFrame = now
       syncAppearance(current)

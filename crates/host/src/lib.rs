@@ -458,6 +458,8 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
     let mut safari_playing = false;
     // The settings generation last applied (`None`: apply them once at startup).
     let mut applied_settings = None;
+    // Whether the page's drawing (and the frames to the game) are paused as the game doesn't show the screen.
+    let mut host_idle = false;
     // Each keybind's presses and holds the page was told of (`PluginBlock::keybind_presses`, `keybind_holds`).
     let mut keybind_presses =
         bridge.bridge().plugin.keybind_presses.each_ref().map(|count| count.load(Ordering::Acquire));
@@ -477,9 +479,24 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
         // Set for this turn when the game has just closed: every web player closes, as its WebView failing
         // closes it (below), the page told so.
         let mut players_closing = false;
+        // Paused while the game isn't showing WestPlay Plus's screen (no game, out of sight, the truck's own screen,
+        // a truck it isn't shown in): the page stops drawing and no frames go to the game, so nothing of WestPlay
+        // Plus costs the graphics card (the companion's Performance setting).
+        let performance = config.settings.get().performance;
+        let showing = status.game_connected
+            && game_shown
+            && status.westplay_open != Some(false)
+            && status.truck_supported != Some(false);
+        let idle = performance.pause_hidden && !showing;
+        if idle != host_idle {
+            host_idle = idle;
+            let _ = webview.post_json(&idle_message(idle));
+        }
         // A captured frame that came before its turn goes out now that it's due.
         // The cursor drawn over it where the mouse is now, the page squeezed into the frame as it's laid out.
-        if let Some(pipeline) = &pipeline {
+        if let Some(pipeline) = &pipeline
+            && !host_idle
+        {
             let placement = cursor::Placement {
                 left: page_place.left as f32,
                 top: page_place.top as f32,
@@ -736,6 +753,10 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
             host.interaction_toggle.store(u32::from(toggle), Ordering::Release);
             for (slot, value) in host.keybinds.iter().zip(config.settings.get().keybinds.bridge_values()) {
                 slot.store(value, Ordering::Release);
+            }
+            // How often the frames go to the game (the Performance setting: 60, or 30 for a weaker graphics card).
+            if let Some(pipeline) = &pipeline {
+                pipeline.capture.set_fps(config.settings.get().performance.frame_rate.fps());
             }
             let _ = webview.post_json(&settings_message(&config.settings.get()));
         }
@@ -2120,6 +2141,12 @@ fn game_shown_message(shown: bool) -> String {
     serde_json::json!({ "type": "gameShown", "shown": shown }).to_string()
 }
 
+/// `{"type":"idle","idle":…}`: whether the page pauses its drawing because the game isn't showing WestPlay Plus's
+/// screen (the Performance setting's Pause When Hidden).
+fn idle_message(idle: bool) -> String {
+    serde_json::json!({ "type": "idle", "idle": idle }).to_string()
+}
+
 /// What YouTube's player does, for the log (play_log.rs), from its state (-1 unstarted, 0 ended, 1 playing,
 /// 2 paused, 3 buffering, 5 cued).
 fn youtube_heard(state: &youtube::State) -> play_log::Heard<'_> {
@@ -2326,6 +2353,9 @@ fn settings_message(settings: &settings::Settings) -> String {
         "equalizerCustom": settings.sound.custom,
         "buildings": settings.map.buildings,
         "roads": settings.map.roads,
+        // The Performance setting: how much of its look the page draws, and how often its frames go to the game.
+        "frameRate": settings.performance.frame_rate,
+        "effects": settings.performance.effects,
         "language": settings.language.as_ref().map(|code| code.as_str()),
     })
     .to_string()

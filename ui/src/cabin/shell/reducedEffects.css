@@ -1,0 +1,23 @@
+/* The companion's Performance setting › Effects: Reduced (weaker graphics cards).
+ *
+ * `.reduced-effects` (set on <html> in shell/Shell.tsx with the setting): the decorative motion stops being drawn —
+ * the fades, slides, bounces and pulses of boot, app switches, widgets and now and then the glass arrive by — so the
+ * graphics card spends its time on the game instead. Its glass goes flat too: `reduce-transparency` is set with it
+ * (reduceTransparency.css), which drops every backdrop-filter.
+ *
+ * `.host-idle` (the setting's Pause When Hidden, sent by the host while the game isn't showing the screen): the page
+ * keeps its last picture; its animations pause so nothing redraws while nobody looks. */
+:root.reduced-effects *,
+:root.reduced-effects *::before,
+:root.reduced-effects *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+:root.host-idle *,
+:root.host-idle *::before,
+:root.host-idle *::after {
+  animation-play-state: paused !important;
+}

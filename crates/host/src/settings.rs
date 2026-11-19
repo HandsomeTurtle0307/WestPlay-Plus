@@ -35,10 +35,64 @@ pub struct Settings {
     pub sound: SoundSettings,
     #[serde(deserialize_with = "lenient")]
     pub map: MapSettings,
+    #[serde(deserialize_with = "lenient")]
+    pub performance: PerformanceSettings,
     /// The language WestPlay speaks, in the cab and the companion (the companion's Setup page): one of the
     /// game's, by its code (`tr_tr`), or `None`: the game's own (owner 2026-11-03).
     #[serde(deserialize_with = "lenient")]
     pub language: Option<LanguageCode>,
+}
+
+/// How hard WestPlay works for the screen: how often the cabin page's frames go to the game, how much of its
+/// glass and motion the page draws, and whether it pauses while the game isn't showing it. Made for weaker
+/// graphics cards (an Intel Iris Xe falls from 40 fps to single digits otherwise): the page's Liquid Glass
+/// blurs the live map, and both cost the same graphics card the game needs (owner 2026-11-19).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", default)]
+pub struct PerformanceSettings {
+    #[serde(deserialize_with = "lenient")]
+    pub frame_rate: FrameRate,
+    #[serde(deserialize_with = "lenient")]
+    pub effects: PageEffects,
+    /// Pause the page's drawing (and the frames to the game) while the game isn't showing the screen: no game
+    /// running, its window out of sight, WestPlay closed to the truck's own screen, or a truck it isn't shown in.
+    pub pause_hidden: bool,
+}
+
+impl Default for PerformanceSettings {
+    fn default() -> Self {
+        Self { frame_rate: FrameRate::Fps60, effects: PageEffects::Full, pause_hidden: true }
+    }
+}
+
+/// Frames a second the cabin page's frames go to the game: 60 (the page as smooth as it gets) or 30 (half the
+/// work; the map and the glass update half as often).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FrameRate {
+    #[default]
+    Fps60,
+    Fps30,
+}
+
+impl FrameRate {
+    /// The cap, as a number.
+    pub fn fps(self) -> u32 {
+        match self {
+            Self::Fps60 => 60,
+            Self::Fps30 => 30,
+        }
+    }
+}
+
+/// How much of the look the cabin page draws: everything (Full), or with the Liquid Glass flat and the decorative
+/// motion still (Reduced), for weaker graphics cards.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum PageEffects {
+    #[default]
+    Full,
+    Reduced,
 }
 
 /// One of the game's language codes, as its `config.cfg` writes them (`tr_tr`, `pt_br`): two letters, `_`, two.
@@ -533,6 +587,11 @@ mod tests {
                 coach: CoachSpeakers::Passengers,
             },
             map: MapSettings { buildings: false, roads: false, fast: true },
+            performance: PerformanceSettings {
+                frame_rate: FrameRate::Fps30,
+                effects: PageEffects::Reduced,
+                pause_hidden: false,
+            },
             language: LanguageCode::new("pt_br"),
         };
         let json = to_json(&settings);
@@ -541,6 +600,9 @@ mod tests {
         assert!(json.contains("\"key\": 5"), "{json}");
         assert!(json.contains("\"mode\": \"toggle\""), "{json}");
         assert!(json.contains("\"truckStrip\": \"off\""), "{json}");
+        assert!(json.contains("\"frameRate\": \"fps30\""), "{json}");
+        assert!(json.contains("\"effects\": \"reduced\""), "{json}");
+        assert!(json.contains("\"pauseHidden\": false"), "{json}");
         assert!(json.contains("\"language\": \"pt_br\""), "{json}");
         assert_eq!(parse(&json).unwrap(), settings);
     }

@@ -18,6 +18,7 @@ import { useSidebarPeek } from './sidebarPeek'
 import { VolumeHud } from './VolumeHud'
 import './transitions.css'
 import './reduceTransparency.css'
+import './reducedEffects.css'
 import { Wallpaper } from './Wallpaper'
 
 interface ShellProps {
@@ -75,13 +76,24 @@ export function Shell({ children, overlay, entering = false }: ShellProps) {
     document.documentElement.style.setProperty('--text-scale', String(textScale(textSize)))
   }, [textSize])
   // Reduce Transparency (reduceTransparency.css), on <html> as well: every glass surface flat, those portalled out of
-  // the apps and the screen changes' snapshots too.
+  // the apps and the screen changes' snapshots too. The companion's Performance setting (Reduced effects) asks for
+  // the same, and for the decorative motion to stay still (reducedEffects.css), and pauses the page while the game
+  // isn't showing it.
   const reduceTransparency = useCabin((state) => state.reduceTransparency)
+  const pageEffects = useCabin((state) => state.pageEffects)
+  const hostIdle = useCabin((state) => state.hostIdle)
   useLayoutEffect(() => {
-    document.documentElement.classList.toggle('reduce-transparency', reduceTransparency)
-  }, [reduceTransparency])
-  // Liquid Glass's lens and touch, for every glass surface as it comes (liquidGlass.ts).
-  useEffect(() => startLiquidGlass(), [])
+    const root = document.documentElement.classList
+    root.toggle('reduce-transparency', reduceTransparency || pageEffects === 'reduced')
+    root.toggle('reduced-effects', pageEffects === 'reduced')
+    root.toggle('host-idle', hostIdle)
+  }, [reduceTransparency, pageEffects, hostIdle])
+  // Liquid Glass's lens and touch, for every glass surface as it comes (liquidGlass.ts). Reduced effects draws no
+  // glass to shape (the flat surfaces above), so its work stays off.
+  useEffect(() => {
+    if (pageEffects === 'reduced') return
+    return startLiquidGlass()
+  }, [pageEffects])
 
   // Handed to the truck (the sidebar's truck button, or the W shortcut): CarPlay shrinks into WestPlay Plus's
   // button and the truck's own screen shows; the button grows it back.

@@ -94,6 +94,7 @@ export function ScreenPage({ status, settings, setup, cw }: PageProps) {
         </Note>
       )}
       <GpuChooser status={status} settings={settings} cw={cw} />
+      <PerformanceChooser settings={settings} cw={cw} />
       <CoachChooser status={status} settings={settings} cw={cw} />
       {status?.error && <Note tone="bad">{status.error}</Note>}
     </Panel>
@@ -136,6 +137,73 @@ function GpuChooser({ status, settings: state, cw }: Pick<PageProps, 'status' | 
       </Group>
       <Note tone="calm">{w.gpuNote}</Note>
     </>
+  )
+}
+
+/**
+ * How hard WestPlay Plus works for the screen (owner 2026-11-19: an Iris Xe ran the game at 40 fps alone, and fell to
+ * single digits with WestPlay Plus: the cabin page's Liquid Glass blurs the live map, and both take the graphics card
+ * the game needs). The frames a second sent to the game, how much of its look the page draws, and whether the page
+ * pauses while the game isn't showing it, chosen as iOS's segmented controls.
+ */
+function PerformanceChooser({ settings: state, cw }: Pick<PageProps, 'settings' | 'cw'>) {
+  const w = cw.screen.performance
+  const { settings, update } = state
+  if (!settings) return null
+  const performance = settings.performance
+  const choose = (next: typeof performance) => {
+    if (next.frameRate === performance.frameRate && next.effects === performance.effects && next.pauseHidden === performance.pauseHidden) return
+    void update({ ...settings, performance: next })
+  }
+  const segments = (
+    title: string,
+    options: { key: string; label: string; chosen: boolean; pick(): void }[],
+  ) => (
+    <Row
+      title={title}
+      accessory={
+        <span className="cz-segments">
+          {options.map((option) => (
+            <button
+              key={option.key}
+              type="button"
+              aria-checked={option.chosen}
+              onClick={option.pick}
+            >
+              {option.label}
+            </button>
+          ))}
+        </span>
+      }
+    />
+  )
+  return (
+    <Group title={w.title} place={8}>
+      {segments(w.rate, [
+        { key: 'fps60', label: w.rate60, chosen: performance.frameRate === 'fps60', pick: () => choose({ ...performance, frameRate: 'fps60' }) },
+        { key: 'fps30', label: w.rate30, chosen: performance.frameRate === 'fps30', pick: () => choose({ ...performance, frameRate: 'fps30' }) },
+      ])}
+      {segments(w.effects, [
+        { key: 'full', label: w.effectsFull, chosen: performance.effects === 'full', pick: () => choose({ ...performance, effects: 'full' }) },
+        {
+          key: 'reduced',
+          label: w.effectsReduced,
+          chosen: performance.effects === 'reduced',
+          pick: () => choose({ ...performance, effects: 'reduced' }),
+        },
+      ])}
+      <Row
+        title={w.pause}
+        detail={w.pauseDetail}
+        accessory={
+          <Switch
+            on={performance.pauseHidden}
+            label={w.pause}
+            change={(pauseHidden) => choose({ ...performance, pauseHidden })}
+          />
+        }
+      />
+    </Group>
   )
 }
 

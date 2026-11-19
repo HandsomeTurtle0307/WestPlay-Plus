@@ -40,7 +40,14 @@ use crate::gpu::{Gpu, Lock, SharedFrame};
 
 /// Frames per second published to the game. Chromium renders at the monitor's refresh rate.
 pub const MAX_FPS: u32 = 60;
+/// [`MAX_FPS`]'s interval: the tests' schedule (`flush`).
+#[cfg(test)]
 const FRAME_INTERVAL: Duration = Duration::from_micros(1_000_000 / MAX_FPS as u64);
+/// The interval between frames published at `fps` (the player's Frame Rate setting: 60, or 30 for a weaker
+/// graphics card; `capture::Capture::set_fps`).
+fn frame_interval(fps: u32) -> Duration {
+    Duration::from_micros(1_000_000 / fps.clamp(15, 240) as u64)
+}
 /// Tolerance for capture timing jitter.
 const FRAME_JITTER: Duration = Duration::from_micros(1_500);
 /// Frames in the capture pool: one kept in the mailbox, one being published, one WGC draws into.
@@ -82,6 +89,8 @@ pub struct Capture {
     light: Cell<f32>,
     drawn_light: Cell<f32>,
     dim_failed: Cell<bool>,
+    /// The frames a second published to the game (`settings::PerformanceSettings::frame_rate`).
+    fps: Cell<u32>,
 }
 
 impl Capture {
@@ -148,7 +157,13 @@ impl Capture {
             light: Cell::new(1.0),
             drawn_light: Cell::new(1.0),
             dim_failed: Cell::new(false),
+            fps: Cell::new(MAX_FPS),
         })
+    }
+
+    /// The frames a second published from now on (the player's Frame Rate setting).
+    pub fn set_fps(&self, fps: u32) {
+        self.fps.set(fps.clamp(15, 240));
     }
 
     /// The screen's light from now on (0 to 1 of full: `brightness::light`); the last frame goes out again with it.
@@ -181,7 +196,7 @@ impl Capture {
         }
         let cursor = cursor.filter(|_| self.painter.is_some());
         let now = Instant::now();
-        let sent = flush(&self.mailbox, now, |frame| {
+        let sent = flush_with(&self.mailbox, now, frame_interval(self.fps.get()), |frame| {
             let texture: Result<ID3D11Texture2D> = frame
                 .Surface()
                 // SAFETY: the frame's surface is a Direct3D surface (the capture's own frames), alive through the call.
@@ -470,9 +485,9 @@ impl<F> Mailbox<F> {
     /// The frame taken went out: the next is due an interval on, staying on schedule; or, after an idle
     /// period (a whole interval or more past its turn), an interval after this one, the schedule starting
     /// over from it rather than letting frames catch up.
-    fn published(&self, now: Instant) {
+    fn published(&self, now: Instant, interval: Duration) {
         let mut slot = self.slot();
-        slot.due = if now >= slot.due + FRAME_INTERVAL { now + FRAME_INTERVAL } else { slot.due + FRAME_INTERVAL };
+        slot.due = if now >= slot.due + interval { now + interval } else { slot.due + interval };
     }
 
     /// The frame taken couldn't go out: it waits again, unless a newer one came meanwhile (then it's
@@ -488,12 +503,19 @@ impl<F> Mailbox<F> {
 }
 
 /// Publishes the mailbox's frame with `publish` if it's due (which says whether it went out): `None` if
-/// none was due, else whether it went out. The mailbox is let go of before `publish` runs.
+/// none was due, else whether it went out. The mailbox is let go of before `publish` runs. The tests' schedule at
+/// [`MAX_FPS`]; the host's own at the player's Frame Rate setting ([`flush_with`]).
+#[cfg(test)]
 fn flush<F>(mailbox: &Mailbox<F>, now: Instant, publish: impl FnOnce(&F) -> bool) -> Option<bool> {
+    flush_with(mailbox, now, FRAME_INTERVAL, publish)
+}
+
+/// [`flush`], on the frames a second `interval` asks for.
+fn flush_with<F>(mailbox: &Mailbox<F>, now: Instant, interval: Duration, publish: impl FnOnce(&F) -> bool) -> Option<bool> {
     let frame = mailbox.take_due(now)?;
     let sent = publish(&frame);
     if sent {
-        mailbox.published(now);
+        mailbox.published(now, interval);
         drop(frame);
     } else {
         drop(mailbox.put_back(frame));

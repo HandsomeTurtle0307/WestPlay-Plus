@@ -71,6 +71,7 @@ let settings: Settings = {
   graphics: { gpu: null },
   sound: { equalizer: { bass: 0, mid: 0, treble: 0 }, custom: false, coach: 'driver' },
   map: { buildings: true, roads: true, fast: false },
+  performance: { frameRate: 'fps60', effects: 'full', pauseHidden: true },
   language: null,
 }
 

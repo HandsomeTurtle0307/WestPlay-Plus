@@ -114,9 +114,16 @@ export type HostMessage =
       /** The player's own tone curve (Settings › Equalizer), and whether it plays (Custom) or not (Recommended). */
       equalizer?: Equalizer
       equalizerCustom?: boolean
+      /** The Performance setting: how often the frames go to the game (`fps60` or `fps30`), and how much of its
+       * look the page draws (`full`, or `reduced`: flat glass, still decorative motion). */
+      frameRate?: 'fps60' | 'fps30'
+      effects?: 'full' | 'reduced'
       /** The language chosen in the companion (a game code, `de_de`); `null`: the game's. */
       language?: string | null
     }
+  /** Whether the page pauses its drawing, as the game isn't showing WestPlay Plus's screen: with the companion's
+   * Performance setting (Pause When Hidden), the host stops the frames and asks the page to stop too. */
+  | { type: 'idle'; idle: boolean }
   /** The player's own wallpapers and icon sets (shared/customize.ts), their files at `CABIN_FILES`. */
   | { type: 'customize'; wallpapers: CustomWallpaper[]; iconSets: IconSet[] }
   /** The music's spectrum as it plays, while the page asks for it (`spectrum`): bars from the lows to the

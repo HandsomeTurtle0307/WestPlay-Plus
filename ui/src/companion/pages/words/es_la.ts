@@ -14,6 +14,17 @@ export const words: CompanionWords = {
       stopped: 'El servicio de WestPlay Plus se detuvo. Tienes los detalles en Información.',
     },
     gpuNote: 'Si la pantalla se traba, elige otra tarjeta: WestPlay Plus se reinicia en ella.',
+    performance: {
+      title: 'Performance',
+      rate: 'Frame rate',
+      rate60: '60 fps',
+      rate30: '30 fps',
+      effects: 'Effects',
+      effectsFull: 'Full',
+      effectsReduced: 'Reduced',
+      pause: 'Pause when hidden',
+      pauseDetail: 'Stop drawing while the game does not show the screen',
+    },
     coachSpeakers: 'Altavoces del autobús',
     coachNote:
       'Altavoces de los pasajeros de este autobús: {n}, todos a la vez. Con un procesador poco potente, el juego puede trabarse.',
