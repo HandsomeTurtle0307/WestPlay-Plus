@@ -4,9 +4,10 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "predev": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/dev/sweep.ps1",
-    "dev": "tauri dev",
+    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/dev/tauri.ps1 dev",
     "prebuild": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/dev/sweep.ps1",
-    "build": "tauri build",
+    "build": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/dev/tauri.ps1 build",
+    "build:installer": "powershell -NoProfile -ExecutionPolicy Bypass -File tools/dev/tauri.ps1 installer",
     "postinstall": "npm --prefix ui install"
   },
   "devDependencies": {
