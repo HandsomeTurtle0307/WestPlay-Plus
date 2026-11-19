@@ -25,6 +25,18 @@
 
 WestPlay Plus stawiŏ ekran jak z telefōnu na panelu twojigo kamiōna, w grze: Euro Truck Simulator 2 abo American Truck Simulator, jedyn ekran dlo ôbōch. Twoja trasa na mapie narysowanyj z twojij włŏsnyj gry, twoja muzyka, YouTube, pogoda na twojij drōdze: dokładnie tam, kaj prawdziwy kamiōn mŏ swōj ekran, ôbsugowany myszōm, kej trzimiesz klawisz.
 
+<!-- why:start -->
+
+## Czamu to zrobiōłech
+
+Nojprzōd szukołech moda do CarPlay, aże trefiōłech na WestPlay i zoboczōłech, iże je zrobiony bardzo dobrze (no naprowdã bardzo dobrze), ino optymalizacyjo niy była nojlepszo i komputyr mi sie zawiysiōł. To żech sie rozhodnōł sam go dopieszczyć, pociōngnōńc wydajność i dodać pora nowych funkcyj (stoja na ramionach ôlbrzyma, hi hi~😊).
+
+<!-- easter-egg:start -->
+> Je jeszcze jedna prziczyna: kedyś, jak żech bōł rozstrojiōny, zrobiōłech rzeczy (co prawda mocka), kere wpłyneły na inkszych — nojbarzij na tych, kerych żech naprowdã niy chcioł skrzywdzić. Teroz jak o tym pōmiyrzã, to mie dusi i wstyd mie, a prziszłość je mglisto (uczenie sie i plany na dalij). To żech sie chyciōł tego, co mōgã kontrolować — programowanio — i tym na razie zakrywōm to, co mie boli inkszyndzij. Ech🥲 Potym to już niy wiem co robić, idã krok za krokiem :)‍💨
+<!-- easter-egg:end -->
+
+<!-- why:end -->
+
 ## Funkcyje
 
 **Mapy z twojij włŏsnyj gry.** Rysowane z mapy twojij gry, ze modami map (ProMods a inksze), z twojōm trasōm, wskazōwkami zakrãt za zakrãtym a szukaniym, kere dodŏwŏ przistanki do GPS-u samyj gry.

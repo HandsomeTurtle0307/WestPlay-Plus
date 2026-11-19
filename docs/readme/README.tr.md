@@ -25,6 +25,14 @@
 
 WestPlay Plus, oyunun içinde kamyonunun kendi gösterge ekranına telefon tarzı bir ekran koyar: Euro Truck Simulator 2 ya da American Truck Simulator, ikisi için tek ekran. Kendi oyunundan çizilmiş bir harita üzerinde rotan, müziğin, YouTube, yol boyunca hava durumu: gerçek bir kamyonun ekranının olduğu tam o yerde, bir tuşu basılı tutarken fareyle kullanılır.
 
+<!-- why:start -->
+
+## Bunu neden yaptım
+
+Başta bir CarPlay modu arıyordum, sonra WestPlay'e denk geldim ve gerçekten çok iyi yapılmış olduğunu gördüm (cidden, çok çok iyi). Sadece optimizasyonu kötüydü ve bilgisayarımı dondurdu. Ben de kendim elden geçirmeye karar verdim: performansı toparladım, birkaç yeni özellik ekledim (bir devin omuzlarında duruyorum işte, hihi~😊).
+
+<!-- why:end -->
+
 ## Özellikler
 
 **Haritalar kendi oyunundan.** Oyununun haritasından çizilir, harita modları dahil (ProMods ve diğerleri), rotan, dönüş dönüş yönlendirme ve oyunun kendi GPS'ine durak ekleyen bir arama ile.

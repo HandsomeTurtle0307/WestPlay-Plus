@@ -25,6 +25,14 @@
 
 WestPlay Plus bringt einen Bildschirm im Handy-Stil auf das eigene Armaturendisplay deines Lkw, mitten im Spiel: Euro Truck Simulator 2 oder American Truck Simulator, ein Bildschirm für beide. Deine Route auf einer Karte, die aus deinem eigenen Spiel gezeichnet ist, deine Musik, YouTube, das Wetter auf deiner Fahrt: genau dort, wo ein echter Lkw seinen Bildschirm hat, mit der Maus bedient, während du eine Taste hältst.
 
+<!-- why:start -->
+
+## Warum ich das gebaut habe
+
+Eigentlich wollte ich nur einen CarPlay-Mod finden, dann bin ich über WestPlay gestolpert – und das ist wirklich sehr gut gemacht (wirklich, richtig gut). Bloß die Optimierung war mies und hat meinen Rechner eingefroren. Also habe ich beschlossen, selbst Hand anzulegen: Performance aufpolieren, ein paar neue Funktionen dazu (auf den Schultern eines Riesen, hihi~😊).
+
+<!-- why:end -->
+
 ## Funktionen
 
 **Karten aus deinem eigenen Spiel.** Gezeichnet aus der Karte deines Spiels, Kartenmods inklusive (ProMods und andere), mit deiner Route, Abbiegehinweisen und einer Suche, die Zwischenziele ins GPS des Spiels einträgt.

@@ -25,6 +25,14 @@
 
 WestPlay Plus sätter en telefonskärm på instrumentbrädan i din egen lastbil, inne i spelet: Euro Truck Simulator 2 eller American Truck Simulator, en skärm för båda. Din rutt på en karta ritad från ditt eget spel, din musik, YouTube, vädret längs vägen: precis där en riktig lastbil har sin skärm, styrd med musen medan du håller en tangent.
 
+<!-- why:start -->
+
+## Varför jag byggde det här
+
+Först letade jag efter en CarPlay-mod, sedan snubblade jag över WestPlay och såg att den är riktigt bra gjord (verkligen, väldigt väldigt bra). Det var bara optimeringen som var dålig och fick min dator att hänga sig. Så jag bestämde mig för att förbättra den själv: fixa prestandan och lägga till några nya funktioner (står på en jättes axlar, hihi~😊).
+
+<!-- why:end -->
+
 ## Funktioner
 
 **Kartor från ditt eget spel.** Ritade från spelets karta, kartmoddar inräknade (ProMods och andra), med din rutt, sväng för sväng-anvisningar och en sökning som lägger till stopp i spelets egen GPS.

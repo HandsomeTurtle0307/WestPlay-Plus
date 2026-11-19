@@ -25,6 +25,14 @@
 
 A WestPlay Plus telefonos stílusú képernyőt tesz a saját kamionod műszerfalára, a játékon belül: Euro Truck Simulator 2 vagy American Truck Simulator, egy képernyő mindkettőhöz. Az útvonalad a saját játékodból rajzolt térképen, a zenéd, a YouTube, az út időjárása: pontosan ott, ahol egy igazi kamionnak képernyője van, egérrel kezelve, miközben lenyomva tartasz egy billentyűt.
 
+<!-- why:start -->
+
+## Miért csináltam ezt
+
+Először egy CarPlay modot kerestem, aztán rátaláltam a WestPlayre, és láttam, hogy nagyon jól van megcsinálva (tényleg, nagyon-nagyon jól). Csak az optimalizálás volt gyenge, és lefagyasztotta a gépem. Ezért úgy döntöttem, magam javítom meg: rendbe teszem a teljesítményt, és hozzáadok pár új funkciót (egy óriás vállán állva, hehe~😊).
+
+<!-- why:end -->
+
 ## Funkciók
 
 **Térképek a saját játékodból.** A játékod térképéből rajzolva, térképmodokkal együtt (ProMods és mások), az útvonaladdal, kanyarról kanyarra haladó navigációval és olyan kereséssel, amely megállókat tesz a játék saját GPS-ébe.

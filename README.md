@@ -28,6 +28,14 @@ Simulator 2 or American Truck Simulator, one screen for both. Your route on a ma
 music, YouTube, the weather on your drive: right where a real truck has its screen, used with the mouse while you
 hold a key.
 
+<!-- why:start -->
+
+## Why I built this
+
+I went looking for a CarPlay mod, found WestPlay, and saw it was genuinely excellent (really, really good). The only trouble was the optimisation: it froze my PC. So I decided to polish it up myself, tighten the performance and add a few new features (standing on the shoulders of a giant, hehe~😊).
+
+<!-- why:end -->
+
 ## Features
 
 **Maps from your own game.** Drawn from your game's map, map mods included (ProMods and others), with your route,

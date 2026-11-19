@@ -25,6 +25,14 @@
 
 WestPlay Plus zet een telefoonachtig scherm op het dashboardscherm van je eigen vrachtwagen, in de game: Euro Truck Simulator 2 of American Truck Simulator, één scherm voor allebei. Je route op een kaart die uit je eigen game is getekend, je muziek, YouTube, het weer op je rit: precies waar een echte vrachtwagen zijn scherm heeft, bediend met de muis terwijl je een toets ingedrukt houdt.
 
+<!-- why:start -->
+
+## Waarom ik dit heb gemaakt
+
+Eerst was ik op zoek naar een CarPlay-mod, tot ik WestPlay tegenkwam. Dat is echt heel goed gemaakt (echt, heel erg goed), alleen de optimalisatie was matig en daar liep mijn pc vast. Dus besloot ik het zelf te verbeteren: prestaties oppoetsen en een paar nieuwe functies erbij (op de schouders van een reus, hihi~😊).
+
+<!-- why:end -->
+
 ## Functies
 
 **Kaarten uit je eigen game.** Getekend uit de kaart van je game, inclusief kaartmods (ProMods en andere), met je route, aanwijzingen bocht voor bocht en een zoekfunctie die tussenstops aan de GPS van de game zelf toevoegt.

@@ -25,6 +25,14 @@
 
 WestPlay Plus installe un écran de cellulaire sur le tableau de bord de votre camion, dans le jeu : Euro Truck Simulator 2 ou American Truck Simulator, un seul écran pour les deux. Votre itinéraire sur une carte dessinée à partir de votre propre jeu, votre musique, YouTube, la météo de votre trajet : exactement là où un vrai camion a son écran, au pilotage à la souris, une touche maintenue.
 
+<!-- why:start -->
+
+## Pourquoi j'ai fait ça
+
+Au départ je cherchais un mod CarPlay, pis je suis tombé sur WestPlay, et honnêtement c'est très bien fait (vraiment, vraiment bien). Le seul problème, c'était l'optimisation : ça a figé mon ordi. Faque j'ai décidé de le retravailler moi-même, de travailler les performances pis d'ajouter quelques nouvelles affaires (sur les épaules d'un géant, héhé~😊).
+
+<!-- why:end -->
+
 ## Fonctionnalités
 
 **Des cartes tirées de votre propre jeu.** Dessinées depuis la carte de votre jeu, mods de carte compris (ProMods et d'autres), avec votre itinéraire, les indications virage par virage et une recherche qui ajoute des arrêts au GPS du jeu.

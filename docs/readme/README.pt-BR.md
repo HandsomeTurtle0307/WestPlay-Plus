@@ -25,6 +25,14 @@
 
 O WestPlay Plus coloca uma tela de celular na tela do painel do seu próprio caminhão, dentro do jogo: Euro Truck Simulator 2 ou American Truck Simulator, uma tela só para os dois. Sua rota num mapa desenhado a partir do seu próprio jogo, sua música, o YouTube, o tempo que vai fazer na sua viagem: bem onde um caminhão de verdade tem a sua tela, controlada com o mouse enquanto você segura uma tecla.
 
+<!-- why:start -->
+
+## Por que eu fiz isso
+
+No começo eu procurava um mod de CarPlay, aí encontrei o WestPlay e vi que é muito bem feito (sério, muito muito bem). Só que a otimização não era boa e travou o meu PC. Então decidi melhorar eu mesmo: mexer no desempenho e adicionar algumas funções novas (em cima dos ombros de um gigante, hehe~😊).
+
+<!-- why:end -->
+
 ## Recursos
 
 **Mapas do seu próprio jogo.** Desenhados a partir do mapa do seu jogo, com os mods de mapa incluídos (ProMods e outros), com sua rota, as instruções curva a curva e uma busca que adiciona paradas ao GPS do próprio jogo.

@@ -25,6 +25,14 @@
 
 WestPlay Plus postavi zaslon, kot je na telefonu, na armaturno ploščo tvojega tovornjaka, znotraj igre: Euro Truck Simulator 2 ali American Truck Simulator, en zaslon za oba. Tvoja pot na zemljevidu, narisanem iz tvoje lastne igre, tvoja glasba, YouTube, vreme na tvoji vožnji: točno tam, kjer ima pravi tovornjak svoj zaslon, upravljan z miško, medtem ko držiš tipko.
 
+<!-- why:start -->
+
+## Zakaj sem to naredil
+
+Najprej sem iskal mod za CarPlay, potem pa naletel na WestPlay in videl, da je res dobro narejen (res, zelo zelo dobro). Le optimizacija je bila slaba in mi je zamrznila računalnik. Zato sem se odločil, da ga sam izpilim: izboljšam delovanje in dodam nekaj novih funkcij (stojim na ramenih velikana, hehe~😊).
+
+<!-- why:end -->
+
 ## Funkcije
 
 **Zemljevidi iz tvoje lastne igre.** Narisani iz zemljevida tvoje igre, vključno z modi zemljevidov (ProMods in drugi), s tvojo potjo, navodili ovinek za ovinkom in iskanjem, ki doda postanke v GPS same igre.

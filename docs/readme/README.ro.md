@@ -25,6 +25,14 @@
 
 WestPlay Plus pune un ecran ca de telefon pe bordul propriului tău camion, în joc: Euro Truck Simulator 2 sau American Truck Simulator, un singur ecran pentru amândouă. Traseul tău pe o hartă desenată din propriul joc, muzica ta, YouTube, vremea de pe drum: exact acolo unde un camion adevărat are ecranul, manevrat cu mouse-ul ținând o tastă apăsată.
 
+<!-- why:start -->
+
+## De ce am făcut asta
+
+La început căutam un mod de CarPlay, apoi am dat peste WestPlay și am văzut că e foarte bine făcut (serios, foarte foarte bine). Doar că optimizarea nu era bună și mi-a blocat calculatorul. Așa că am decis să-l îmbunătățesc singur: am lucrat la performanță și am adăugat câteva funcții noi (stau pe umerii unui uriaș, hihi~😊).
+
+<!-- why:end -->
+
 ## Funcții
 
 **Hărți din propriul joc.** Desenate din harta jocului tău, cu modurile de hartă incluse (ProMods și altele), cu traseul tău, indicații viraj cu viraj și o căutare care adaugă opriri în GPS-ul jocului.

@@ -25,6 +25,18 @@
 
 WestPlay Plus pon unha pantalla coma a dun móbil no salpicadoiro do teu propio camión, dentro do xogo: Euro Truck Simulator 2 ou American Truck Simulator, unha pantalla para os dous. A túa ruta nun mapa debuxado a partir do teu propio xogo, a túa música, YouTube, o tempo da túa viaxe: exactamente onde un camión de verdade ten a súa pantalla, controlada co rato mentres mantés premida unha tecla.
 
+<!-- why:start -->
+
+## Por que fixen isto
+
+Ao principio buscaba un mod de CarPlay, e atopei WestPlay: está moi ben feito (de verdade, moi moi ben), só que a optimización non era boa e o ordenador conxelóuseme. Así que decidín melloralo eu mesmo, afinar o rendemento e engadir algunhas funcións novas (estou subido aos ombros dun xigante, jeje~😊).
+
+<!-- easter-egg:start -->
+> Hai outro motivo: antes, cando estaba moi alterado, fixen cousas (bastantes, a verdade) que afectaron a outras persoas — sobre todo a alguén a quen non quería facer dano. Agora, ao pensalo, síntome culpable e moi mal, e vexo o futuro con moita dúbida (tamén os estudos e os plans). Por iso agárrome ao único que podo controlar — programar — e con iso vou tapando, por agora, a dor doutras partes. Ai🥲 Tampouco sei que farei despois; irei paso a paso :)‍💨
+<!-- easter-egg:end -->
+
+<!-- why:end -->
+
 ## Funcións
 
 **Mapas do teu propio xogo.** Debuxados a partir do mapa do teu xogo, cos mods de mapa incluídos (ProMods e outros), coa túa ruta, as indicacións xiro a xiro e unha busca que engade paradas ao GPS do propio xogo.

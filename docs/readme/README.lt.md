@@ -25,6 +25,14 @@
 
 WestPlay Plus įdeda telefono stiliaus ekraną į tavo sunkvežimio prietaisų skydelį, pačioje žaidimo viduje: Euro Truck Simulator 2 arba American Truck Simulator, vienas ekranas abiem. Tavo maršrutas žemėlapyje, nubrėžtame iš tavo paties žaidimo, tavo muzika, YouTube, oras tavo kelionėje: būtent ten, kur tikras sunkvežimis turi savo ekraną, valdomas pele laikant nuspaustą klavišą.
 
+<!-- why:start -->
+
+## Kodėl aš tai padariau
+
+Iš pradžių ieškojau CarPlay modifikacijos, kol užtikau WestPlay ir pamačiau, kad jis tikrai labai gerai padarytas (tikrai, labai labai gerai). Tik optimizacija buvo silpna ir užšaldė man kompiuterį. Todėl nusprendžiau pats jį patobulinti: pakoreguoti našumą ir pridėti kelias naujas funkcijas (stoviu ant milžino pečių, hi hi~😊).
+
+<!-- why:end -->
+
 ## Funkcijos
 
 **Žemėlapiai iš tavo paties žaidimo.** Brėžiami iš tavo žaidimo žemėlapio, įskaitant žemėlapių modus (ProMods ir kitus), su tavo maršrutu, posūkis po posūkio nurodymais ir paieška, kuri prideda sustojimus į paties žaidimo GPS.

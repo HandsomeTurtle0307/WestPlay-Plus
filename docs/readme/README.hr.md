@@ -25,6 +25,14 @@
 
 WestPlay Plus stavlja zaslon poput onog na mobitelu na armaturu tvog kamiona, unutar igre: Euro Truck Simulator 2 ili American Truck Simulator, jedan zaslon za oba. Tvoja ruta na karti nacrtanoj iz tvoje vlastite igre, tvoja glazba, YouTube, vrijeme na tvom putu: točno tamo gdje pravi kamion ima svoj zaslon, upravljan mišem dok držiš tipku.
 
+<!-- why:start -->
+
+## Zašto sam ovo napravio
+
+Prvo sam tražio mod za CarPlay, a onda naletio na WestPlay i vidio da je stvarno dobro napravljen (stvarno, jako jako dobro). Samo je optimizacija bila slaba i zamrznula mi je računalo. Zato sam odlučio sam ga doraditi: posložiti performanse i dodati nekoliko novih funkcija (stojeći na ramenima diva, hehe~😊).
+
+<!-- why:end -->
+
 ## Značajke
 
 **Karte iz tvoje vlastite igre.** Crtane iz karte tvoje igre, uključujući modove za karte (ProMods i drugi), s tvojom rutom, uputama skretanje po skretanje i pretraživanjem koje dodaje stajališta u GPS same igre.

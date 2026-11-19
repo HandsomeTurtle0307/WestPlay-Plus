@@ -25,6 +25,14 @@
 
 WestPlay Plus posa una pantalla com la d'un mòbil al tauler de comandament del teu camió, dins del joc: Euro Truck Simulator 2 o American Truck Simulator, una pantalla per als dos. La teva ruta en un mapa dibuixat a partir del teu propi joc, la teva música, YouTube, el temps del teu viatge: exactament on un camió de veritat té la seva pantalla, controlada amb el ratolí mentre mantens premuda una tecla.
 
+<!-- why:start -->
+
+## Per què vaig fer això
+
+Al principi buscava un mod de CarPlay, i vaig topar amb el WestPlay: està molt ben fet (de debò, molt i molt ben fet), només que l'optimització no era bona i em va penjar l'ordinador. Així que vaig decidir millorar-lo jo mateix: polir el rendiment i afegir unes quantes funcions noves (a espatlles d'un gegant, jeje~😊).
+
+<!-- why:end -->
+
 ## Funcions
 
 **Mapes del teu propi joc.** Dibuixats a partir del mapa del teu joc, amb els mods de mapa inclosos (ProMods i d'altres), amb la teva ruta, les indicacions gir a gir i una cerca que afegeix parades al GPS del propi joc.

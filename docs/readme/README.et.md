@@ -25,6 +25,18 @@
 
 WestPlay Plus paneb telefonistiilis ekraani sinu veoauto armatuurlauale, mängu sees: Euro Truck Simulator 2 või American Truck Simulator, üks ekraan mõlemale. Sinu marsruut sinu enda mängust joonistatud kaardil, sinu muusika, YouTube, ilm teel: täpselt seal, kus päris veoautol on oma ekraan, juhitav hiirega, hoides klahvi all.
 
+<!-- why:start -->
+
+## Miks ma selle tegin
+
+Alguses otsisin CarPlay modi, siis leidsin WestPlay ja avastasin, et see on väga hästi tehtud (tõesti, väga-väga hästi) — ainult optimeerimine oli kehv ja arvuti külmus ära. Nii otsustasin selle ise korda teha: võimsust lihvida ja paar uut funktsiooni lisada (seisan hiiglase õlgadel, hi hi~😊).
+
+<!-- easter-egg:start -->
+> On veel üks põhjus: varem, kui olin väga emotsionaalne, tegin asju (päris palju), mis mõjutasid teisi — eriti neid, keda ma tegelikult ei tahtnud haavata. Nüüd, kui selle peale mõtlen, tunnen süüd ja mul on väga raske, ja tulevik tundub segane (ka õpingud ja plaanid). Nii haarangi ainsast, mida saan kontrollida — programmeerimisest — ja sellega katan praegu valu mujal. Oh🥲 Mida edasi teha, seda ma ka ei tea, lähen samm-sammult :)‍💨
+<!-- easter-egg:end -->
+
+<!-- why:end -->
+
 ## Funktsioonid
 
 **Kaardid sinu enda mängust.** Joonistatud sinu mängu kaardilt, kaardimodid kaasa arvatud (ProMods ja teised), sinu marsruudi, pööre pöörde haaval juhistega ja otsinguga, mis lisab peatusi mängu enda GPS-i.

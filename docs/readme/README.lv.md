@@ -25,6 +25,18 @@
 
 WestPlay Plus liek telefona stila ekrānu uz tavas kravas automašīnas armatūras paneļa, pašā spēlē: Euro Truck Simulator 2 vai American Truck Simulator, viens ekrāns abiem. Tavs maršruts kartē, kas zīmēta no tavas paša spēles, tava mūzika, YouTube, laikapstākļi tavā braucienā: tieši tur, kur īstai kravas automašīnai ir savs ekrāns, vadāms ar peli, turot nospiestu taustiņu.
 
+<!-- why:start -->
+
+## Kāpēc es to uztaisīju
+
+Sākumā meklēju CarPlay modu, tad uzgāju WestPlay un sapratu, ka tas ir ļoti labi uztaisīts (tiešām, tiešām labi) — vienīgi optimizācija nebija laba, un dators man iekārās. Tāpēc nolēmu to paplašināt pats: pieslīpēt veiktspēju un pielikt pāris jaunas funkcijas (stāvu uz milža pleciem, hihi~😊).
+
+<!-- easter-egg:start -->
+> Ir vēl viens iemesls: agrāk, kad biju ļoti satraukts, es izdarīju lietas (var teikt, daudz), kas ietekmēja citus — īpaši tos, kurus es īsti negribēju sāpināt. Tagad, kad par to domāju, jūtos vainīgs un man ir ļoti smagi, un nākotne šķiet neskaidra (arī mācības un plāni). Tāpēc es pieķeros vienīgajam, ko varu kontrolēt — programmēšanai — un ar to pagaidām aizklāju sāpes citās lietās. Eh🥲 Ko darīt tālāk, es arī nezinu, iešu soli pa solim :)‍💨
+<!-- easter-egg:end -->
+
+<!-- why:end -->
+
 ## Funkcijas
 
 **Kartes no tavas pašas spēles.** Zīmētas no tavas spēles kartes, ieskaitot karšu modus (ProMods un citus), ar tavu maršrutu, norādēm pagrieziens pa pagriezienam un meklēšanu, kas pievieno pieturas pašas spēles GPS.

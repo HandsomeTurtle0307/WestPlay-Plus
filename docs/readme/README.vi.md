@@ -25,6 +25,14 @@
 
 WestPlay Plus đặt một màn hình kiểu điện thoại lên bảng điều khiển của chính chiếc xe tải bạn lái, ngay trong game: Euro Truck Simulator 2 hay American Truck Simulator, một màn hình dùng cho cả hai. Lộ trình của bạn trên bản đồ được vẽ từ chính game của bạn, nhạc của bạn, YouTube, thời tiết trên đường: đúng chỗ mà một chiếc xe tải thật có màn hình, điều khiển bằng chuột trong khi giữ một phím.
 
+<!-- why:start -->
+
+## Vì sao mình làm cái này
+
+Ban đầu mình chỉ tìm một mod CarPlay, rồi tình cờ thấy WestPlay và nhận ra nó được làm rất tốt (thật đấy, rất rất tốt). Chỉ có điều phần tối ưu chưa ổn nên làm máy mình đơ luôn. Thế là mình quyết định tự hoàn thiện nó: chỉnh lại hiệu năng và thêm vài tính năng mới (đứng trên vai người khổng lồ mà, hehe~😊).
+
+<!-- why:end -->
+
 ## Tính năng
 
 **Bản đồ từ chính game của bạn.** Vẽ từ bản đồ trong game, bao gồm cả mod bản đồ (ProMods và các mod khác), với lộ trình, hướng dẫn rẽ từng chặng và tìm kiếm có thể thêm điểm dừng vào GPS của chính game.

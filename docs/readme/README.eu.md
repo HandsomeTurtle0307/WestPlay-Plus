@@ -25,6 +25,18 @@
 
 WestPlay Plus-ek telefonu baten antzeko pantaila jartzen du zure kamioiaren aginte-panelean, jokoaren barruan: Euro Truck Simulator 2 edo American Truck Simulator, pantaila bat bietarako. Zure ibilbidea zure joko propiotik marraztutako mapa batean, zure musika, YouTube, zure bidaiako eguraldia: benetako kamioi batek pantaila duen leku berean, saguarekin kontrolatuta tekla bat sakatuta edukita.
 
+<!-- why:start -->
+
+## Zergatik egin nuen hau
+
+Hasieran CarPlay mod bat bilatzen hasi nintzen, eta WestPlay aurkitu nuen. Oso ondo eginda dago (benetan, oso-oso ondo), baina optimizazioa ez zen ona eta ordenagailua izoztu zidan. Beraz, nik neuk hobetzea erabaki nuen: errendimendua findu, eta funtzio berri batzuk gehitu (erraldoi baten sorbaldetan nago eta, jeje~😊).
+
+<!-- easter-egg:start -->
+> Beste arrazoi bat ere badago: lehen, oso urduri nengoela, beste batzuei eragin zieten gauzak egin nituen (asko, egia esan) — batez ere inoiz mindu nahi ez nituenei. Orain pentsatuta, errudun eta gaizki sentitzen naiz, eta etorkizunari begira galdu samar nabil (ikasketak eta etorkizunerako planak barne). Beraz, nire esku dagoen gauza bakarra hartu dut — programazioa — eta horrekin estaltzen ditut beste aldeko minak, behin-behinean. Ai🥲 Gero zer egin ez dakit, baina pausoz pauso joango naiz :)‍💨
+<!-- easter-egg:end -->
+
+<!-- why:end -->
+
 ## Ezaugarriak
 
 **Mapak zure joko propiotik.** Zure jokoaren mapatik marraztuta, mapa-modak barne (ProMods eta beste batzuk), zure ibilbidearekin, bira biraneko jarraibideekin eta jokoaren GPSan geldialdiak gehitzen dituen bilaketarekin.

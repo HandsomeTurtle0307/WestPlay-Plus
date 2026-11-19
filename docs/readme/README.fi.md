@@ -25,6 +25,14 @@
 
 WestPlay Plus tuo puhelinmäisen näytön oman kuorma-autosi kojelaudalle, pelin sisällä: Euro Truck Simulator 2 tai American Truck Simulator, yksi näyttö molemmille. Reittisi omasta pelistäsi piirretyllä kartalla, musiikkisi, YouTube, matkasi sää: juuri siinä, missä oikeassa kuorma-autossa on näyttö, hiirellä käytettynä näppäintä pohjassa pitäen.
 
+<!-- why:start -->
+
+## Miksi tein tämän
+
+Aluksi etsin CarPlay-modia, kunnes törmäsin WestPlayhin ja huomasin, että se on tehty todella hyvin (oikeasti, tosi tosi hyvin). Vain optimointi oli huono ja jäädytti koneeni. Niinpä päätin parantaa sitä itse: viilasin suorituskykyä ja lisäsin pari uutta ominaisuutta (seison jättiläisen hartioilla, hihi~😊).
+
+<!-- why:end -->
+
 ## Ominaisuudet
 
 **Kartat omasta pelistäsi.** Piirretty pelisi kartasta, karttamodit mukaan lukien (ProMods ja muut), reittisi, käännös kerrallaan -ohjeet ja haku, joka lisää pysähdyksiä pelin omaan GPS:ään.

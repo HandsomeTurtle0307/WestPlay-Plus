@@ -25,6 +25,14 @@
 
 WestPlay Plus dáva obrazovku ako z telefónu na palubnú dosku tvojho kamióna, priamo v hre: Euro Truck Simulator 2 alebo American Truck Simulator, jedna obrazovka pre oba. Tvoja trasa na mape nakreslenej z tvojej vlastnej hry, tvoja hudba, YouTube, počasie na ceste: presne tam, kde má opravdový kamión svoju obrazovku, ovládaná myšou pri držanej klávese.
 
+<!-- why:start -->
+
+## Prečo som to urobil
+
+Najprv som hľadal mod na CarPlay, až som natrafil na WestPlay a zistil, že je fakt veľmi dobre urobený (vážne, veľmi veľmi dobre). Len optimalizácia bola slabá a zamrzla mi pri tom celá mašina. Tak som sa rozhodol doladiť ho sám: vyladiť výkon a pridať pár nových funkcií (stojím na ramenách obra, hi hi~😊).
+
+<!-- why:end -->
+
 ## Funkcie
 
 **Mapy z tvojej vlastnej hry.** Kreslené z mapy tvojej hry, vrátane mapových módov (ProMods a ďalšie), s tvojou trasou, navigačnými pokynmi zákruta po zákrute a hľadaním, ktoré pridáva zastávky do GPS samotnej hry.

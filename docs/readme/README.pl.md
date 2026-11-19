@@ -25,6 +25,14 @@
 
 WestPlay Plus kładzie ekran w stylu telefonu na ekran deski rozdzielczej Twojej ciężarówki, w grze: Euro Truck Simulator 2 albo American Truck Simulator, jeden ekran dla obu. Twoja trasa na mapie narysowanej z Twojej własnej gry, Twoja muzyka, YouTube, pogoda na trasie: dokładnie tam, gdzie prawdziwa ciężarówka ma swój ekran, obsługiwany myszą przy trzymanym klawiszu.
 
+<!-- why:start -->
+
+## Po co to zrobiłem
+
+Na początku szukałem moda do CarPlay, aż trafiłem na WestPlay i zobaczyłem, że jest zrobiony naprawdę dobrze (serio, bardzo bardzo dobrze). Tylko optymalizacja była słaba i zawiesiła mi komputer. Więc postanowiłem sam go dopieścić: poprawić wydajność i dodać kilka nowych funkcji (stoję na ramionach olbrzyma, hi hi~😊).
+
+<!-- why:end -->
+
 ## Funkcje
 
 **Mapy z Twojej własnej gry.** Rysowane z mapy Twojej gry, wraz z modami map (ProMods i inne), z trasą, wskazówkami zakręt po zakręcie i wyszukiwaniem, które dodaje przystanki do GPS-u samej gry.
