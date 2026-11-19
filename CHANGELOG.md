@@ -3,6 +3,18 @@
 What changed in each release of WestPlay. The newest release's notes are what the app shows when it offers the
 update.
 
+## 2.4.2 (2026-11-19)
+- A Performance group on the Truck Screen page, for weaker graphics cards (an Intel Iris Xe ran the game at 40 fps
+  alone and fell to about 20 with WestPlay Plus): the frames sent to the game (60, or 30 a second), the look the
+  cabin page draws (full, or reduced: flat glass and still decoration), adaptive frames (sent only as often as the
+  game takes them) and Pause When Hidden (no drawing while the game isn't showing the screen).
+- Reduced effects leaves the map's heaviest decoration out too (road casings, signs, service surfaces), draws the
+  map at three quarters of the screen's pixels and 20 times a second, and stops the host while the game hasn't drawn
+  WestPlay Plus's screen for a moment (a menu, another camera, the truck's own screen). About 7% of the graphics
+  card's 3D work with the screen shown, down from nearly 30%.
+- The README in 38 languages, under docs/readme.
+- Fixes: the About page's plugin log path, and the account steps' Skip no longer waits for the sign-in check.
+
 ## 2.4.1 (2026-11-17)
 - Liquid Glass, as on iOS 26: the sidebar, the Dashboard's widgets, Apple Music's bar, buttons, mini player and
   menus, the map's buttons and search, the keyboard and the volume pill are glass again, made the way Apple's is.

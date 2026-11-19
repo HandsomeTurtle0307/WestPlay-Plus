@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Naudojama',
     gpuNote: 'Jei ekranas stringa, pasirink kitą plokštę. Tada WestPlay Plus iš naujo pasileis joje.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Našumas',
       rate: 'Kadrų dažnis',
       rate60: '60 kadr./s',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Efektai',
       effectsFull: 'Pilni',
       effectsReduced: 'Sumažinti',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pristabdyti, kai ekranas paslėptas',
       pauseDetail: 'Nustok piešti, kol žaidimas nerodo ekrano',
     },

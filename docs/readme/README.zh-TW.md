@@ -9,14 +9,14 @@
 <!-- languages:end -->
 
 <!-- english-only:start -->
-<p align="center"><sub>西里西亞語、巴斯克語、喬治亞語在軟體裡都支援，但暫時沒有 README：這三種語言的譯文還沒人校對過。倉庫首頁的英文版內容是全的。</sub></p>
+<p align="center"><sub>西里西亞語、巴斯克語、喬治亞語在軟體裡都支援，但暫時沒有 README：這三種語言的譯文還沒人校對過。英文版在儲存庫首頁，內容一樣完整。</sub></p>
 <!-- english-only:end -->
 
 <p align="center">
-  <b>為《歐洲卡車模擬 2》與《美國卡車模擬》的卡車打造、CarPlay 風格的車機螢幕。</b><br>
-  你的地圖、你的音樂與 YouTube，就在卡車自己的儀表螢幕上。
+  <b>給《歐洲卡車模擬 2》和《美國卡車模擬》的卡車，裝一塊 CarPlay 風格的車機螢幕。</b><br>
+  你的地圖、你的音樂、你的 YouTube，都在卡車自己的儀表螢幕上。
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> 的修改版分支，進行一些最佳化與功能新增。
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> 的修改版分支，做了一些最佳化，也加了新功能。
 </p>
 
 <p align="center">
@@ -27,7 +27,7 @@
   <a href="../../LICENSE"><img alt="Licence: GPL-3.0-or-later" src="https://img.shields.io/badge/licence-GPL--3.0-2b2b2b?style=for-the-badge"></a>
 </p>
 
-WestPlay Plus 把一塊手機風格的車機螢幕裝到遊戲裡卡車自己的儀表螢幕上：《歐洲卡車模擬 2》與《美國卡車模擬》，一塊螢幕通用。你的路線畫在一張用你自己的遊戲產生的地圖上，你的音樂、YouTube、沿途的天氣，全都在真卡車裝螢幕的那個位置；按住一個鍵，用滑鼠就能操作。
+WestPlay Plus 把一塊手機風格的車機螢幕，裝進遊戲裡卡車自己的儀表螢幕：《歐洲卡車模擬 2》和《美國卡車模擬》共用一塊。路線畫在一張用你自己的遊戲產生的地圖上，音樂、YouTube、路上的天氣，都擺在真車上裝螢幕的那個位置；按住一個鍵，就能用滑鼠操作。
 
 <!-- why:start -->
 
@@ -43,33 +43,33 @@ WestPlay Plus 把一塊手機風格的車機螢幕裝到遊戲裡卡車自己的
 
 ## 功能
 
-**地圖來自你自己的遊戲。** 直接繪製自遊戲本體地圖，支援地圖模組（ProMods 及其他），具備路線、逐段轉向指引，以及能把停靠點加進遊戲自帶 GPS 的搜尋功能。
+**地圖來自你自己的遊戲。** 直接從遊戲本體的地圖畫出來，支援地圖模組（ProMods 之類），有路線和逐個路口的指示，搜到的地點還能直接加進遊戲內建的 GPS。
 
-**為行車準備的儀表板。** 地圖旁邊是正在播放的內容與你要去的地方，還有沿途天氣，全都在一塊螢幕上。
+**為開車準備的儀表板。** 地圖旁邊就是正在播的東西、要去的地方，還有路上的天氣，全在一塊螢幕上。
 
-**你的音樂。** Apple Music、Spotify 與 YouTube Music，具備 Now Playing 與歌詞。歌曲的音樂影片可以直接在 Now Playing 裡播放；YouTube 部分支援頻道、播放清單、字幕與畫質。播放器應用程式則播放你放進遊戲自帶音樂資料夾的歌曲。
+**你的音樂。** Apple Music、Spotify 和 YouTube Music，都有正在播放畫面和歌詞。歌曲的 MV 能直接在正在播放裡播；YouTube 那邊支援頻道、播放清單、字幕和畫質。播放器應用程式則負責播你放進遊戲內建音樂資料夾的歌。
 
-**明暗主題，還能換成你自己的樣子。** 入夜時、或你打開大燈時，它會自動變暗，像車上的光線感應器。桌布與應用程式圖示可以換成你自己的。
+**明暗兩種主題，也能換成你自己的樣子。** 天黑下來，或者你打開大燈，它會像車上的光線感應器一樣自己變暗。桌布和應用程式圖示都能換。
 
-**PC 上的配套程式**負責把一切準備好：找出你的遊戲（ETS2、ATS 或兩者），把 WestPlay Plus 裝進每一個遊戲，產生它們的地圖，之後就不再打擾你。
+**PC 上的配套程式**負責把這些都準備好：找到你的遊戲（ETS2、ATS，或兩個都有），挨個裝好 WestPlay Plus、把地圖產生出來，然後就安靜待在旁邊，不再煩你。
 
 ## 運作原理
 
 ```mermaid
 flowchart LR
-  game["《歐洲卡車模擬 2》<br/>或《美國卡車模擬》"] -- "卡車、它的路線" --> plugin["WestPlay Plus 的外掛<br/>（在遊戲內）"]
+  game["《歐洲卡車模擬 2》<br/>或《美國卡車模擬》"] -- "卡車和它的路線" --> plugin["WestPlay Plus 的外掛<br/>（在遊戲內）"]
   plugin <--> app["WestPlay Plus<br/>（在你的 PC 上）"]
   app -- "畫面，繪製在 WestPlay Plus 自帶的瀏覽器裡" --> plugin
   plugin -- "把它畫到" --> screen["卡車自己的螢幕"]
 ```
 
-WestPlay Plus 在自己的瀏覽器裡繪製畫面（就在你的 PC 上），再由外掛把每一格畫面放到遊戲內卡車的顯示螢幕上。卡車自己的螢幕與資訊列仍然屬於卡車：WestPlay Plus 取代 GPS 的位置，而「Vehicle Bar」設定決定卡車的資訊列是否留在旁邊。
+WestPlay Plus 在自己的瀏覽器裡畫出畫面（就在你的 PC 上），外掛再把畫面一格一格投到遊戲裡卡車的螢幕上。卡車自己的螢幕和資訊列還是卡車說了算：WestPlay Plus 只是頂掉 GPS 的位置；資訊列要不要留，由「車輛資訊列」（Vehicle Bar）這個設定決定。
 
 ## 卡車
 
-WestPlay Plus 有兩種出場方式：出現在卡車自己的螢幕上，或出現在 WestPlay Plus 平板上。
+WestPlay Plus 有兩種出現方式：出現在卡車自己的螢幕上，或出現在 WestPlay Plus 平板上。
 
-**在卡車自己的螢幕上。** 在現實中就配備 CarPlay 的車型裡，WestPlay Plus 取代 GPS 的位置，出現在儀表螢幕上，並貼合螢幕的形狀。不用買、不用裝：上車就在那裡。以下為《歐洲卡車模擬 2》：
+**出現在卡車自己的螢幕上。** 現實裡本來就配備 CarPlay 的車型，WestPlay Plus 直接頂掉 GPS，順著螢幕的形狀鋪在儀表螢幕上。不用買、不用裝，上車就在那裡。以下是《歐洲卡車模擬 2》：
 
 - **DAF** XF 與 XG/XG+ 2021、XF Electric 與 XD（以及 Jasper 的 DAF 2021）
 - **Scania** S 與 R，搭配 7 吋螢幕或 Smart Dash，以及 S BEV
@@ -78,11 +78,11 @@ WestPlay Plus 有兩種出場方式：出現在卡車自己的螢幕上，或出
 - **Volvo** FH（2021 與 2024）
 - **客車 DLC：** Scania Touring 與 MAN Lion's Coach（2024）
 - **Oyuncuyusbis 的客車：** Mercedes-Benz Travego 16 SHD、MAN Lion's Coach 與 Setra S 531 DT，畫面在它們自己的儀表螢幕上
-- **Setra S 516 HD/2**（Oyuncuyusbis 的）：在客車自己的 GPS 螢幕上，也就是它的「Gps」部件，需要你在卡車商店裡裝上去：依玩家要求用的是客車自己的螢幕，但要你自己加裝
+- **Setra S 516 HD/2**（Oyuncuyusbis 的）：走客車自己的 GPS 螢幕，也就是它的「Gps」部件。這個要你自己去卡車商店裝——依玩家要求，用客車自己的螢幕，但不預設幫你加
 
-**在 WestPlay Plus 平板上。** 其他所有卡車，不論遊戲自帶或模組卡車，都透過一塊平板使用 WestPlay Plus，平板在卡車商店裡安裝：在配件（Accessories）下的懸掛物品裡，或作為儀表台套組。卡車自己的螢幕則保留遊戲的導航。每一輛有懸掛物品的卡車都有這塊平板，包括你之後才裝的模組卡車（下次啟動遊戲時它們就會得到）。
+**出現在 WestPlay Plus 平板上。** 其他所有卡車，不管是遊戲內建還是模組車，都用平板來看 WestPlay Plus。平板在卡車商店裡裝：配件（Accessories）裡的懸掛物品，或儀表台套組。卡車自己的螢幕繼續放遊戲導航。只要車上有懸掛物品，就有這塊平板；你後來才裝的模組車也有（下次進遊戲就出現了）。
 
-**在《美國卡車模擬》裡**，目前所有卡車都是透過平板使用 WestPlay Plus。現實中有 CarPlay 對應車型的卡車，之後會讓 WestPlay Plus 出現在它們自己的螢幕上。
+**在《美國卡車模擬》裡**，目前所有卡車都是靠平板用 WestPlay Plus。現實中有 CarPlay 對應車型的，之後也會讓 WestPlay Plus 出現在它們自己的螢幕上。
 
 |                  | 卡車自己的螢幕   | WestPlay Plus 平板             |
 | ---------------- | ---------------- | ------------------------------ |
@@ -92,7 +92,7 @@ WestPlay Plus 有兩種出場方式：出現在卡車自己的螢幕上，或出
 
 ### 音效
 
-在以下《歐洲卡車模擬 2》卡車裡，音樂從卡車自己的喇叭播出，每個喇叭都在駕駛室裡的實際位置發聲。其他卡車，以及目前《美國卡車模擬》的卡車，都是普通立體聲。
+下面這些《歐洲卡車模擬 2》的卡車，音樂是從車內真實位置的喇叭出來的，每個喇叭都在駕駛室裡它該在的地方響。其他卡車，以及目前《美國卡車模擬》的卡車，都是普通立體聲。
 
 - **Scania S 與 R（2016）、S BEV** — 車門低音、A 柱高音、車頂低音
 - **Scania R（2009）、Streamline** — 車門低音、A 柱高音
@@ -118,32 +118,32 @@ WestPlay Plus 有兩種出場方式：出現在卡車自己的螢幕上，或出
 ## 安裝
 
 1. 從[最新版本](https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases/latest)下載安裝程式並執行。
-2. 配套程式會開啟，帶你走完剩下的步驟：找出你的遊戲（ETS2、ATS 或兩者），為每個遊戲安裝 WestPlay Plus 的外掛與它的螢幕模組，並產生你的地圖。
+2. 配套程式會開啟，帶你走完剩下的：找到你的遊戲（ETS2、ATS 或兩個都有），給每個遊戲裝上 WestPlay Plus 的外掛和螢幕模組，再把地圖產生出來。
 3. 啟動遊戲，坐上卡車。
 
-**更新：** 本分支不會自動更新。要檢查是否有新版本，請前往[發行頁面](https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases)。配套程式的「關於」頁面有同一個連結。
+**更新：** 本分支不會自動更新。想知道有沒有新版本，去[發行頁面](https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases)看。配套程式的「關於」頁面裡也有這個連結。
 
-**系統需求：** Windows 10 或 11（64 位元）、《歐洲卡車模擬 2》1.62 版（或 1.61），或《美國卡車模擬》1.62 版（其他版本可能也能用；遇到未測試的版本時配套程式會提示），以及 Microsoft Edge WebView2（Windows 11 已內建；缺少時安裝程式會補上）。
+**系統需求：** Windows 10 或 11（64 位元）；《歐洲卡車模擬 2》1.62（1.61 也行），或《美國卡車模擬》1.62（別的版本多半也能跑，碰到沒測過的版本，配套程式會提醒你）；以及 Microsoft Edge WebView2（Windows 11 已內建，缺了安裝程式會補上）。
 
 ## 隱私權
 
 WestPlay Plus 沒有伺服器、沒有自己的帳號，也沒有任何統計。它不蒐集、也不傳送任何關於你的資訊。
 
-- 你是在 Apple Music、Spotify 與 YouTube 自己的頁面上登入的，用的是 WestPlay Plus 在 PC 上的獨立瀏覽器設定檔，和在瀏覽器裡一樣。WestPlay Plus 自己不保存任何帳號資料。
-- 你的地圖在你的 PC 上由你的遊戲產生，並留在那裡。
+- 登入是在 Apple Music、Spotify 和 YouTube 自己的頁面上完成的，用的是 WestPlay Plus 在 PC 上另外一套瀏覽器設定檔，跟你平常開瀏覽器一樣。WestPlay Plus 本身不會儲存任何帳號資料。
+- 地圖由你的遊戲在你的 PC 上產生，也一直留在那裡。
 - WestPlay Plus 只與你使用的服務通訊；只有當你開啟它的發行頁面時，才會連上 GitHub。
 
 ## 意見回饋
 
-問題、疑問與建議：請在 [GitHub](https://github.com/HandsomeTurtle0307/WestPlay-Plus/issues) 上開一個 issue。
+有問題、有想法，或想給點建議，去 [GitHub](https://github.com/HandsomeTurtle0307/WestPlay-Plus/issues) 開個 issue 就行。
 
 ## 從原始碼建置
 
-你需要 [Rust](https://rustup.rs)（stable）與 [Node.js](https://nodejs.org) 24，執行於 Windows。
+你需要 Windows 上的 [Rust](https://rustup.rs)（stable）和 [Node.js](https://nodejs.org) 24。
 
 ```sh
-npm install      # 配套程式的工具與 UI 的相依套件
-npm run dev      # 啟動 WestPlay Plus，UI 即時載入
+npm install      # 配套程式和介面的相依套件
+npm run dev      # 啟動 WestPlay Plus，介面即時重新載入
 ```
 
 `cargo test --workspace` 與 `npm test --prefix ui` 用來跑測試。遊戲外掛用 `cargo build --release -p westplay-plugin` 建置。
@@ -152,11 +152,11 @@ npm run dev      # 啟動 WestPlay Plus，UI 即時載入
 
 WestPlay Plus 是自由軟體：你可以依 GNU 通用公共授權條款第 3 版（或你選擇的更新版本）的條款重新散布與修改它。詳見 [LICENSE](../../LICENSE)。
 
-版權所有 © 2026 HandsomeTurtle0307。WestPlay Plus 附帶的第三方函式庫各自保留其授權條款：見 [THIRD_PARTY_LICENSES.md](../../THIRD_PARTY_LICENSES.md)，以及 [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md)，了解它所遵循的作品。
+版權所有 © 2026 HandsomeTurtle0307。WestPlay Plus 用到的第三方函式庫各自保留自己的授權條款：清單見 [THIRD_PARTY_LICENSES.md](../../THIRD_PARTY_LICENSES.md)，著作權聲明見 [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md)。
 
 ## 專案來源
 
-WestPlay Plus 是 [WestPlay](https://github.com/enes-less/WestPlay) 的修改版分支（fork），後者是由 **enes-less** 製作、為《歐洲卡車模擬 2》與《美國卡車模擬》打造的 CarPlay 風格車內螢幕模組，表現極為出色。它幾乎全部的設計、程式碼與素材都出自他的工作；本分支在他的成果之上保留了自己的修改，並對他的付出深表感謝。如果你喜歡這個專案，也請去看看原專案。
+WestPlay Plus 是 [WestPlay](https://github.com/enes-less/WestPlay) 的修改版分支（fork）。
 
 本專案的絕大部分設計、程式碼與素材來自原專案 **WestPlay**（作者 [enes-less](https://github.com/enes-less/WestPlay)），
 這是一個極其優秀的歐卡 2 / 美卡車內中控螢幕模組。本分支只是在它之上做了一些最佳化與功能新增，並對原作者表達由衷感謝。
@@ -166,4 +166,4 @@ WestPlay Plus 是 [WestPlay](https://github.com/enes-less/WestPlay) 的修改版
 <sub>各個語言的 README 由英語版翻譯而來。因為作者能力有限（肯定不能全會 43 種語言😭😭），翻譯出的 README 可能有不完備的地方，請大家見諒~ 如果你是某種語言的使用者，並且發現翻譯得不完善，歡迎指正~</sub>
 <!-- translated:end -->
 
-<sub>WestPlay Plus 是一個獨立專案，與 Apple、SCS Software、Spotify、Google 及各卡車製造商沒有隸屬關係，也未獲其背書。CarPlay、Apple Music、Spotify、YouTube、YouTube Music 以及各卡車廠商的名稱與標誌均為其各自所有者的商標，此處僅用於說明 WestPlay Plus 相容的對象。</sub>
+<sub>WestPlay Plus 是一個獨立專案，跟 Apple、SCS Software、Spotify、Google 以及各家卡車製造商都沒有隸屬關係，也沒有得到它們的背書。CarPlay、Apple Music、Spotify、YouTube、YouTube Music 以及各卡車廠商的名稱和標誌，都是各自所有者的商標，這裡只是用來說明 WestPlay Plus 相容哪些東西。</sub>

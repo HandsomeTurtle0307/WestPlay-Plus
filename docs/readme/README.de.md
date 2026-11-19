@@ -51,7 +51,7 @@ Eigentlich wollte ich nur einen CarPlay-Mod finden, dann bin ich über WestPlay 
 
 **Hell und dunkel, und dein eigener Look.** Nachts oder wenn du das Licht einschaltest, wird es dunkel, wie bei einem Lichtsensor im Auto. Eigene Hintergrundbilder und App-Symbole bringst du selbst mit.
 
-**Die Begleit-App** auf deinem PC richtet alles ein: Sie findet deine Spiele – ETS2, ATS oder beide –, installiert WestPlay Plus in jedes davon, baut deren Karten und hält sich danach heraus.
+**Die Begleit-App** auf deinem PC richtet alles ein: sie findet deine Spiele – ETS2, ATS oder beide –, installiert WestPlay Plus in jedes davon, baut deren Karten und hält sich danach heraus.
 
 ## So funktioniert es
 
@@ -118,7 +118,7 @@ In diesen Lkw von Euro Truck Simulator 2 kommt die Musik aus den eigenen Lautspr
 ## Installation
 
 1. Lade den Installer von der [neuesten Version](https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases/latest) herunter und führe ihn aus.
-2. Die Begleit-App öffnet sich und führt dich durch den Rest: Sie findet deine Spiele (ETS2, ATS oder beide), installiert in jedem das Plugin von WestPlay Plus und dessen Bildschirm-Mod und baut deine Karten.
+2. Die Begleit-App öffnet sich und führt dich durch den Rest: sie findet deine Spiele (ETS2, ATS oder beide), installiert in jedem das Plugin von WestPlay Plus und dessen Bildschirm-Mod und baut deine Karten.
 3. Starte das Spiel und steig in einen Lkw.
 
 **Updates:** Dieser Zweig aktualisiert sich nicht selbst. Ob es eine neuere Version gibt, siehst du auf der [Releases-Seite](https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases). Die Seite „Über“ der Begleit-App hat denselben Link.

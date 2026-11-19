@@ -155,6 +155,7 @@ function PerformanceChooser({ settings: state, cw }: Pick<PageProps, 'settings' 
     if (
       next.frameRate === performance.frameRate &&
       next.effects === performance.effects &&
+      next.adaptiveFrames === performance.adaptiveFrames &&
       next.pauseHidden === performance.pauseHidden
     ) {
       return
@@ -166,10 +167,12 @@ function PerformanceChooser({ settings: state, cw }: Pick<PageProps, 'settings' 
   }
   const segments = (
     title: string,
+    detail: string | undefined,
     options: { key: string; label: string; chosen: boolean; pick(): void }[],
   ) => (
     <Row
       title={title}
+      detail={detail}
       accessory={
         <span className="cz-segments">
           {options.map((option) => (
@@ -187,32 +190,46 @@ function PerformanceChooser({ settings: state, cw }: Pick<PageProps, 'settings' 
     />
   )
   return (
-    <Group title={w.title} place={8}>
-      {segments(w.rate, [
-        { key: 'fps60', label: w.rate60, chosen: performance.frameRate === 'fps60', pick: () => choose({ ...performance, frameRate: 'fps60' }) },
-        { key: 'fps30', label: w.rate30, chosen: performance.frameRate === 'fps30', pick: () => choose({ ...performance, frameRate: 'fps30' }) },
-      ])}
-      {segments(w.effects, [
-        { key: 'full', label: w.effectsFull, chosen: performance.effects === 'full', pick: () => choose({ ...performance, effects: 'full' }) },
-        {
-          key: 'reduced',
-          label: w.effectsReduced,
-          chosen: performance.effects === 'reduced',
-          pick: () => choose({ ...performance, effects: 'reduced' }),
-        },
-      ])}
-      <Row
-        title={w.pause}
-        detail={w.pauseDetail}
-        accessory={
-          <Switch
-            on={performance.pauseHidden}
-            label={w.pause}
-            change={(pauseHidden) => choose({ ...performance, pauseHidden })}
-          />
-        }
-      />
-    </Group>
+    <>
+      <Group title={w.title} place={8}>
+        {segments(w.rate, w.rateDetail, [
+          { key: 'fps60', label: w.rate60, chosen: performance.frameRate === 'fps60', pick: () => choose({ ...performance, frameRate: 'fps60' }) },
+          { key: 'fps30', label: w.rate30, chosen: performance.frameRate === 'fps30', pick: () => choose({ ...performance, frameRate: 'fps30' }) },
+        ])}
+        {segments(w.effects, w.effectsDetail, [
+          { key: 'full', label: w.effectsFull, chosen: performance.effects === 'full', pick: () => choose({ ...performance, effects: 'full' }) },
+          {
+            key: 'reduced',
+            label: w.effectsReduced,
+            chosen: performance.effects === 'reduced',
+            pick: () => choose({ ...performance, effects: 'reduced' }),
+          },
+        ])}
+        <Row
+          title={w.adaptive}
+          detail={w.adaptiveDetail}
+          accessory={
+            <Switch
+              on={performance.adaptiveFrames}
+              label={w.adaptive}
+              change={(adaptiveFrames) => choose({ ...performance, adaptiveFrames })}
+            />
+          }
+        />
+        <Row
+          title={w.pause}
+          detail={w.pauseDetail}
+          accessory={
+            <Switch
+              on={performance.pauseHidden}
+              label={w.pause}
+              change={(pauseHidden) => choose({ ...performance, pauseHidden })}
+            />
+          }
+        />
+      </Group>
+      <Note tone="calm">{w.note}</Note>
+    </>
   )
 }
 

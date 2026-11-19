@@ -74,6 +74,10 @@ pub const TEST_PAGE: &str = include_str!("test_page.html");
 /// now and then, so the screen isn't left with an old frame when the game comes back.
 const PUBLISH_KEEPALIVE: Duration = Duration::from_millis(150);
 
+/// A WestPlay screen not drawn for this long isn't being shown (a menu, another camera, the truck's own screen): the
+/// page has nothing to draw for it, so it pauses (the Performance setting's Pause When Hidden).
+const SCREEN_STALE: Duration = Duration::from_millis(800);
+
 #[derive(Clone)]
 pub enum Content {
     Url(String),
@@ -468,6 +472,9 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
     // with a keepalive for a screen the game has stopped presenting (the host's capture keeps the newest frame waiting).
     let mut last_game_frame = 0u64;
     let mut last_publish = Instant::now();
+    // The game frame in which a WestPlay screen was last drawn, and when it was: stale, the game isn't showing one.
+    let mut drawn_frame = 0u64;
+    let mut drawn_at = Instant::now();
     // Each keybind's presses and holds the page was told of (`PluginBlock::keybind_presses`, `keybind_holds`).
     let mut keybind_presses =
         bridge.bridge().plugin.keybind_presses.each_ref().map(|count| count.load(Ordering::Acquire));
@@ -491,7 +498,15 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
         // a truck it isn't shown in): the page stops drawing and no frames go to the game, so nothing of WestPlay
         // Plus costs the graphics card (the companion's Performance setting).
         let performance = config.settings.get().performance;
-        let showing = status.game_connected
+        // The game drew a WestPlay screen a moment ago: it's showing one, so the page has something to draw for.
+        let screen_frame = bridge.bridge().plugin.screen_frame.load(Ordering::Relaxed);
+        if screen_frame != drawn_frame {
+            drawn_frame = screen_frame;
+            drawn_at = Instant::now();
+        }
+        let screen_shown = screen_frame != 0 && drawn_at.elapsed() < SCREEN_STALE;
+        let showing = screen_shown
+            && status.game_connected
             && game_shown
             && status.westplay_open != Some(false)
             && status.truck_supported != Some(false);
@@ -500,11 +515,13 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
             host_idle = idle;
             let _ = webview.post_json(&idle_message(idle));
         }
-        // A captured frame that came before its turn goes out now that it's due — and only as often as the game could
-        // take one (its presents: at 20 fps, half the copies would be for nothing), with a keepalive so a screen the
-        // game has stopped presenting still gets its last frames.
+        // A captured frame that came before its turn goes out now that it's due — and, unless the player chose
+        // otherwise, only as often as the game could take one (its presents: at 20 fps, half the copies would be for
+        // nothing), with a keepalive so a screen the game has stopped presenting still gets its last frames.
         let game_frame = bridge.bridge().plugin.heartbeat.load(Ordering::Relaxed);
-        let publish_due = game_frame != last_game_frame || last_publish.elapsed() >= PUBLISH_KEEPALIVE;
+        let publish_due = !performance.adaptive_frames
+            || game_frame != last_game_frame
+            || last_publish.elapsed() >= PUBLISH_KEEPALIVE;
         // A captured frame that came before its turn goes out now that it's due.
         // The cursor drawn over it where the mouse is now, the page squeezed into the frame as it's laid out.
         if let Some(pipeline) = &pipeline

@@ -67,6 +67,9 @@ export const words: CompanionWords = {
     gpuInUse: '使用中',
     gpuNote: '如果螢幕卡頓，請換一張顯示卡。WestPlay Plus 會在所選顯示卡上重新啟動。',
     performance: {
+      note: '在效能較弱的顯示卡上，WestPlay Plus 可以為螢幕少做一點工作。以下選項降低它的繪製和傳送量。',
+      rateDetail: '30 幀：只傳送一半畫面，地圖和玻璃效果更新頻率減半。',
+      effectsDetail: '精簡：關閉玻璃模糊和裝飾動畫；地圖以 75% 解析度繪製，不畫道路描邊、路牌和服務區，且 20 幀/秒。',
       title: '效能',
       rate: '影格率上限',
       rate60: '60 幀',
@@ -74,6 +77,8 @@ export const words: CompanionWords = {
       effects: '畫面效果',
       effectsFull: '完整',
       effectsReduced: '精簡',
+      adaptive: '自適應發送影格',
+      adaptiveDetail: '只在遊戲需要時發送畫面',
       pause: '隱藏時暫停',
       pauseDetail: '遊戲沒有顯示螢幕時停止繪製',
     },
@@ -263,7 +268,7 @@ export const words: CompanionWords = {
   about: {
     updateNote: {
       title: '更新',
-      text: '這個應用程式是作者基於 WestPlay 分支的改良版，暫時不提供自動更新功能。如果你想檢查最新版本，請造訪儲存庫的 Release 頁面。',
+      text: 'WestPlay Plus 基於上游 WestPlay 分支改良，暫不提供自動更新。想檢查新版本，請開啟倉庫的 Release 頁面。',
       releases: 'Release 頁面',
     },
     title: '關於 WestPlay Plus',

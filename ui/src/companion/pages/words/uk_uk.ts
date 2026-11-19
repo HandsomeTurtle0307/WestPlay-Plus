@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Використовується',
     gpuNote: 'Якщо екран підвисає, виберіть іншу відеокарту — WestPlay Plus перезапуститься на ній.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Продуктивність',
       rate: 'Частота кадрів',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Ефекти',
       effectsFull: 'Повні',
       effectsReduced: 'Обмежені',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Пауза при приховуванні',
       pauseDetail: 'Зупиняйте відрисовку, коли гра не показує екран',
     },

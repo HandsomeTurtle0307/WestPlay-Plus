@@ -67,6 +67,9 @@ export const words: CompanionWords = {
     gpuInUse: '使用中',
     gpuNote: '如果屏幕卡顿，请换一块显卡。WestPlay Plus 会在所选显卡上重新启动。',
     performance: {
+      note: '在性能较弱的显卡上，WestPlay Plus 可以为屏幕少做一点工作。以下选项降低它的绘制和发送量。',
+      rateDetail: '30 帧：只发送一半画面，地图和玻璃效果刷新频率减半。',
+      effectsDetail: '精简：关闭玻璃模糊和装饰动画；地图按 75% 分辨率绘制，不画道路描边、路牌和服务区，且 20 帧/秒。',
       title: '性能',
       rate: '帧率上限',
       rate60: '60 帧',
@@ -74,6 +77,8 @@ export const words: CompanionWords = {
       effects: '画面效果',
       effectsFull: '完整',
       effectsReduced: '精简',
+      adaptive: '自适应发帧',
+      adaptiveDetail: '只在游戏需要时发送画面',
       pause: '隐藏时暂停',
       pauseDetail: '游戏没有显示屏幕时停止绘制',
     },
@@ -263,7 +268,7 @@ export const words: CompanionWords = {
   about: {
     updateNote: {
       title: '更新',
-      text: '这个应用是作者基于 WestPlay 分支的改良版，暂时不提供自动更新功能。如果你想检查最新版本，请访问仓库的 Release 页面。',
+      text: 'WestPlay Plus 基于上游 WestPlay 分支改进，暂不提供自动更新。想检查新版本，请打开仓库的 Release 页面。',
       releases: 'Release 页面',
     },
     title: '关于 WestPlay Plus',

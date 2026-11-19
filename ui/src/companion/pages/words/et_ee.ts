@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Kasutusel',
     gpuNote: 'Kui ekraan hakib, vali teine kaart. WestPlay Plus käivitub siis sellel uuesti.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Jõudlus',
       rate: 'Kaadrisagedus',
       rate60: '60 kaadrit/s',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Efektid',
       effectsFull: 'Täielikud',
       effectsReduced: 'Vähendatud',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Peata, kui ekraan on peidetud',
       pauseDetail: 'Lõpeta joonistamine, kui mäng ekraani ei näita',
     },

@@ -76,12 +76,20 @@ export interface CompanionWords {
      * the cabin page draws, and whether it pauses while the game isn't showing it. */
     performance: {
       title: string
+      /** What the group is for, under it: WestPlay Plus working lighter for the screen on weaker graphics cards. */
+      note: string
       rate: string
       rate60: string
       rate30: string
+      /** What the frame rate does, under its row. */
+      rateDetail: string
       effects: string
       effectsFull: string
       effectsReduced: string
+      /** What reduced effects leaves out, under its row. */
+      effectsDetail: string
+      adaptive: string
+      adaptiveDetail: string
       pause: string
       pauseDetail: string
     }

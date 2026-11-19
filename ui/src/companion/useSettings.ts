@@ -53,6 +53,8 @@ export interface Settings {
     frameRate: FrameRate
     /** Full, or reduced (flat glass, still decorative motion). */
     effects: PageEffects
+    /** Send the frames only as often as the game could take one (its presents), rather than at the cap. */
+    adaptiveFrames: boolean
     /** Pause the page's drawing while the game isn't showing the screen. */
     pauseHidden: boolean
   }

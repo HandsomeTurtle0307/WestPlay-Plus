@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'En uso',
     gpuNote: 'Se a pantalla vai a saltos, escolle outra tarxeta. WestPlay Plus volverá iniciarse nela.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Rendemento',
       rate: 'Frecuencia de fotogramas',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Efectos',
       effectsFull: 'Completos',
       effectsReduced: 'Reducidos',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pausar cando está oculta',
       pauseDetail: 'Deixa de debuxar mentres o xogo non mostra a pantalla.',
     },

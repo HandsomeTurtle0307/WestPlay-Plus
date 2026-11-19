@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Používá se',
     gpuNote: 'Pokud se obraz na obrazovce trhá, vyberte jinou kartu. WestPlay Plus se na ní spustí znovu.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Výkon',
       rate: 'Snímková frekvence',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Efekty',
       effectsFull: 'Plné',
       effectsReduced: 'Omezené',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pozastavit při skrytí',
       pauseDetail: 'Zastavte vykreslování, když hra obrazovku nezobrazuje',
     },

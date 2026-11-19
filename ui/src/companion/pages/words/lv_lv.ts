@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Tiek lietota',
     gpuNote: 'Ja ekrāns raustās, izvēlies citu karti. Tad WestPlay Plus no jauna startēs uz tās.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Veiktspēja',
       rate: 'Kadru ātrums',
       rate60: '60 kadri/s',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Efekti',
       effectsFull: 'Pilni',
       effectsReduced: 'Samazināti',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pauze, kad ekrāns ir paslēpts',
       pauseDetail: 'Pārtrauc zīmēšanu, kamēr spēle nerāda ekrānu',
     },

@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'I bruk',
     gpuNote: 'Hakker skjermen? Velg et annet kort, så starter WestPlay Plus på nytt på det.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Ytelse',
       rate: 'Bilderate',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Effekter',
       effectsFull: 'Full',
       effectsReduced: 'Redusert',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pause når skjult',
       pauseDetail: 'Stopp tegningen mens spillet ikke viser skjermen',
     },

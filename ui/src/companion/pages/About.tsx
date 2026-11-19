@@ -56,7 +56,6 @@ export function About({ status, setup, cw }: PageProps) {
         <Row title={w.version} value={version} />
       </Group>
       <Group title={w.updateNote.title} place={5}>
-        <Note tone="calm">{w.updateNote.text}</Note>
         <Row
           title={w.updateNote.releases}
           detail="github.com/HandsomeTurtle0307/WestPlay-Plus/releases"
@@ -64,6 +63,7 @@ export function About({ status, setup, cw }: PageProps) {
           onClick={() => void openReleasePage()}
         />
       </Group>
+      <Note tone="calm">{w.updateNote.text}</Note>
       <Group title={w.diagnostics} place={6}>
         <Row
           title={w.frames}
@@ -73,7 +73,7 @@ export function About({ status, setup, cw }: PageProps) {
         <Row title={w.cabGpu} detail={status?.cabAdapter ?? '—'} />
         <Row title={w.gameGpu} detail={status?.gameAdapter ?? w.waitingForGame} />
         <Row title={w.webview} value={status?.webviewVersion || '—'} />
-        <Row title={w.log} detail="Documents\WestPlay Plus\logs\plugin.log" />
+        <Row title={w.log} detail="Documents\WestPlay\logs\plugin.log" />
         <Row title={w.appLog} detail={appLog ?? '—'} />
       </Group>
     </Panel>

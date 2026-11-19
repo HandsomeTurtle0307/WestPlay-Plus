@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Erabiltzen',
     gpuNote: 'Pantaila trabatzen bada, aukeratu beste txartel bat. WestPlay Plus bertan berrabiaraziko da.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Errendimendua',
       rate: 'Fotograma-tasa',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Efektuak',
       effectsFull: 'Osoak',
       effectsReduced: 'Murriztuak',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pausatu ezkutatuta dagoenean',
       pauseDetail: 'Utzi marrazteari jokoak pantaila erakusten ez duenean.',
     },

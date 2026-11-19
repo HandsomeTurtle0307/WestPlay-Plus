@@ -29,3 +29,6 @@ dist/
 
 # Real CarPlay photos the owner took, for reference only: Apple's UI in someone's car, never committed or shipped
 /reference/
+
+# The AI assistant's own working scripts and notes for the README localization, kept out of the repository
+/.workbuddy/

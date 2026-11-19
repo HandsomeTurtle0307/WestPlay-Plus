@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Đang dùng',
     gpuNote: 'Nếu màn hình bị giật, hãy chọn card khác. WestPlay Plus sẽ khởi động lại trên card đó.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Hiệu năng',
       rate: 'Tốc độ khung hình',
       rate60: '60 khung/giây',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Hiệu ứng',
       effectsFull: 'Đầy đủ',
       effectsReduced: 'Giảm bớt',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Tạm dừng khi ẩn',
       pauseDetail: 'Ngừng vẽ khi trò chơi không hiển thị màn hình.',
     },

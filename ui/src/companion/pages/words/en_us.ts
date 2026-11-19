@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'In use',
     gpuNote: 'If the screen stutters, pick another card. WestPlay Plus starts again on it.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Performance',
       rate: 'Frame rate',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Effects',
       effectsFull: 'Full',
       effectsReduced: 'Reduced',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Pause when hidden',
       pauseDetail: 'Stop drawing while the game does not show the screen',
     },
@@ -263,7 +268,7 @@ export const words: CompanionWords = {
   about: {
     updateNote: {
       title: 'Updates',
-      text: 'This build is a modified branch of WestPlay kept by its author. Automatic updates are not available for now. To check for a newer version, visit the repository Releases page.',
+      text: 'WestPlay Plus is a modified branch of WestPlay, kept by its author. Automatic updates are not available for now: to check for a newer version, open the repository’s Releases page.',
       releases: 'Releases Page',
     },
     title: 'About WestPlay Plus',

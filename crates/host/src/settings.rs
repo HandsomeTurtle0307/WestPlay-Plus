@@ -54,6 +54,9 @@ pub struct PerformanceSettings {
     pub frame_rate: FrameRate,
     #[serde(deserialize_with = "lenient")]
     pub effects: PageEffects,
+    /// Send the page's frames only as often as the game could take one (its own presents), rather than at the Frame
+    /// Rate cap whatever the game does with them: at 20 fps, half the copies would be for nothing.
+    pub adaptive_frames: bool,
     /// Pause the page's drawing (and the frames to the game) while the game isn't showing the screen: no game
     /// running, its window out of sight, WestPlay closed to the truck's own screen, or a truck it isn't shown in.
     pub pause_hidden: bool,
@@ -61,7 +64,7 @@ pub struct PerformanceSettings {
 
 impl Default for PerformanceSettings {
     fn default() -> Self {
-        Self { frame_rate: FrameRate::Fps60, effects: PageEffects::Full, pause_hidden: true }
+        Self { frame_rate: FrameRate::Fps60, effects: PageEffects::Full, adaptive_frames: true, pause_hidden: true }
     }
 }
 
@@ -590,6 +593,7 @@ mod tests {
             performance: PerformanceSettings {
                 frame_rate: FrameRate::Fps30,
                 effects: PageEffects::Reduced,
+                adaptive_frames: false,
                 pause_hidden: false,
             },
             language: LanguageCode::new("pt_br"),
@@ -602,6 +606,7 @@ mod tests {
         assert!(json.contains("\"truckStrip\": \"off\""), "{json}");
         assert!(json.contains("\"frameRate\": \"fps30\""), "{json}");
         assert!(json.contains("\"effects\": \"reduced\""), "{json}");
+        assert!(json.contains("\"adaptiveFrames\": false"), "{json}");
         assert!(json.contains("\"pauseHidden\": false"), "{json}");
         assert!(json.contains("\"language\": \"pt_br\""), "{json}");
         assert_eq!(parse(&json).unwrap(), settings);

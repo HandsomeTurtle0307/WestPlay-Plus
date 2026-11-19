@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: '사용 중',
     gpuNote: '화면이 끊기면 다른 카드를 고르세요. WestPlay Plus가 그 카드로 다시 시작해요.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: '성능',
       rate: '프레임 속도',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: '효과',
       effectsFull: '전체',
       effectsReduced: '간소화',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: '숨겨지면 일시 정지',
       pauseDetail: '게임이 화면을 표시하지 않는 동안은 그리기를 멈춰요.',
     },

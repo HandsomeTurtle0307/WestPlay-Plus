@@ -27,7 +27,7 @@
   <a href="../../LICENSE"><img alt="Licence: GPL-3.0-or-later" src="https://img.shields.io/badge/licence-GPL--3.0-2b2b2b?style=for-the-badge"></a>
 </p>
 
-WestPlay Plus installe un écran de téléphone sur l'écran de bord de votre camion, dans le jeu : Euro Truck Simulator 2 ou American Truck Simulator, un seul écran pour les deux. Votre itinéraire sur une carte dessinée depuis votre propre jeu, votre musique, YouTube, la météo de votre trajet : là où un vrai camion a son écran, au pilotage à la souris, une touche maintenue.
+WestPlay Plus installe un écran de téléphone sur l'écran de bord de votre camion, dans le jeu : Euro Truck Simulator 2 ou American Truck Simulator, un seul écran pour les deux. Votre itinéraire sur une carte dessinée depuis votre propre jeu, votre musique, YouTube, la météo de votre trajet : là où un vrai camion a son écran, et ça se pilote à la souris en gardant une touche enfoncée.
 
 <!-- why:start -->
 

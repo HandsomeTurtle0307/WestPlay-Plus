@@ -68,6 +68,9 @@ export const words: CompanionWords = {
     gpuInUse: 'Használatban',
     gpuNote: 'Ha a képernyő akad, válassz másik kártyát. A WestPlay Plus azon indul újra.',
     performance: {
+      note: 'On a weaker graphics card, WestPlay Plus can do less work for the screen. These options lower how much it draws and sends.',
+      rateDetail: '30 fps sends half the frames: the map and the glass update half as often.',
+      effectsDetail: 'Reduced: flat, unblurred glass and still decoration; the map at 75% resolution, without road casings, signs or service areas, and at 20 fps.',
       title: 'Teljesítmény',
       rate: 'Képkockasebesség',
       rate60: '60 fps',
@@ -75,6 +78,8 @@ export const words: CompanionWords = {
       effects: 'Effektek',
       effectsFull: 'Teljes',
       effectsReduced: 'Csökkentett',
+      adaptive: 'Adaptive frames',
+      adaptiveDetail: 'Send frames only as often as the game needs them',
       pause: 'Szünet, ha a képernyő rejtve van',
       pauseDetail: 'Állítsd le a rajzolást, amikor a játék nem jeleníti meg a képernyőt',
     },

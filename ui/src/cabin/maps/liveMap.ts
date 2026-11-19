@@ -151,6 +151,9 @@ interface LiveMap {
   painted: Appearance
   /** The owned garages' cities the place icons show as the player's (`null`: not applied yet). */
   garagesShown: string | null
+  /** Whether the map draws without its heaviest decoration, as the Performance setting's reduced effects ask
+   * (`null`: not applied yet). */
+  reducedDetail: boolean | null
   /** TruckersMP's other players: how many were last drawn, when, and when the part of the map shown was last
    * told the reader. */
   playersShown: number
@@ -341,6 +344,7 @@ function create(data: MapData, appearance: Appearance): LiveMap {
     wanted: appearance,
     painted: appearance,
     garagesShown: null,
+    reducedDetail: null,
     playersShown: 0,
     playersDrawn: 0,
     viewTold: 0,
@@ -399,10 +403,30 @@ function create(data: MapData, appearance: Appearance): LiveMap {
       }
     }, TEXT_SIZE_SETTLE_MS)
   })
-  map.once('style.load', () => showBuildings(map))
+  map.once('style.load', () => {
+    showBuildings(map)
+    const reduced = useCabin.getState().pageEffects === 'reduced'
+    showReducedDetail(map, reduced)
+    created.reducedDetail = reduced
+  })
   listen(created)
   restoreView(created)
   return created
+}
+
+/** The layers the map leaves out at the Performance setting's reduced effects: the road casings and shadows (their
+ * blurred lines are the heaviest to draw), the service surfaces, and the signs drawn on the map (the guidance card
+ * still says what to do). */
+const REDUCED_LAYERS = ['surface-road-shadow', 'surface-road-casing', 'surface-service', 'road-signs', 'no-entry']
+
+/** The map's heaviest decoration shown or left out (see [`REDUCED_LAYERS`]); reduced effects rasterise the map's own
+ * canvas at three quarters of the screen's pixels too (the place names are drawn by the page, so they stay sharp). */
+function showReducedDetail(map: maplibregl.Map, reduced: boolean) {
+  for (const id of REDUCED_LAYERS) {
+    if (!map.getLayer(id)) continue
+    map.setLayoutProperty(id, 'visibility', reduced ? 'none' : 'visible')
+  }
+  map.setPixelRatio(reduced ? 0.75 : window.devicePixelRatio || 1)
 }
 
 /** The map's buildings raised or flat, as the player has it (the companion's Map page). */
@@ -756,8 +780,15 @@ function place() {
         lastFrame = now
         return
       }
+      // Reduced effects: the map leaves out its heaviest decoration (REDUCED_LAYERS) and draws 20 times a second
+      // rather than 35 (or the display's own pace at 60 fps), for a weaker graphics card.
+      const reduced = useCabin.getState().pageEffects === 'reduced'
+      if (reduced !== current.reducedDetail) {
+        current.reducedDetail = reduced
+        showReducedDetail(current.map, reduced)
+      }
       // Half the map frames at the Performance setting's 30 a second (frameCap.ts), for a weaker graphics card.
-      const pace = useCabin.getState().pageFrameRate >= 60 ? LEAST_PACE : LEAST_PACE / 2
+      const pace = reduced ? 20 : useCabin.getState().pageFrameRate >= 60 ? LEAST_PACE : LEAST_PACE / 2
       if (!mapFrameDue(now, lastFrame, frameMs, pace)) return
       const dt = Math.min(now - lastFrame, 100)
       lastFrame = now
