@@ -12,7 +12,7 @@
   <b>CarPlay-stílusú képernyő az Euro Truck Simulator 2 és az American Truck Simulator kamionjaihoz.</b><br>
   A térképed, a zenéd és a YouTube – a saját kamionod műszerfalán.
   <br>
-  A <a href="https://github.com/enes-less/WestPlay">WestPlay</a> módosított ága, kínaiul beszélő játékosoknak.
+  A <a href="https://github.com/enes-less/WestPlay">WestPlay</a> módosított ága, néhány optimalizációval és új funkcióval.
 </p>
 
 <p align="center">

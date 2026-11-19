@@ -12,7 +12,7 @@
   <b>Obrazovka v štýle CarPlay pre kamióny z Euro Truck Simulator 2 a American Truck Simulator.</b><br>
   Tvoja mapa, tvoja hudba a YouTube, na palubnej doske tvojho kamióna.
   <br>
-  Upravená vetva <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, pre hráčov hovoriacich po čínsky.
+  Upravená vetva <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, s niekoľkými optimalizáciami a novými funkciami.
 </p>
 
 <p align="center">

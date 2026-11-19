@@ -12,7 +12,7 @@
   <b>Een scherm in CarPlay-stijl voor de vrachtwagens van Euro Truck Simulator 2 en American Truck Simulator.</b><br>
   Je kaart, je muziek en YouTube, op het dashboardscherm van je eigen vrachtwagen.
   <br>
-  Een aangepaste tak van <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, voor Chineestalige spelers.
+  Een aangepaste tak van <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, met wat optimalisaties en nieuwe functies.
 </p>
 
 <p align="center">

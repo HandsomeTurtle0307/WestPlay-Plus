@@ -12,7 +12,7 @@
   <b>A CarPlay-style screen for the trucks of Euro Truck Simulator 2 and American Truck Simulator.</b><br>
   Your map, your music and YouTube, on your truck's own dashboard screen.
   <br>
-  A modified branch of <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, for Chinese-speaking players.
+  A modified branch of <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, with some optimisations and new features.
 </p>
 
 <p align="center">

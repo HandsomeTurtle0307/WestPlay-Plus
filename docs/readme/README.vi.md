@@ -12,7 +12,7 @@
   <b>Một màn hình kiểu CarPlay cho xe tải trong Euro Truck Simulator 2 và American Truck Simulator.</b><br>
   Bản đồ, nhạc và YouTube của bạn, ngay trên bảng điều khiển của chính chiếc xe tải bạn lái.
   <br>
-  Một nhánh sửa đổi của <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, dành cho người chơi nói tiếng Trung.
+  Một nhánh sửa đổi của <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, có thêm một số tối ưu và tính năng mới.
 </p>
 
 <p align="center">

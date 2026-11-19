@@ -12,7 +12,7 @@
   <b>CarPlay estiloko pantaila bat Euro Truck Simulator 2 eta American Truck Simulator-eko kamioientzat.</b><br>
   Zure mapa, zure musika eta YouTube, zure kamioiaren aginte-panelean.
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>ren adar aldatua, txineraz hitz egiten duten jokalarientzat.
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>ren adar aldatua, optimizazio batzuekin eta funtzio berriekin.
 </p>
 
 <p align="center">

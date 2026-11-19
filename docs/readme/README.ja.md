@@ -12,7 +12,7 @@
   <b>Euro Truck Simulator 2 と American Truck Simulator のトラックのための、CarPlay 風スクリーン。</b><br>
   地図も音楽も YouTube も、トラック自身のダッシュボード画面に。
   <br>
-  中国語話者のプレイヤー向けの、<a href="https://github.com/enes-less/WestPlay">WestPlay</a> の改変ブランチです。
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> の改変ブランチで、いくつかの最適化と新機能を追加しています。
 </p>
 
 <p align="center">

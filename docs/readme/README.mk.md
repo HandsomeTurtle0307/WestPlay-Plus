@@ -12,7 +12,7 @@
   <b>Екран во стил на CarPlay за камионите од Euro Truck Simulator 2 и American Truck Simulator.</b><br>
   Твојата карта, твојата музика и YouTube, на арматурната табла на твојот камион.
   <br>
-  Изменета гранка на <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, за играчи што зборуваат кинески.
+  Изменета гранка на <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, со неколку оптимизации и нови функции.
 </p>
 
 <p align="center">

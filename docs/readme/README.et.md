@@ -12,7 +12,7 @@
   <b>CarPlay-stiilis ekraan Euro Truck Simulator 2 ja American Truck Simulatori veoautodele.</b><br>
   Sinu kaart, sinu muusika ja YouTube – sinu veoauto armatuurlaual.
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> muudetud haru, hiina keelt kõnelevatele mängijatele.
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> muudetud haru, kuhu on lisatud optimeerimisi ja uusi funktsioone.
 </p>
 
 <p align="center">

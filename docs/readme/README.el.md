@@ -12,7 +12,7 @@
   <b>Μια οθόνη σε στυλ CarPlay για τα φορτηγά των Euro Truck Simulator 2 και American Truck Simulator.</b><br>
   Ο χάρτης σου, η μουσική σου και το YouTube, στο ταμπλό του δικού σου φορτηγού.
   <br>
-  Ένας τροποποιημένος κλάδος του <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, για παίκτες που μιλούν κινεζικά.
+  Ένας τροποποιημένος κλάδος του <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, με μερικές βελτιστοποιήσεις και νέες λειτουργίες.
 </p>
 
 <p align="center">

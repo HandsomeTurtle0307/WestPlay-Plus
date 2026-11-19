@@ -12,7 +12,7 @@
   <b>Ekran w stylu CarPlay dla ciężarówek z Euro Truck Simulator 2 i American Truck Simulator.</b><br>
   Twoja mapa, Twoja muzyka i YouTube — na ekranie deski rozdzielczej Twojej ciężarówki.
   <br>
-  Zmodyfikowana gałąź <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, dla graczy mówiących po chińsku.
+  Zmodyfikowana gałąź <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, z kilkoma optymalizacjami i nowymi funkcjami.
 </p>
 
 <p align="center">

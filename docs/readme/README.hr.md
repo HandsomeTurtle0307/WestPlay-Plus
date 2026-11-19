@@ -12,7 +12,7 @@
   <b>Zaslon u stilu CarPlaya za kamione iz Euro Truck Simulator 2 i American Truck Simulator.</b><br>
   Tvoja karta, tvoja glazba i YouTube, na armaturi tvog kamiona.
   <br>
-  Izmijenjena grana <a href="https://github.com/enes-less/WestPlay">WestPlaya</a>, za igrače koji govore kineski.
+  Izmijenjena grana <a href="https://github.com/enes-less/WestPlay">WestPlaya</a>, s nekoliko optimizacija i novih značajki.
 </p>
 
 <p align="center">

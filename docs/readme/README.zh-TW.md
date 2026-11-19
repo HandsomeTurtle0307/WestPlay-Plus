@@ -12,7 +12,7 @@
   <b>為《歐洲卡車模擬 2》與《美國卡車模擬》的卡車打造、CarPlay 風格的車機螢幕。</b><br>
   你的地圖、你的音樂與 YouTube，就在卡車自己的儀表螢幕上。
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> 的修改版分支，面向中文玩家。
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> 的修改版分支，進行一些最佳化與功能新增。
 </p>
 
 <p align="center">
@@ -155,7 +155,7 @@ WestPlay Plus 是自由軟體：你可以依 GNU 通用公共授權條款第 3 �
 WestPlay Plus 是 [WestPlay](https://github.com/enes-less/WestPlay) 的修改版分支（fork），後者是由 **enes-less** 製作、為《歐洲卡車模擬 2》與《美國卡車模擬》打造的 CarPlay 風格車內螢幕模組，表現極為出色。它幾乎全部的設計、程式碼與素材都出自他的工作；本分支在他的成果之上保留了自己的修改，並對他的付出深表感謝。如果你喜歡這個專案，也請去看看原專案。
 
 本專案的絕大部分設計、程式碼與素材來自原專案 **WestPlay**（作者 [enes-less](https://github.com/enes-less/WestPlay)），
-這是一個極其優秀的歐卡 2 / 美卡車內中控螢幕模組。本分支只是在它之上做了適合中文玩家的修改，並對原作者表達由衷感謝。
+這是一個極其優秀的歐卡 2 / 美卡車內中控螢幕模組。本分支只是在它之上做了一些最佳化與功能新增，並對原作者表達由衷感謝。
 建議同時支持原專案（如果可以的話能支持支持我嘛😭😭😭，開發軟體不易啊~）
 
 <!-- translated:start -->

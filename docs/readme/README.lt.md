@@ -12,7 +12,7 @@
   <b>CarPlay stiliaus ekranas Euro Truck Simulator 2 ir American Truck Simulator sunkvežimiams.</b><br>
   Tavo žemėlapis, tavo muzika ir YouTube – savo sunkvežimio prietaisų skydelyje.
   <br>
-  Modifikuota <a href="https://github.com/enes-less/WestPlay">WestPlay</a> šaka, kiniečių kalba kalbantiems žaidėjams.
+  Modifikuota <a href="https://github.com/enes-less/WestPlay">WestPlay</a> šaka, su kai kuriomis optimizacijomis ir naujomis funkcijomis.
 </p>
 
 <p align="center">

@@ -12,7 +12,7 @@
   <b>Una pantalla a l'estil de CarPlay per als camions d'Euro Truck Simulator 2 i American Truck Simulator.</b><br>
   El teu mapa, la teva música i YouTube, al tauler de comandament del teu camió.
   <br>
-  Una branca modificada de <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, per a jugadors que parlen xinès.
+  Una branca modificada de <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, amb algunes optimitzacions i funcions noves.
 </p>
 
 <p align="center">

@@ -12,7 +12,7 @@
   <b>Экран в стиле CarPlay для грузовиков Euro Truck Simulator 2 и American Truck Simulator.</b><br>
   Ваша карта, ваша музыка и YouTube — на собственном экране вашего грузовика.
   <br>
-  Изменённая ветка <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, для игроков, говорящих по-китайски.
+  Изменённая ветка <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, с рядом оптимизаций и новых функций.
 </p>
 
 <p align="center">

@@ -12,7 +12,7 @@
   <b>Ekran w stylu CarPlay dlo kamiōnōw z Euro Truck Simulator 2 a American Truck Simulator.</b><br>
   Twoja mapa, twoja muzyka a YouTube, na panelu twojigo kamiōna.
   <br>
-  Zmodyfikowanŏ gałōń <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, dlo grŏczy, kerzy gŏdajōm po chińsku.
+  Zmodyfikowanŏ gałōń <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, s pora optymalizacyjami a nowymi funkcyjami.
 </p>
 
 <p align="center">

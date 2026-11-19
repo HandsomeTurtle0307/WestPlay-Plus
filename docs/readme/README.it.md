@@ -12,7 +12,7 @@
   <b>Uno schermo in stile CarPlay per i camion di Euro Truck Simulator 2 e American Truck Simulator.</b><br>
   La tua mappa, la tua musica e YouTube, sullo schermo del cruscotto del tuo camion.
   <br>
-  Un ramo modificato di <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, per giocatori di lingua cinese.
+  Un ramo modificato di <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, con alcune ottimizzazioni e nuove funzioni.
 </p>
 
 <p align="center">

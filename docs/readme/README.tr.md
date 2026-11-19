@@ -12,7 +12,7 @@
   <b>Euro Truck Simulator 2 ve American Truck Simulator kamyonları için CarPlay tarzı bir ekran.</b><br>
   Haritan, müziğin ve YouTube, kamyonunun kendi gösterge ekranında.
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> projesinin, Çince konuşan oyuncular için değiştirilmiş bir dalı.
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a> projesinin, bazı optimizasyonlar ve yeni özellikler eklenmiş değiştirilmiş bir dalı.
 </p>
 
 <p align="center">

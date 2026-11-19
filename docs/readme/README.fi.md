@@ -12,7 +12,7 @@
   <b>CarPlay-tyylinen näyttö Euro Truck Simulator 2:n ja American Truck Simulatorin kuorma-autoihin.</b><br>
   Karttasi, musiikkisi ja YouTube – oman kuorma-autosi kojelaudan näytöllä.
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>-projektin muokattu haara, kiinankielisille pelaajille.
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>-projektin muokattu haara, johon on lisätty optimointeja ja uusia ominaisuuksia.
 </p>
 
 <p align="center">

@@ -12,7 +12,7 @@
   <b>Ein Bildschirm im CarPlay-Stil für die Lkw in Euro Truck Simulator 2 und American Truck Simulator.</b><br>
   Deine Karte, deine Musik und YouTube – auf dem eigenen Display deines Lkw.
   <br>
-  Ein modifizierter Zweig von <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, für chinesischsprachige Spieler.
+  Ein modifizierter Zweig von <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, mit einigen Optimierungen und neuen Funktionen.
 </p>
 
 <p align="center">

@@ -12,7 +12,7 @@
   <b>CarPlay stila ekrāns kravas automašīnām no Euro Truck Simulator 2 un American Truck Simulator.</b><br>
   Tava karte, tava mūzika un YouTube – uz tavas kravas automašīnas armatūras paneļa.
   <br>
-  Modificēts <a href="https://github.com/enes-less/WestPlay">WestPlay</a> atzars, spēlētājiem, kas runā ķīniski.
+  Modificēts <a href="https://github.com/enes-less/WestPlay">WestPlay</a> atzars, ar dažām optimizācijām un jaunām funkcijām.
 </p>
 
 <p align="center">

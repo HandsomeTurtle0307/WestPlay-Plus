@@ -12,7 +12,7 @@
   <b>En CarPlay-lignende skjerm for lastebilene i Euro Truck Simulator 2 og American Truck Simulator.</b><br>
   Kartet ditt, musikken din og YouTube, på din egen lastebils dashbord.
   <br>
-  En modifisert gren av <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, for kinesisktalende spillere.
+  En modifisert gren av <a href="https://github.com/enes-less/WestPlay">WestPlay</a>, med noen optimaliseringer og nye funksjoner.
 </p>
 
 <p align="center">

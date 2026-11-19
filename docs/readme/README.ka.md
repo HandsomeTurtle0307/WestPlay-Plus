@@ -12,7 +12,7 @@
   <b>CarPlay-ის სტილის ეკრანი Euro Truck Simulator 2-ისა და American Truck Simulator-ის სატვირთო მანქანებისთვის.</b><br>
   შენი რუკა, შენი მუსიკა და YouTube — შენივე სატვირთოს სამართავ პანელზე.
   <br>
-  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>-ის შეცვლილი შტო, ჩინურენოვანი მოთამაშეებისთვის.
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>-ის შეცვლილი შტო, რამდენიმე ოპტიმიზაციითა და ახალი ფუნქციით.
 </p>
 
 <p align="center">

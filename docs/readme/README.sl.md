@@ -12,7 +12,7 @@
   <b>Zaslon v slogu CarPlaya za tovornjake iz Euro Truck Simulator 2 in American Truck Simulator.</b><br>
   Tvoj zemljevid, tvoja glasba in YouTube, na armaturni plošči tvojega tovornjaka.
   <br>
-  Spremenjena veja <a href="https://github.com/enes-less/WestPlay">WestPlaya</a>, za igralce, ki govorijo kitajsko.
+  Spremenjena veja <a href="https://github.com/enes-less/WestPlay">WestPlaya</a>, z nekaj optimizacijami in novimi funkcijami.
 </p>
 
 <p align="center">

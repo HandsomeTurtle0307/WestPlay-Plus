@@ -12,7 +12,7 @@
   <b>Euro Truck Simulator 2와 American Truck Simulator의 트럭을 위한 CarPlay 스타일 화면.</b><br>
   지도도, 음악도, YouTube도 트럭 자신의 대시보드 화면 위에.
   <br>
-  중국어권 플레이어를 위한 <a href="https://github.com/enes-less/WestPlay">WestPlay</a>의 수정 브랜치입니다.
+  <a href="https://github.com/enes-less/WestPlay">WestPlay</a>의 수정 브랜치로, 몇 가지 최적화와 새 기능을 더했습니다.
 </p>
 
 <p align="center">
