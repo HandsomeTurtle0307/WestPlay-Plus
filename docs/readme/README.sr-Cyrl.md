@@ -4,9 +4,13 @@
 
 <!-- languages:start -->
 <p align="center">
-  <a href="../../README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.fr-CA.md">Français (Canada)</a> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.it.md">Italiano</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.pl.md">Polski</a> · <a href="README.szl.md">Ślōnsko godka</a> · <a href="README.nl.md">Nederlands</a> · <a href="README.tr.md">Türkçe</a> · <a href="README.uk.md">Українська</a> · <a href="README.cs.md">Čeština</a> · <a href="README.sk.md">Slovenčina</a> · <a href="README.hu.md">Magyar</a> · <a href="README.ro.md">Română</a> · <a href="README.bg.md">Български</a> · <a href="README.hr.md">Hrvatski</a> · <a href="README.sr-Latn.md">Srpski (latinica)</a> · <b>Српски (ћирилица)</b> · <a href="README.sl.md">Slovenščina</a> · <a href="README.mk.md">Македонски</a> · <a href="README.el.md">Ελληνικά</a> · <a href="README.sv.md">Svenska</a> · <a href="README.da.md">Dansk</a> · <a href="README.no.md">Norsk</a> · <a href="README.fi.md">Suomi</a> · <a href="README.et.md">Eesti</a> · <a href="README.lt.md">Lietuvių</a> · <a href="README.lv.md">Latviešu</a> · <a href="README.ca.md">Català</a> · <a href="README.gl.md">Galego</a> · <a href="README.eu.md">Euskara</a> · <a href="README.ka.md">ქართული</a> · <a href="README.vi.md">Tiếng Việt</a>
+  <a href="../../README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.fr-CA.md">Français (Canada)</a> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.it.md">Italiano</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.pl.md">Polski</a> · <a href="README.nl.md">Nederlands</a> · <a href="README.tr.md">Türkçe</a> · <a href="README.uk.md">Українська</a> · <a href="README.cs.md">Čeština</a> · <a href="README.sk.md">Slovenčina</a> · <a href="README.hu.md">Magyar</a> · <a href="README.ro.md">Română</a> · <a href="README.bg.md">Български</a> · <a href="README.hr.md">Hrvatski</a> · <a href="README.sr-Latn.md">Srpski (latinica)</a> · <b>Српски (ћирилица)</b> · <a href="README.sl.md">Slovenščina</a> · <a href="README.mk.md">Македонски</a> · <a href="README.el.md">Ελληνικά</a> · <a href="README.sv.md">Svenska</a> · <a href="README.da.md">Dansk</a> · <a href="README.no.md">Norsk</a> · <a href="README.fi.md">Suomi</a> · <a href="README.et.md">Eesti</a> · <a href="README.lt.md">Lietuvių</a> · <a href="README.lv.md">Latviešu</a> · <a href="README.ca.md">Català</a> · <a href="README.gl.md">Galego</a> · <a href="README.vi.md">Tiếng Việt</a>
 </p>
 <!-- languages:end -->
+
+<!-- english-only:start -->
+<p align="center"><sub>Шлески, баскијски и грузијски апликација подржава, али још немају README: није било никога да провери превод на те језике. Сав садржај је у енглеској верзији у корену репозиторијума.</sub></p>
+<!-- english-only:end -->
 
 <p align="center">
   <b>Екран у стилу CarPlay-а за камионе из Euro Truck Simulator 2 и American Truck Simulator.</b><br>
@@ -30,6 +34,10 @@ WestPlay Plus ставља екран попут оног на телефону 
 ## Зашто сам ово направио
 
 Прво сам тражио мод за CarPlay, а онда налетео на WestPlay и видео да је стварно добро направљен (стварно, јако јако добро). Само је оптимизација била слаба и замрзла ми је рачунар. Зато сам одлучио сам да га дорадим: посложим перформансе и додам неколико нових функција (стојећи на раменима дива, хехе~😊).
+
+<!-- easter-egg:start -->
+> Постоји још један разлог: раније, када сам био веома узнемирен, урадио сам ствари (може се рећи, много) које су утицале на друге — посебно на некога кога заиста нисам желео да повредим. Сада кад помислим на то, осећам се кривим и веома ми је тешко, а будућност ми изгледа магловита (и учење и планови). Зато се држим једине ствари коју могу да контролишем — програмирања — и тиме за сада прекривам бол на другим местима. Ех🥲 Шта да радим даље, ни ја не знам, ићи ћу корак по корак :)‍💨
+<!-- easter-egg:end -->
 
 <!-- why:end -->
 

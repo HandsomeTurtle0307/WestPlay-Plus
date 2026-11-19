@@ -152,8 +152,17 @@ function PerformanceChooser({ settings: state, cw }: Pick<PageProps, 'settings' 
   if (!settings) return null
   const performance = settings.performance
   const choose = (next: typeof performance) => {
-    if (next.frameRate === performance.frameRate && next.effects === performance.effects && next.pauseHidden === performance.pauseHidden) return
-    void update({ ...settings, performance: next })
+    if (
+      next.frameRate === performance.frameRate &&
+      next.effects === performance.effects &&
+      next.pauseHidden === performance.pauseHidden
+    ) {
+      return
+    }
+    // Reduced effects draws the map without its 3D detail too (the biggest cost after the glass): the Map page's
+    // switches show it off, and the player can turn them back on there.
+    const map = next.effects === 'reduced' ? { ...settings.map, buildings: false, roads: false } : settings.map
+    void update({ ...settings, performance: next, map })
   }
   const segments = (
     title: string,

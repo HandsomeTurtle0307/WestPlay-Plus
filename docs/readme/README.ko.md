@@ -4,9 +4,13 @@
 
 <!-- languages:start -->
 <p align="center">
-  <a href="../../README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <b>한국어</b> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.fr-CA.md">Français (Canada)</a> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.it.md">Italiano</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.pl.md">Polski</a> · <a href="README.szl.md">Ślōnsko godka</a> · <a href="README.nl.md">Nederlands</a> · <a href="README.tr.md">Türkçe</a> · <a href="README.uk.md">Українська</a> · <a href="README.cs.md">Čeština</a> · <a href="README.sk.md">Slovenčina</a> · <a href="README.hu.md">Magyar</a> · <a href="README.ro.md">Română</a> · <a href="README.bg.md">Български</a> · <a href="README.hr.md">Hrvatski</a> · <a href="README.sr-Latn.md">Srpski (latinica)</a> · <a href="README.sr-Cyrl.md">Српски (ћирилица)</a> · <a href="README.sl.md">Slovenščina</a> · <a href="README.mk.md">Македонски</a> · <a href="README.el.md">Ελληνικά</a> · <a href="README.sv.md">Svenska</a> · <a href="README.da.md">Dansk</a> · <a href="README.no.md">Norsk</a> · <a href="README.fi.md">Suomi</a> · <a href="README.et.md">Eesti</a> · <a href="README.lt.md">Lietuvių</a> · <a href="README.lv.md">Latviešu</a> · <a href="README.ca.md">Català</a> · <a href="README.gl.md">Galego</a> · <a href="README.eu.md">Euskara</a> · <a href="README.ka.md">ქართული</a> · <a href="README.vi.md">Tiếng Việt</a>
+  <a href="../../README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.ja.md">日本語</a> · <b>한국어</b> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.fr-CA.md">Français (Canada)</a> · <a href="README.es.md">Español</a> · <a href="README.es-419.md">Español (Latinoamérica)</a> · <a href="README.it.md">Italiano</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.pt-PT.md">Português (Portugal)</a> · <a href="README.ru.md">Русский</a> · <a href="README.pl.md">Polski</a> · <a href="README.nl.md">Nederlands</a> · <a href="README.tr.md">Türkçe</a> · <a href="README.uk.md">Українська</a> · <a href="README.cs.md">Čeština</a> · <a href="README.sk.md">Slovenčina</a> · <a href="README.hu.md">Magyar</a> · <a href="README.ro.md">Română</a> · <a href="README.bg.md">Български</a> · <a href="README.hr.md">Hrvatski</a> · <a href="README.sr-Latn.md">Srpski (latinica)</a> · <a href="README.sr-Cyrl.md">Српски (ћирилица)</a> · <a href="README.sl.md">Slovenščina</a> · <a href="README.mk.md">Македонски</a> · <a href="README.el.md">Ελληνικά</a> · <a href="README.sv.md">Svenska</a> · <a href="README.da.md">Dansk</a> · <a href="README.no.md">Norsk</a> · <a href="README.fi.md">Suomi</a> · <a href="README.et.md">Eesti</a> · <a href="README.lt.md">Lietuvių</a> · <a href="README.lv.md">Latviešu</a> · <a href="README.ca.md">Català</a> · <a href="README.gl.md">Galego</a> · <a href="README.vi.md">Tiếng Việt</a>
 </p>
 <!-- languages:end -->
+
+<!-- english-only:start -->
+<p align="center"><sub>실레시아어, 바스크어, 조지아어는 앱에서 지원하지만 README는 아직 없습니다. 이 세 언어는 번역을 검토해 줄 사람이 없기 때문입니다. 전체 내용은 저장소 최상단의 영어판에 있습니다.</sub></p>
+<!-- english-only:end -->
 
 <p align="center">
   <b>Euro Truck Simulator 2와 American Truck Simulator의 트럭을 위한 CarPlay 스타일 화면.</b><br>
@@ -30,6 +34,10 @@ WestPlay Plus는 게임 속 트럭의 대시보드 화면에 휴대폰 스타일
 ## 왜 이걸 만들었냐면
 
 처음엔 CarPlay 모드를 찾다가 WestPlay를 발견했는데, 정말 잘 만들어져 있었어요(진짜, 아주아주 잘). 다만 최적화가 아쉬워서 컴퓨터가 뻗어버렸고, 그래서 제가 직접 다듬기로 했습니다. 성능을 손보고 새 기능도 좀 붙이고요(거인의 어깨에 올라탄 셈이죠, 히히~😊).
+
+<!-- easter-egg:start -->
+> 사실 이유가 하나 더 있어요. 예전에 제가 많이 흥분했을 때, 다른 사람들에게 영향을 준 일을 했어요(많이요). 특히 정말 상처 주고 싶지 않았던 사람에게요. 지금 생각하면 미안하고 너무 힘들고, 앞날도 막막해요(공부도, 계획도). 그래서 제가 통제할 수 있는 유일한 것, 그러니까 프로그래밍에 매달려서 다른 쪽의 아픔을 잠시 덮고 있는 거예요. 하🥲 앞으로 어떻게 해야 할지는 저도 모르겠어요. 그냥 한 걸음씩 가려고요 :)‍💨
+<!-- easter-egg:end -->
 
 <!-- why:end -->
 

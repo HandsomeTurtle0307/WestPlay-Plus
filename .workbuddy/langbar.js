@@ -22,7 +22,6 @@ const NAMES = {
   'README.pt-PT.md': 'Português (Portugal)',
   'README.ru.md': 'Русский',
   'README.pl.md': 'Polski',
-  'README.szl.md': 'Ślōnsko godka',
   'README.nl.md': 'Nederlands',
   'README.tr.md': 'Türkçe',
   'README.uk.md': 'Українська',
@@ -46,8 +45,6 @@ const NAMES = {
   'README.lv.md': 'Latviešu',
   'README.ca.md': 'Català',
   'README.gl.md': 'Galego',
-  'README.eu.md': 'Euskara',
-  'README.ka.md': 'ქართული',
   'README.vi.md': 'Tiếng Việt',
 }
 

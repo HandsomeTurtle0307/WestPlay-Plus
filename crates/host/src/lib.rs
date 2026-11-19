@@ -70,6 +70,10 @@ pub use westplay_shared::{SCREEN_HEIGHT, SCREEN_WIDTH};
 /// Built-in page used when no UI URL is given: shows that frames and telemetry arrive.
 pub const TEST_PAGE: &str = include_str!("test_page.html");
 
+/// The longest frames wait while the game presents none (a paused game, a loading screen): the newest still goes out
+/// now and then, so the screen isn't left with an old frame when the game comes back.
+const PUBLISH_KEEPALIVE: Duration = Duration::from_millis(150);
+
 #[derive(Clone)]
 pub enum Content {
     Url(String),
@@ -460,6 +464,10 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
     let mut applied_settings = None;
     // Whether the page's drawing (and the frames to the game) are paused as the game doesn't show the screen.
     let mut host_idle = false;
+    // The game's present count and when frames last went to it: frames go only as often as the game could take one,
+    // with a keepalive for a screen the game has stopped presenting (the host's capture keeps the newest frame waiting).
+    let mut last_game_frame = 0u64;
+    let mut last_publish = Instant::now();
     // Each keybind's presses and holds the page was told of (`PluginBlock::keybind_presses`, `keybind_holds`).
     let mut keybind_presses =
         bridge.bridge().plugin.keybind_presses.each_ref().map(|count| count.load(Ordering::Acquire));
@@ -492,11 +500,19 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
             host_idle = idle;
             let _ = webview.post_json(&idle_message(idle));
         }
+        // A captured frame that came before its turn goes out now that it's due — and only as often as the game could
+        // take one (its presents: at 20 fps, half the copies would be for nothing), with a keepalive so a screen the
+        // game has stopped presenting still gets its last frames.
+        let game_frame = bridge.bridge().plugin.heartbeat.load(Ordering::Relaxed);
+        let publish_due = game_frame != last_game_frame || last_publish.elapsed() >= PUBLISH_KEEPALIVE;
         // A captured frame that came before its turn goes out now that it's due.
         // The cursor drawn over it where the mouse is now, the page squeezed into the frame as it's laid out.
         if let Some(pipeline) = &pipeline
             && !host_idle
+            && publish_due
         {
+            last_game_frame = game_frame;
+            last_publish = Instant::now();
             let placement = cursor::Placement {
                 left: page_place.left as f32,
                 top: page_place.top as f32,

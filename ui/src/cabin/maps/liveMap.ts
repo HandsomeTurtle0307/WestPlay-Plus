@@ -257,7 +257,8 @@ function create(data: MapData, appearance: Appearance): LiveMap {
     pitchWithRotate: false,
     attributionControl: false,
     fadeDuration: 0,
-    canvasContextAttributes: { antialias: true },
+    // The Performance setting's reduced effects draw the map without anti-aliasing too (cheaper 3D edges).
+  canvasContextAttributes: { antialias: useCabin.getState().pageEffects !== 'reduced' },
   })
 
   // Added to the map when in range and clear of more important names (showLabels). Each says what

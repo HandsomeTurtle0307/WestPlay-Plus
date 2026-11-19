@@ -65,6 +65,16 @@ impl Default for PerformanceSettings {
     }
 }
 
+/// How much of the look the cabin page draws: everything (Full), or with the Liquid Glass flat and the decorative
+/// motion still (Reduced), for weaker graphics cards.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub enum PageEffects {
+    #[default]
+    Full,
+    Reduced,
+}
+
 /// Frames a second the cabin page's frames go to the game: 60 (the page as smooth as it gets) or 30 (half the
 /// work; the map and the glass update half as often).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -83,16 +93,6 @@ impl FrameRate {
             Self::Fps30 => 30,
         }
     }
-}
-
-/// How much of the look the cabin page draws: everything (Full), or with the Liquid Glass flat and the decorative
-/// motion still (Reduced), for weaker graphics cards.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub enum PageEffects {
-    #[default]
-    Full,
-    Reduced,
 }
 
 /// One of the game's language codes, as its `config.cfg` writes them (`tr_tr`, `pt_br`): two letters, `_`, two.

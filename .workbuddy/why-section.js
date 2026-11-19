@@ -33,11 +33,13 @@ const W = {
   'README.ko.md': {
     t: '## 왜 이걸 만들었냐면',
     p: '처음엔 CarPlay 모드를 찾다가 WestPlay를 발견했는데, 정말 잘 만들어져 있었어요(진짜, 아주아주 잘). 다만 최적화가 아쉬워서 컴퓨터가 뻗어버렸고, 그래서 제가 직접 다듬기로 했습니다. 성능을 손보고 새 기능도 좀 붙이고요(거인의 어깨에 올라탄 셈이죠, 히히~😊).',
+    q: '> 사실 이유가 하나 더 있어요. 예전에 제가 많이 흥분했을 때, 다른 사람들에게 영향을 준 일을 했어요(많이요). 특히 정말 상처 주고 싶지 않았던 사람에게요. 지금 생각하면 미안하고 너무 힘들고, 앞날도 막막해요(공부도, 계획도). 그래서 제가 통제할 수 있는 유일한 것, 그러니까 프로그래밍에 매달려서 다른 쪽의 아픔을 잠시 덮고 있는 거예요. 하🥲 앞으로 어떻게 해야 할지는 저도 모르겠어요. 그냥 한 걸음씩 가려고요 :)‍💨',
   },
 
   'README.de.md': {
     t: '## Warum ich das gebaut habe',
     p: 'Eigentlich wollte ich nur einen CarPlay-Mod finden, dann bin ich über WestPlay gestolpert – und das ist wirklich sehr gut gemacht (wirklich, richtig gut). Bloß die Optimierung war mies und hat meinen Rechner eingefroren. Also habe ich beschlossen, selbst Hand anzulegen: Performance aufpolieren, ein paar neue Funktionen dazu (auf den Schultern eines Riesen, hihi~😊).',
+    q: '> Eigentlich gibt es noch einen Grund: Früher, wenn ich sehr aufgewühlt war, habe ich Dinge getan (man kann sagen: viele), die andere getroffen haben – vor allem jemanden, den ich wirklich nicht verletzen wollte. Wenn ich heute daran denke, fühle ich mich schuldig und es tut mir sehr weh, und die Zukunft kommt mir neblig vor (auch Studium und Pläne). Deshalb klammere ich mich an das Einzige, was ich kontrollieren kann – das Programmieren – und decke damit vorerst den Schmerz an anderen Stellen zu. Ach🥲 Was ich weiter machen soll, weiß ich auch nicht, ich gehe Schritt für Schritt :)‍💨',
   },
 
   'README.fr.md': {
@@ -78,17 +80,12 @@ const W = {
   'README.ru.md': {
     t: '## Зачем я это сделал',
     p: 'Сначала я искал мод на CarPlay, потом наткнулся на WestPlay и понял, что он очень хорошо сделан (правда, очень-очень хорошо). Вот только оптимизация подводила — компьютер у меня зависал. Поэтому я решил сам его доработать: подтянуть производительность и добавить пару новых функций (стою на плечах гиганта, хе~😊).',
+    q: '> На самом деле есть ещё одна причина: раньше, когда я был очень взвинчен, я сделал вещи (можно сказать, немало), которые задели других — особенно того, кому я совсем не хотел делать больно. Сейчас, когда я об этом думаю, мне стыдно и очень тяжело, а будущее кажется туманным (и учёба, и планы). Поэтому я держусь за единственное, что могу контролировать — программирование — и этим пока прикрываю боль в остальном. Эх🥲 Что делать дальше, я тоже не знаю, буду идти шаг за шагом :)‍💨',
   },
 
   'README.pl.md': {
     t: '## Po co to zrobiłem',
     p: 'Na początku szukałem moda do CarPlay, aż trafiłem na WestPlay i zobaczyłem, że jest zrobiony naprawdę dobrze (serio, bardzo bardzo dobrze). Tylko optymalizacja była słaba i zawiesiła mi komputer. Więc postanowiłem sam go dopieścić: poprawić wydajność i dodać kilka nowych funkcji (stoję na ramionach olbrzyma, hi hi~😊).',
-  },
-
-  'README.szl.md': {
-    t: '## Czamu to zrobiōłech',
-    p: 'Nojprzōd szukołech moda do CarPlay, aże trefiōłech na WestPlay i zoboczōłech, iże je zrobiony bardzo dobrze (no naprowdã bardzo dobrze), ino optymalizacyjo niy była nojlepszo i komputyr mi sie zawiysiōł. To żech sie rozhodnōł sam go dopieszczyć, pociōngnōńc wydajność i dodać pora nowych funkcyj (stoja na ramionach ôlbrzyma, hi hi~😊).',
-    q: '> Je jeszcze jedna prziczyna: kedyś, jak żech bōł rozstrojiōny, zrobiōłech rzeczy (co prawda mocka), kere wpłyneły na inkszych — nojbarzij na tych, kerych żech naprowdã niy chcioł skrzywdzić. Teroz jak o tym pōmiyrzã, to mie dusi i wstyd mie, a prziszłość je mglisto (uczenie sie i plany na dalij). To żech sie chyciōł tego, co mōgã kontrolować — programowanio — i tym na razie zakrywōm to, co mie boli inkszyndzij. Ech🥲 Potym to już niy wiem co robić, idã krok za krokiem :)‍💨',
   },
 
   'README.nl.md': {
@@ -139,21 +136,25 @@ const W = {
   'README.sr-Latn.md': {
     t: '## Zašto sam ovo napravio',
     p: 'Prvo sam tražio mod za CarPlay, a onda naleteo na WestPlay i video da je stvarno dobro napravljen (stvarno, jako jako dobro). Samo je optimizacija bila slaba i zamrzla mi je računar. Zato sam odlučio sam da ga doradim: posložim performanse i dodam nekoliko novih funkcija (stojeći na ramenima diva, hehe~😊).',
+    q: '> Postoji još jedan razlog: ranije, kada sam bio veoma uznemiren, uradio sam stvari (može se reći, mnogo) koje su uticale na druge — posebno na nekoga koga zaista nisam želeo da povredim. Sada kad pomislim na to, osećam se krivim i veoma mi je teško, a budućnost mi izgleda maglovita (i učenje i planovi). Zato se držim jedine stvari koju mogu da kontrolišem — programiranja — i time za sada prekrivam bol na drugim mestima. Eh🥲 Šta da radim dalje, ni ja ne znam, ići ću korak po korak :)‍💨',
   },
 
   'README.sr-Cyrl.md': {
     t: '## Зашто сам ово направио',
     p: 'Прво сам тражио мод за CarPlay, а онда налетео на WestPlay и видео да је стварно добро направљен (стварно, јако јако добро). Само је оптимизација била слаба и замрзла ми је рачунар. Зато сам одлучио сам да га дорадим: посложим перформансе и додам неколико нових функција (стојећи на раменима дива, хехе~😊).',
+    q: '> Постоји још један разлог: раније, када сам био веома узнемирен, урадио сам ствари (може се рећи, много) које су утицале на друге — посебно на некога кога заиста нисам желео да повредим. Сада кад помислим на то, осећам се кривим и веома ми је тешко, а будућност ми изгледа магловита (и учење и планови). Зато се држим једине ствари коју могу да контролишем — програмирања — и тиме за сада прекривам бол на другим местима. Ех🥲 Шта да радим даље, ни ја не знам, ићи ћу корак по корак :)‍💨',
   },
 
   'README.sl.md': {
     t: '## Zakaj sem to naredil',
     p: 'Najprej sem iskal mod za CarPlay, potem pa naletel na WestPlay in videl, da je res dobro narejen (res, zelo zelo dobro). Le optimizacija je bila slaba in mi je zamrznila računalnik. Zato sem se odločil, da ga sam izpilim: izboljšam delovanje in dodam nekaj novih funkcij (stojim na ramenih velikana, hehe~😊).',
+    q: '> Pravzaprav je še en razlog: prej, ko sem bil zelo vznemirjen, sem naredil stvari (lahko rečemo, veliko), ki so prizadele druge — predvsem nekoga, ki ga res nisem hotel prizadeti. Zdaj, ko pomislim na to, se počutim krivega in mi je zelo hudo, prihodnost pa se mi zdi nejasna (tudi študij in načrti). Zato se držim edine stvari, ki jo lahko nadzorujem — programiranja — in z njo za zdaj prekrivam bolečino drugje. Eh🥲 Kaj narediti naprej, tudi ne vem, šel bom korak za korakom :)‍💨',
   },
 
   'README.mk.md': {
     t: '## Зошто го направив ова',
     p: 'Најпрво барав мод за CarPlay, па налетав на WestPlay и видов дека е навистина добро направен (навистина, многу многу добро). Само оптимизацијата беше слаба и ми го замрзна компјутерот. Затоа решив сам да го дотерам: да ја подобрам брзината и да додадам неколку нови функции (стојам на рамениците на џин, хехе~😊).',
+    q: '> Има уште една причина: порано, кога бев многу вознемирен, направив работи (може да се каже, многу) што влијаеја на други — особено на некој што навистина не сакав да го повредам. Сега кога ќе помислам на тоа, се чувствувам виновен и многу ми е тешко, а иднината ми изгледа маглива (и учењето и плановите). Затоа се држам за единственото што можам да го контролирам — програмирањето — и со тоа засега ја покривам болката на други места. Ех🥲 Што да правам понатаму, ни јас не знам, ќе одам чекор по чекор :)‍💨',
   },
 
   'README.el.md': {
@@ -190,6 +191,7 @@ const W = {
   'README.lt.md': {
     t: '## Kodėl aš tai padariau',
     p: 'Iš pradžių ieškojau CarPlay modifikacijos, kol užtikau WestPlay ir pamačiau, kad jis tikrai labai gerai padarytas (tikrai, labai labai gerai). Tik optimizacija buvo silpna ir užšaldė man kompiuterį. Todėl nusprendžiau pats jį patobulinti: pakoreguoti našumą ir pridėti kelias naujas funkcijas (stoviu ant milžino pečių, hi hi~😊).',
+    q: '> Tiesa, yra dar viena priežastis: anksčiau, kai buvau labai susijaudinęs, padariau dalykų (galima sakyti, daug), kurie paveikė kitus — ypač tuos, kurių tikrai nenorėjau skaudinti. Dabar, kai apie tai pagalvoju, jaučiuosi kaltas ir man labai sunku, o ateitis atrodo miglota (ir mokslai, ir planai). Todėl laikausi vienintelio dalyko, kurį galiu kontroliuoti — programavimo — ir juo kol kas užmaskuoju skausmą kitur. Ech🥲 Ką daryti toliau, irgi nežinau, eisiu žingsnis po žingsnio :)‍💨',
   },
 
   'README.lv.md': {
@@ -207,18 +209,6 @@ const W = {
     t: '## Por que fixen isto',
     p: 'Ao principio buscaba un mod de CarPlay, e atopei WestPlay: está moi ben feito (de verdade, moi moi ben), só que a optimización non era boa e o ordenador conxelóuseme. Así que decidín melloralo eu mesmo, afinar o rendemento e engadir algunhas funcións novas (estou subido aos ombros dun xigante, jeje~😊).',
     q: '> Hai outro motivo: antes, cando estaba moi alterado, fixen cousas (bastantes, a verdade) que afectaron a outras persoas — sobre todo a alguén a quen non quería facer dano. Agora, ao pensalo, síntome culpable e moi mal, e vexo o futuro con moita dúbida (tamén os estudos e os plans). Por iso agárrome ao único que podo controlar — programar — e con iso vou tapando, por agora, a dor doutras partes. Ai🥲 Tampouco sei que farei despois; irei paso a paso :)‍💨',
-  },
-
-  'README.eu.md': {
-    t: '## Zergatik egin nuen hau',
-    p: 'Hasieran CarPlay mod bat bilatzen hasi nintzen, eta WestPlay aurkitu nuen. Oso ondo eginda dago (benetan, oso-oso ondo), baina optimizazioa ez zen ona eta ordenagailua izoztu zidan. Beraz, nik neuk hobetzea erabaki nuen: errendimendua findu, eta funtzio berri batzuk gehitu (erraldoi baten sorbaldetan nago eta, jeje~😊).',
-    q: '> Beste arrazoi bat ere badago: lehen, oso urduri nengoela, beste batzuei eragin zieten gauzak egin nituen (asko, egia esan) — batez ere inoiz mindu nahi ez nituenei. Orain pentsatuta, errudun eta gaizki sentitzen naiz, eta etorkizunari begira galdu samar nabil (ikasketak eta etorkizunerako planak barne). Beraz, nire esku dagoen gauza bakarra hartu dut — programazioa — eta horrekin estaltzen ditut beste aldeko minak, behin-behinean. Ai🥲 Gero zer egin ez dakit, baina pausoz pauso joango naiz :)‍💨',
-  },
-
-  'README.ka.md': {
-    t: '## რატომ გავაკეთე ეს',
-    p: 'თავიდან CarPlay-ის მოდს ვეძებდი, მერე WestPlay-ს წავაწყდი და დავინახე, რომ ძალიან კარგადაა გაკეთებული (მართლა, ძალიან-ძალიან კარგად), უბრალოდ ოპტიმიზაცია არ ვარგოდა და კომპიუტერი გამითიშა. ამიტომ გადავწყვიტე, თავად გამომესწორებინა, ცოტა გამეაუმჯობესებინა წარმადობა და რამდენიმე ახალი ფუნქციაც დამემატებინა (გიგანტის მხრებზე ვდგავარ, ჰე~😊).',
-    q: '> კიდევ ერთი მიზეზი არსებობს: ადრე, როცა ძალიან აღელვებული ვიყავი, ისეთი რამ გავაკეთე (შეიძლება ითქვას, ბევრი რამ), რამაც სხვებზე იმოქმედა — განსაკუთრებით მათზე, ვისაც საერთოდ არ ვაპირებდი ტკივილის მიყენებას. ახლა რომ ვფიქრობ, სირცხვილი და სიმძიმე მაქვს და მომავალიც ბუნდოვანი მგონია (სწავლაც და ცხოვრების გეგმებიც). ამიტომ ერთადერთს ვეჭიდები, რაც ჩემს ხელშია — პროგრამირებას — და ამით დროებით ვმალავ იმ ტკივილს, რომელიც სხვა მხარეს მაქვს. ეჰ🥲 მერე რა ვქნა, არც მე ვიცი, ნაბიჯ-ნაბიჯ მივყვები :)‍💨',
   },
 
   'README.vi.md': {
