@@ -51,52 +51,6 @@ const NAMES = {
   'README.vi.md': 'Tiếng Việt',
 }
 
-// The English README names each language in English, so that file stays English only.
-const ENGLISH_NAMES = {
-  'README.md': 'English',
-  'README.zh-CN.md': 'Chinese (Simplified)',
-  'README.zh-TW.md': 'Chinese (Traditional)',
-  'README.ja.md': 'Japanese',
-  'README.ko.md': 'Korean',
-  'README.de.md': 'German',
-  'README.fr.md': 'French',
-  'README.fr-CA.md': 'French (Canada)',
-  'README.es.md': 'Spanish',
-  'README.es-419.md': 'Spanish (Latin America)',
-  'README.it.md': 'Italian',
-  'README.pt-BR.md': 'Portuguese (Brazil)',
-  'README.pt-PT.md': 'Portuguese (Portugal)',
-  'README.ru.md': 'Russian',
-  'README.pl.md': 'Polish',
-  'README.szl.md': 'Silesian',
-  'README.nl.md': 'Dutch',
-  'README.tr.md': 'Turkish',
-  'README.uk.md': 'Ukrainian',
-  'README.cs.md': 'Czech',
-  'README.sk.md': 'Slovak',
-  'README.hu.md': 'Hungarian',
-  'README.ro.md': 'Romanian',
-  'README.bg.md': 'Bulgarian',
-  'README.hr.md': 'Croatian',
-  'README.sr-Latn.md': 'Serbian (Latin)',
-  'README.sr-Cyrl.md': 'Serbian (Cyrillic)',
-  'README.sl.md': 'Slovenian',
-  'README.mk.md': 'Macedonian',
-  'README.el.md': 'Greek',
-  'README.sv.md': 'Swedish',
-  'README.da.md': 'Danish',
-  'README.no.md': 'Norwegian',
-  'README.fi.md': 'Finnish',
-  'README.et.md': 'Estonian',
-  'README.lt.md': 'Lithuanian',
-  'README.lv.md': 'Latvian',
-  'README.ca.md': 'Catalan',
-  'README.gl.md': 'Galician',
-  'README.eu.md': 'Basque',
-  'README.ka.md': 'Georgian',
-  'README.vi.md': 'Vietnamese',
-}
-
 const ORDER = Object.keys(NAMES)
 const rank = (f) => (ORDER.includes(f) ? ORDER.indexOf(f) : 999)
 
@@ -118,8 +72,8 @@ for (const from of entries) {
     console.log('no markers: ' + from.file)
     continue
   }
-  const name = (f) =>
-    from.file === 'README.md' ? ENGLISH_NAMES[f] ?? NAMES[f] ?? f : NAMES[f] ?? f
+  // Every version lists each language in its own name, the way GitHub does it.
+  const name = (f) => NAMES[f] ?? f
   const links = [...entries]
     .sort((a, b) => rank(a.file) - rank(b.file))
     .map((to) =>
