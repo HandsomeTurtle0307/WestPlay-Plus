@@ -16,7 +16,7 @@
         "installMode": "currentUser",
         "installerIcon": "icons/icon.ico",
         "installerHooks": "installer/hooks.nsh",
-        "displayLanguageSelector": false,
+        "displayLanguageSelector": true,
         "languages": [
           "English", "Turkish", "German", "French", "Spanish", "SpanishInternational", "Italian", "PortugueseBR",
           "Portuguese", "Dutch", "Polish", "Russian", "Ukrainian", "Czech", "Slovak", "Bulgarian", "Croatian",
