@@ -372,8 +372,9 @@
         // That key's way refused: the other's asked.
       }
     }
-    // A song the account may not play comes back without a file: said, not guessed at.
-    throw new Error('qq music: this song needs a subscription')
+    // A song the account may not play comes back without a file: said, not guessed at (`subscription`: the
+    // cab has its own words for it, `Playback.said`).
+    throw new Error('subscription')
   }
 
   // A song of the queue, ready to play: its address fetched as it's needed (they're short-lived).
@@ -384,13 +385,39 @@
     return { song, url }
   }
 
+  // Why the song asked for can't play (`subscription`: the account's doesn't cover it; `unplayable`: QQ Music
+  // gave no address for it, or the element refused it): the cab says it rather than showing a song that never
+  // starts. Cleared as the next song is asked for.
+  let trouble = ''
+
   const playAt = async (at) => {
-    const playing = await ready(at)
-    if (!playing) return
     index = at
+    trouble = ''
+    let playing = null
+    try {
+      playing = await ready(at)
+    } catch (error) {
+      trouble = String(error?.message) === 'subscription' ? 'subscription' : 'unplayable'
+    }
+    if (!playing) {
+      // Nothing to play: the element silenced, and the page's own player too (the cab is to be told of the song
+      // it asked for, which can't play — not of something else the page happened to be playing).
+      own.pause()
+      own.removeAttribute('src')
+      pausePage()
+      report()
+      return
+    }
+    // One sound at a time: the page's own player paused first (a song played on y.qq.com itself would
+    // otherwise still be sounding under this one).
+    pausePage()
     own.src = playing.url
-    await own.play().catch(() => {})
-    step()
+    try {
+      await own.play()
+    } catch {
+      trouble = 'unplayable'
+    }
+    report()
   }
 
   // The songs as the app has them (its page's lists, which it alone knows the names of).
@@ -451,6 +478,12 @@
     return mediaPlay.apply(this, args)
   }
   addEventListener('playing', (event) => keep(event.target), true)
+
+  // The page's own element, paused: the app's own player is to be the one sound (a song picked on y.qq.com
+  // itself, or its own player started by a press, would otherwise play under it).
+  const pausePage = () => {
+    for (const element of known) if (!element.paused) element.pause()
+  }
 
   // The one playing now: not paused, not ended, not muted (a silent one is not what the cab hears).
   const pagePlaying = () => [...known].find((element) => !element.paused && !element.ended && !element.muted) ?? sounding
@@ -554,12 +587,14 @@
           repeat,
           queue: queue.length,
           index,
+          // Why it can't play, when it can't: the cab says so instead of showing a song never started.
+          said: trouble || undefined,
         }
       : null
     // Said as it changes, and every second while it plays (the position the app can't guess: a song may
     // start again at the same second, and the app would keep its own count).
     const key = playback
-      ? `${playback.playing}:${Math.round(playback.position)}:${playback.track.title}:${playback.track.artist}`
+      ? `${playback.playing}:${Math.round(playback.position)}:${playback.track.title}:${playback.track.artist}:${trouble}`
       : 'none'
     if (key === told.playback) return
     told.playback = key
@@ -599,6 +634,8 @@
     play: async (data) => {
       if (data.songs) return start(data)
       if (ownSong()) {
+        // The page's own player paused first: one sound at a time.
+        pausePage()
         own.muted = false
         return own.play().catch(() => {})
       }
@@ -631,11 +668,8 @@
       media.muted = share === 0
       media.volume = share
     },
-    // The cab's fade, in the page's own element: its volume times `level` (1, as QQ Music has it).
-    fade: async ({ level }) => {
-      const media = element()
-      if (media) media.volume = Math.max(0, Math.min(1, Number(level)))
-    },
+    // The cab's fades go through `volume` (the level itself, as the other players' `sendVolume`): a fade of
+    // its own, kept apart from the player's volume, was never asked for and is gone.
     shuffle: async ({ on }) => {
       shuffle = Boolean(on)
       // Shuffled, the queue is dealt again, the song playing first.
@@ -721,12 +755,14 @@
   addEventListener('DOMContentLoaded', () => post({ ready: true }))
   post({ ready: true })
 
-  // The first element may be made long after the page loads; the player bar changes as songs do.
+  // The first element may be made long after the page loads; the player bar changes as songs do. Its elements
+  // and their text, not every character typed into it: QQ Music's page changes its own DOM constantly, and a
+  // hidden page's work is the cab's (each report reads the page's tree).
   const watch = new MutationObserver(() => step())
   const begin = () => {
     const audio = document.querySelector('audio')
     if (audio) keep(audio)
-    watch.observe(document.body, { subtree: true, childList: true, characterData: true })
+    watch.observe(document.body, { subtree: true, childList: true })
     setInterval(() => {
       report()
       tellState()

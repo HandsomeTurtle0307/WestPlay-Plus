@@ -8,9 +8,11 @@ import { Home, Library, Page } from './pages'
 import { clock } from './parts'
 import {
   goBack,
+  keepQqMusic,
   next,
   openTab,
   playOrPause,
+  putQqMusicAwayWhenIdle,
   searchFor,
   signIn,
   startQqMusic,
@@ -18,15 +20,12 @@ import {
   useQqMusic,
   type View,
 } from './qqMusic'
+import { useQqMusicWords } from './words'
 import './qqMusic.css'
 
 const FIELD = 'qq-music-search'
 
-const TABS: { tab: Tab; name: string }[] = [
-  { tab: 'home', name: '首页' },
-  { tab: 'search', name: '搜索' },
-  { tab: 'library', name: '我的' },
-]
+const TABS: Tab[] = ['home', 'search', 'library']
 
 /**
  * QQ Music, as the cab shows it: Home (what QQ Music recommends), Search, the account's Library, and the
@@ -35,6 +34,7 @@ const TABS: { tab: Tab; name: string }[] = [
  * Now Playing; at the foot, the song playing while its pages are read.
  */
 export function QqMusicApp() {
+  const words = useQqMusicWords()
   const tab = useQqMusic((state) => state.tab)
   const views = useQqMusic((state) => state.views)
   const signedIn = useQqMusic((state) => state.signedIn)
@@ -43,8 +43,13 @@ export function QqMusicApp() {
   const [query, setQuery] = useState('')
   const typing = useKeyboard((state) => state.field?.id === FIELD)
 
-  // Its page, running hidden from the moment the app opens.
-  useEffect(() => startQqMusic(), [])
+  // Its page, running hidden from the moment the app opens; put away once the app has been closed a while
+  // with nothing playing (QQ Music's own page is heavy, and a browser made again is slow).
+  useEffect(() => {
+    keepQqMusic()
+    startQqMusic()
+    return putQqMusicAwayWhenIdle
+  }, [])
 
   const top = views.length ? views[views.length - 1] : null
   // Search's field is its page: typing there is searching.
@@ -60,26 +65,26 @@ export function QqMusicApp() {
   return (
     <section className="app-panel qm-app">
       <header className="qm-top">
-        <button className="qm-back" aria-label="返回" onClick={back}>
+        <button className="qm-back" aria-label={words.back} onClick={back}>
           ‹
         </button>
-        <span className="qm-top-title">{top ? viewTitle(top) : tabName(tab)}</span>
+        <span className="qm-top-title">{top ? viewTitle(top) : tabName(tab, words)}</span>
         {signedIn === false && (
           <button className="qm-sign-in" onClick={() => signIn()}>
-            登录
+            {words.signIn}
           </button>
         )}
       </header>
 
       {tabBar && (
         <nav className="qm-tabs">
-          {TABS.map(({ tab: each, name }) => (
+          {TABS.map((each) => (
             <button
               key={each}
               className={`qm-tab${tab === each ? ' qm-tab-on' : ''}`}
               onClick={() => openTab(each)}
             >
-              {name}
+              {tabName(each, words)}
             </button>
           ))}
         </nav>
@@ -93,8 +98,8 @@ export function QqMusicApp() {
               value={query}
               onChange={setQuery}
               onSubmit={() => searchFor(query)}
-              hint="搜歌、歌手、专辑"
-              label="搜索"
+              hint={words.searchHint}
+              label={words.searchLabel}
               returnKind="search"
             />
           </div>
@@ -110,6 +115,12 @@ export function QqMusicApp() {
         )}
       </main>
 
+      {playback?.said && (
+        <div className="qm-said" role="status">
+          {playback.said === 'subscription' ? words.needsVip : words.cannotPlay}
+        </div>
+      )}
+
       {playback?.track && !nowPlaying && (
         <button className="qm-mini" onClick={() => useQqMusic.setState({ nowPlaying: true })}>
           <span className="qm-mini-cover" style={{ background: playback.track.cover ? undefined : '#26262e' }}>
@@ -123,7 +134,7 @@ export function QqMusicApp() {
           <span
             className="qm-mini-play"
             role="button"
-            aria-label={playback.playing ? '暂停' : '播放'}
+            aria-label={playback.playing ? words.pause : words.play}
             onClick={(event) => {
               event.stopPropagation()
               playOrPause()
@@ -134,7 +145,7 @@ export function QqMusicApp() {
           <span
             className="qm-mini-next"
             role="button"
-            aria-label="下一首"
+            aria-label={words.next}
             onClick={(event) => {
               event.stopPropagation()
               next()
@@ -152,20 +163,28 @@ export function QqMusicApp() {
 
 /** Search's page before a search: what it's for. */
 function SearchStart({ query }: { query: string }) {
+  const words = useQqMusicWords()
   return (
     <div className="qm-none qm-search-start">
-      <p>搜一首歌、一个歌手，或者一张专辑。</p>
+      <p>{words.searchStart}</p>
       {query.trim() && (
         <button className="qm-retry" onClick={() => searchFor(query)}>
-          搜索「{query.trim()}」
+          {words.searchFor(query.trim())}
         </button>
       )}
     </div>
   )
 }
 
-function tabName(tab: Tab): string {
-  return TABS.find((each) => each.tab === tab)?.name ?? 'QQ 音乐'
+function tabName(tab: Tab, words: ReturnType<typeof useQqMusicWords>): string {
+  switch (tab) {
+    case 'home':
+      return words.home
+    case 'search':
+      return words.search
+    case 'library':
+      return words.library
+  }
 }
 
 function viewTitle(view: View): string {

@@ -992,9 +992,13 @@ pub fn invalid_state(error: &Error) -> bool {
 /// `autoplay`: pages play sound without being clicked first (WestPlay's own players, which play as the cab asks).
 fn create_environment(user_data: &Path, autoplay: bool) -> Result<ICoreWebView2Environment, Error> {
     let options = CoreWebView2EnvironmentOptions::default();
-    // Chromium throttles or stops rendering for hidden or occluded windows; ours is never shown.
+    // Chromium throttles or stops rendering for hidden or occluded windows; ours is never shown. And D3D11 by
+    // name: left to pick its own backend, ANGLE chose badly on a machine with a virtual display adapter (MuMu's)
+    // beside the real GPU, its GPU process died, and WebView2 refused the controller with whichever HRESULT the
+    // step it had reached gives (0x8000FFFF, 0x800705B4, 0x80080005 were all seen for one cause).
     let mut arguments = "--disable-features=CalculateNativeWinOcclusion --disable-background-timer-throttling \
-                         --disable-renderer-backgrounding --disable-backgrounding-occluded-windows"
+                         --disable-renderer-backgrounding --disable-backgrounding-occluded-windows \
+                         --use-angle=d3d11"
         .to_string();
     if autoplay {
         arguments.push_str(" --autoplay-policy=no-user-gesture-required");

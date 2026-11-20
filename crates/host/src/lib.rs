@@ -132,6 +132,10 @@ pub struct Status {
     /// window open.
     pub apple_music_signed_in: Option<bool>,
     pub apple_music_signing_in: bool,
+    /// The same of QQ Music: signed in or not (`None`: not known, QQ Music not run yet), its sign-in window
+    /// open.
+    pub qq_music_signed_in: Option<bool>,
+    pub qq_music_signing_in: bool,
     /// The map of the profile played: ready, being built, waiting for the game to close...
     pub map: maps::MapStatus,
     /// The map the cab shows: its folder in WestPlay's maps, and when it was built (the companion's
@@ -143,13 +147,14 @@ pub struct Status {
     pub error: Option<String>,
 }
 
-/// The companion window's requests to sign YouTube, Spotify or Apple Music in or out (or to know whether it
-/// is), from any thread, for the host to carry out as the cab's apps would.
+/// The companion window's requests to sign YouTube, Spotify, Apple Music or QQ Music in or out (or to know
+/// whether it is), from any thread, for the host to carry out as the cab's apps would.
 #[derive(Debug, Default)]
 pub struct AccountRequests {
     pub youtube: AccountRequest,
     pub spotify: AccountRequest,
     pub apple_music: AccountRequest,
+    pub qq_music: AccountRequest,
 }
 
 /// One service's request, the latest not carried out yet.
@@ -450,6 +455,8 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
     let mut qq_music: Option<qq_music::QQMusic> = None;
     let mut qq_music_state: Option<qq_music::State> = None;
     let mut qq_music_playback: Option<String> = None;
+    // Its sign-in window open (its page says when it closes, not when it opens: this is set as it's asked for).
+    let mut qq_music_signing_in = false;
     // Apple Music's web player, the same way.
     let mut apple_music: Option<apple_music::AppleMusic> = None;
     let mut apple_music_state: Option<apple_music::State> = None;
@@ -615,6 +622,22 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                 AccountAction::SignIn => apple_music::Command::SignIn,
                 AccountAction::SignOut => apple_music::Command::SignOut,
                 AccountAction::Check => apple_music::Command::Start,
+            });
+        }
+        if let Some(action) = config.accounts.qq_music.take()
+            && let Some(player) = start_qq_music(&mut qq_music, &stage, &config)
+        {
+            // Its page says when its sign-in window closes, not when it opens: the request is what says it's
+            // open (the companion shows "finish in the window" meanwhile).
+            if action == AccountAction::SignIn && !qq_music_signing_in {
+                qq_music_signing_in = true;
+                status.qq_music_signing_in = true;
+                (config.on_status)(&status);
+            }
+            let _ = player.command(&match action {
+                AccountAction::SignIn => qq_music::Command::SignIn,
+                AccountAction::SignOut => qq_music::Command::SignOut,
+                AccountAction::Check => qq_music::Command::Start,
             });
         }
 
@@ -1070,10 +1093,18 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                     }
                 }
                 Some(PageMessage::QqMusic { command }) => {
-                    if qq_music.is_none() && matches!(command, qq_music::Command::Pause) {
-                        // Nothing to pause: QQ Music isn't running.
+                    if qq_music.is_none() && matches!(command, qq_music::Command::Pause | qq_music::Command::Stop) {
+                        // Nothing to pause or put away: QQ Music isn't running.
                     } else if let Some(player) = start_qq_music(&mut qq_music, &stage, &config) {
                         let _ = player.command(&command);
+                        // Put away: its page is gone, so nothing of it plays any more (said to the app here:
+                        // a page that isn't there says nothing itself).
+                        if matches!(command, qq_music::Command::Stop) {
+                            qq_music_state = None;
+                            qq_music_playback = None;
+                            let _ = webview.post_json(&qq_music::state_message(None));
+                            let _ = webview.post_json(&qq_music::playback_message(None));
+                        }
                     }
                 }
                 Some(PageMessage::AppleMusic { command }) => {
@@ -1409,6 +1440,10 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                 }
                 qq_music_state = None;
                 qq_music_playback = None;
+                status.qq_music_signed_in = None;
+                status.qq_music_signing_in = false;
+                qq_music_signing_in = false;
+                (config.on_status)(&status);
                 let _ = webview.post_json(&qq_music::state_message(None));
                 let _ = webview.post_json(&qq_music::playback_message(None));
             } else {
@@ -1419,12 +1454,21 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                             let _ = webview.post_json(&speakers::spectrum_message(&bars));
                         }
                         qq_music::Report::State(state) => {
+                            if status.qq_music_signed_in != Some(state.signed_in) {
+                                status.qq_music_signed_in = Some(state.signed_in);
+                                (config.on_status)(&status);
+                            }
                             qq_music_state = Some(state);
                             state_changed = true;
                         }
                         // Its sign-in window closed: the page again, signed in or not (it says which itself).
                         qq_music::Report::SignInWindow(signed_in) => {
-                            log!("[qq music] sign-in closed (signed in: {signed_in})")
+                            log!("[qq music] sign-in closed (signed in: {signed_in})");
+                            if qq_music_signing_in {
+                                qq_music_signing_in = false;
+                                status.qq_music_signing_in = false;
+                                (config.on_status)(&status);
+                            }
                         }
                         qq_music::Report::Playback(playback) => {
                             let message = qq_music::playback_message(playback.as_deref());

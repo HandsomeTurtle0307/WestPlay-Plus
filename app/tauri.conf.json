@@ -25,7 +25,8 @@
         "height": 600,
         "resizable": false,
         "maximizable": false,
-        "visible": false
+        "visible": false,
+        "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --use-angle=d3d11"
       }
     ],
     "security": {

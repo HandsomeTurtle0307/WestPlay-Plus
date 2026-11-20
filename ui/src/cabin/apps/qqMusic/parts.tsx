@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { type Item, type Track, openView, playFrom, playSongs } from './qqMusic'
+import { useQqMusicWords, type Words } from './words'
 
 /**
  * The pieces QQ Music's pages are made of: its covers, its rows of songs, its cards and its shelves. Shared
@@ -32,11 +33,12 @@ export function Cover({ src, seed, size = 'card' }: { src?: string | null; seed:
 
 /** A page's title over what it is (a playlist's, an album's), with its cover. */
 export function PageHead({ item, note }: { item: Item; note?: string }) {
+  const words = useQqMusicWords()
   return (
     <header className="qm-head">
       <Cover src={item.image} seed={item.id || item.title} size="big" />
       <div className="qm-head-words">
-        <div className="qm-head-kind">{kindName(item.kind)}</div>
+        <div className="qm-head-kind">{kindName(item.kind, words)}</div>
         <h1 className="qm-head-title">{item.title}</h1>
         {item.subtitle && <div className="qm-head-by">{item.subtitle}</div>}
         {note && <div className="qm-head-note">{note}</div>}
@@ -45,16 +47,16 @@ export function PageHead({ item, note }: { item: Item; note?: string }) {
   )
 }
 
-function kindName(kind: string): string {
+function kindName(kind: string, words: Words): string {
   switch (kind) {
     case 'album':
-      return '专辑'
+      return words.album
     case 'artist':
-      return '歌手'
+      return words.artist
     case 'chart':
-      return '排行榜'
+      return words.chart
     default:
-      return '歌单'
+      return words.playlist
   }
 }
 
@@ -103,11 +105,12 @@ export function TrackRow({ track, tracks, at }: { track: Track; tracks: Track[];
 
 /** A list of songs, played from its top. */
 export function TrackList({ tracks }: { tracks: Track[] }) {
-  if (!tracks.length) return <p className="qm-none">这里还没有歌。</p>
+  const words = useQqMusicWords()
+  if (!tracks.length) return <p className="qm-none">{words.nothingHere}</p>
   return (
     <div className="qm-songs">
       <button className="qm-play-all" onClick={() => playSongs(tracks, 0)}>
-        ▶ 播放全部 · {tracks.length} 首
+        {words.playAll} · {words.songs(tracks.length)}
       </button>
       {tracks.map((track, at) => (
         <TrackRow key={`${track.id}:${at}`} track={track} tracks={tracks} at={at} />
@@ -133,17 +136,18 @@ export function SongShelf({ title, tracks }: { title: string; tracks: Track[] })
 
 /** A page still coming, or one that couldn't. */
 export function Waiting({ failed, retry }: { failed?: boolean; retry?: () => void }) {
+  const words = useQqMusicWords()
   if (failed) {
     return (
       <div className="qm-none">
-        <p>没加载出来。</p>
+        <p>{words.didNotLoad}</p>
         {retry && (
           <button className="qm-retry" onClick={retry}>
-            重试
+            {words.retry}
           </button>
         )}
       </div>
     )
   }
-  return <p className="qm-none">加载中…</p>
+  return <p className="qm-none">{words.loading}</p>
 }

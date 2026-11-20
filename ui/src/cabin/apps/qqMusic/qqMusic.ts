@@ -52,6 +52,8 @@ export interface Playback {
   repeat: QqMusicRepeat
   queue: number
   index: number
+  /** Why the song asked for can't play (`subscription`, `unplayable`), told by its page: said, not hidden. */
+  said: string | null
 }
 
 /** A page of the app's own, opened over its tab. */
@@ -100,6 +102,29 @@ export function startQqMusic(): void {
   qqMusic({ action: 'start' })
 }
 
+/** How long the app may stay closed with nothing playing before its page is put away: QQ Music's own page is
+ * heavy (carousels, video, a stream of recommendations), and it runs whether the app is open or not. */
+const PUT_AWAY_MS = 5 * 60_000
+
+let putAway: ReturnType<typeof setTimeout> | null = null
+
+/** The app opened: its page kept as it is. */
+export function keepQqMusic(): void {
+  if (putAway) clearTimeout(putAway)
+  putAway = null
+}
+
+/** The app closed: its page put away once a while has passed with nothing playing. The browser stays (making
+ * one again takes seconds, which the cab doesn't have); its next `start` loads the page again. Nothing playing
+ * is the condition: music left playing in the background is left alone. */
+export function putQqMusicAwayWhenIdle(): void {
+  keepQqMusic()
+  putAway = setTimeout(() => {
+    putAway = null
+    if (!playingNow()) qqMusic({ action: 'stop' })
+  }, PUT_AWAY_MS)
+}
+
 /** Whether it's signed in, as the host last said (`null`: not running). */
 export function receiveState(signedIn: boolean | null): void {
   const before = useQqMusic.getState().signedIn
@@ -132,6 +157,7 @@ export function receivePlayback(playback: QqMusicPlayback | null): void {
       repeat: playback.repeat ?? 'off',
       queue: playback.queue,
       index: playback.index,
+      said: playback.said ?? null,
     },
   })
 }
@@ -201,6 +227,7 @@ export function playSongs(tracks: Track[], at = 0): void {
       repeat: before?.repeat ?? 'off',
       queue: tracks.length,
       index,
+      said: null,
     },
   })
   qqMusic({ action: 'play', songs: tracks, at: index })

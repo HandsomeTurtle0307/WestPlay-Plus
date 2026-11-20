@@ -178,6 +178,12 @@ export const words: Words = {
     finishInWindow: '請在 Apple Music 視窗中完成登入',
     signingIn: { title: '正在登入 Apple Music', text: '請在 Apple Music 視窗中繼續' },
   },
+  qqMusic: {
+    title: '登入 QQ 音樂',
+    sub: '選用。登入後，就能在卡車螢幕上用自己的歌單和資料庫收聽 QQ 音樂。登入會在獨立的 QQ 音樂視窗中進行，WestPlay Plus 看不到你的帳戶資訊。',
+    finishInWindow: '請在 QQ 音樂視窗中完成登入',
+    signingIn: { title: '正在登入 QQ 音樂', text: '請在 QQ 音樂視窗中繼續' },
+  },
   launch: {
     title: '一切就緒',
     done: '完成',

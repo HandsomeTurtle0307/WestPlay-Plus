@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { QqMusicCollection, QqMusicTrack } from '../../../shared/host'
 import { PageHead, Shelf, SongShelf, TrackRow, Waiting } from './parts'
 import { ask, type Item, playSongs, useAsked, useQqMusic, type View } from './qqMusic'
+import { useQqMusicWords } from './words'
 
 /**
  * QQ Music's pages: Home (what it recommends), a search's results, a playlist's or album's page, a singer's,
@@ -11,6 +12,7 @@ import { ask, type Item, playSongs, useAsked, useQqMusic, type View } from './qq
 
 /** Home: what QQ Music recommends, and its charts. */
 export function Home({ shown }: { shown: boolean }) {
+  const words = useQqMusicWords()
   // Shown again: asked again (its picks change as the account's do).
   const [times, setTimes] = useState(0)
   useEffect(() => {
@@ -25,29 +27,31 @@ export function Home({ shown }: { shown: boolean }) {
       {answer.shelves.map((shelf) => (
         <Shelf key={shelf.title} title={shelf.title} items={shelf.items} />
       ))}
-      {!answer.shelves.length && <p className="qm-none">QQ 音乐没有送推荐内容。</p>}
+      {!answer.shelves.length && <p className="qm-none">{words.noRecommendations}</p>}
     </div>
   )
 }
 
 /** Search: what was asked, as songs first, then the playlists, albums and singers that match. */
 export function Results({ query }: { query: string }) {
+  const words = useQqMusicWords()
   const { answer, failed, retry } = useAsked({ ask: 'search', query })
   if (!answer) return <Waiting failed={failed} retry={retry} />
   const nothing = !answer.songs.length && !answer.playlists.length && !answer.albums.length && !answer.artists.length
-  if (nothing) return <p className="qm-none">没找到「{query}」。</p>
+  if (nothing) return <p className="qm-none">{words.nothingFound(query)}</p>
   return (
     <div className="qm-page">
-      <SongShelf title="单曲" tracks={answer.songs} />
-      <Shelf title="歌单" items={answer.playlists} />
-      <Shelf title="专辑" items={answer.albums} />
-      <Shelf title="歌手" items={answer.artists} />
+      <SongShelf title={words.songsRow} tracks={answer.songs} />
+      <Shelf title={words.playlists} items={answer.playlists} />
+      <Shelf title={words.albums} items={answer.albums} />
+      <Shelf title={words.artists} items={answer.artists} />
     </div>
   )
 }
 
 /** A playlist's or album's page: its cover, then its songs (a playlist's, more of them as asked). */
 export function Collection({ item }: { item: Item }) {
+  const words = useQqMusicWords()
   const album = item.kind === 'album'
   const first = useAsked(album ? { ask: 'album', id: item.id } : { ask: 'playlist', id: item.id })
   // A playlist's songs come a hundred at a time: each page asked after, and added as it comes.
@@ -88,14 +92,16 @@ export function Collection({ item }: { item: Item }) {
   if (!first.answer) return <Waiting failed={first.failed} retry={first.retry} />
   const collection = more ?? first.answer
   const hasMore = first.answer.more || Boolean(more?.more)
-  const note = [collection.year ? String(collection.year) : '', `${collection.tracks.length} 首`].filter(Boolean).join(' · ')
+  const note = [collection.year ? String(collection.year) : '', words.songs(collection.tracks.length)]
+    .filter(Boolean)
+    .join(' · ')
   return (
     <div className="qm-page">
       <PageHead item={collection.item} note={note} />
       {collection.description && <p className="qm-description">{collection.description}</p>}
       {collection.tracks.length > 0 && (
         <button className="qm-play-all" onClick={() => playSongs(collection.tracks, 0)}>
-          ▶ 播放全部
+          {words.playAll}
         </button>
       )}
       <div className="qm-songs">
@@ -105,28 +111,30 @@ export function Collection({ item }: { item: Item }) {
       </div>
       {hasMore && !album && (
         <button className="qm-more" onClick={() => setPage((n) => n + 1)} disabled={loading}>
-          {loading ? '加载中…' : '加载更多'}
+          {loading ? words.loading : words.loadMore}
         </button>
       )}
-      {!collection.tracks.length && <p className="qm-none">这个歌单里没有歌。</p>}
+      {!collection.tracks.length && <p className="qm-none">{words.emptyPlaylist}</p>}
     </div>
   )
 }
 
 /** A singer's page: their songs. */
 export function Artist({ item }: { item: Item }) {
+  const words = useQqMusicWords()
   const { answer, failed, retry } = useAsked({ ask: 'artist', id: item.id })
   if (!answer) return <Waiting failed={failed} retry={retry} />
   return (
     <div className="qm-page">
-      <PageHead item={{ ...answer.item, kind: 'artist' }} note={`${answer.top.length} 首热门`} />
-      <SongShelf title="热门单曲" tracks={answer.top} />
+      <PageHead item={{ ...answer.item, kind: 'artist' }} note={words.hotSongs(answer.top.length)} />
+      <SongShelf title={words.popularSongs} tracks={answer.top} />
     </div>
   )
 }
 
 /** The account's own library: its playlists. */
 export function Library() {
+  const words = useQqMusicWords()
   const signedIn = useQqMusic((state) => state.signedIn)
   const [times, setTimes] = useState(0)
   const { answer, failed, retry } = useAsked(signedIn === false ? null : { ask: 'library' }, times)
@@ -135,12 +143,12 @@ export function Library() {
   return (
     <div className="qm-page">
       <button className="qm-refresh" onClick={() => setTimes((n) => n + 1)}>
-        刷新
+        {words.refresh}
       </button>
       {answer.shelves.map((shelf) => (
         <Shelf key={shelf.title} title={shelf.title} items={shelf.items} />
       ))}
-      {!answer.shelves.length && <p className="qm-none">这个账号还没有歌单。</p>}
+      {!answer.shelves.length && <p className="qm-none">{words.emptyLibrary}</p>}
     </div>
   )
 }
@@ -159,10 +167,11 @@ export function Page({ view }: { view: View }) {
 
 /** Signed out: what the app can't show, and how to sign in. */
 function SignInNote() {
+  const words = useQqMusicWords()
   return (
     <div className="qm-none qm-signin-note">
-      <p>登录 QQ 音乐后，这里会显示你的歌单。</p>
-      <p className="qm-hint">点右上角的「登录」，在电脑上弹出的窗口里扫码。</p>
+      <p>{words.signInNote}</p>
+      <p className="qm-hint">{words.signInWhere}</p>
     </div>
   )
 }

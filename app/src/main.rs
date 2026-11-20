@@ -126,6 +126,24 @@ fn apple_music_check(accounts: State<Accounts>) {
     accounts.0.apple_music.request(AccountAction::Check);
 }
 
+/// Opens QQ Music's sign-in in a window on the desktop (its QR code is on the page there).
+#[tauri::command]
+fn qq_music_sign_in(accounts: State<Accounts>) {
+    accounts.0.qq_music.request(AccountAction::SignIn);
+}
+
+/// Signs QQ Music out.
+#[tauri::command]
+fn qq_music_sign_out(accounts: State<Accounts>) {
+    accounts.0.qq_music.request(AccountAction::SignOut);
+}
+
+/// Runs QQ Music's web player (hidden), so the status says whether it's signed in.
+#[tauri::command]
+fn qq_music_check(accounts: State<Accounts>) {
+    accounts.0.qq_music.request(AccountAction::Check);
+}
+
 /// This branch's Releases page, where players check for a newer WestPlay Plus: this branch has no automatic
 /// updates of its own.
 const RELEASE_PAGE: &str = "https://github.com/HandsomeTurtle0307/WestPlay-Plus/releases";
@@ -201,6 +219,9 @@ fn main() {
             apple_music_sign_in,
             apple_music_sign_out,
             apple_music_check,
+            qq_music_sign_in,
+            qq_music_sign_out,
+            qq_music_check,
             app_log_place,
             open_release_page,
             customize::customize_list,

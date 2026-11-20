@@ -542,12 +542,13 @@ export type QqMusicCommand =
   | { action: 'next' }
   | { action: 'previous' }
   | { action: 'seek'; seconds: number }
-  /** The playing element's volume, 0 to 100. */
+  /** The playing element's volume, 0 to 100 (the cab's fades go through this one: the level itself). */
   | { action: 'volume'; percent: number }
-  /** The cab's fade, in the playing element: its volume times `level` (0 to 1; 1, as QQ Music has it). */
-  | { action: 'fade'; level: number }
   | { action: 'shuffle'; on: boolean }
   | { action: 'repeat'; mode: QqMusicRepeat }
+  /** The app closed: its page put away (the browser stays, its heavy page doesn't). Its next `start` loads
+   * the page again. */
+  | { action: 'stop' }
 
 /** What the app may ask of QQ Music (`westplay_host::qq_music::Question`): its page answers with its own
  * API, in the page's session. */
@@ -661,6 +662,9 @@ export interface QqMusicPlayback {
   repeat: QqMusicRepeat | null
   queue: number
   index: number
+  /** Why the song asked for can't play (`subscription`: the account's doesn't cover it, `unplayable`: QQ
+   * Music gave no address for it). The app says it rather than showing a song that never starts. */
+  said?: string
 }
 
 /** What a row, a card or a shortcut shows: under its name, a card shows its description (or who it's by), a

@@ -191,6 +191,14 @@ export interface Words {
     finishInWindow: string
     signingIn: Note
   }
+  /** QQ Music's sign-in step, as Spotify's. Optional: a language without it gets `QQ_MUSIC_STEP` (a service
+   * added to the app shouldn't hold up forty-five language files). */
+  qqMusic?: {
+    title: string
+    sub: string
+    finishInWindow: string
+    signingIn: Note
+  }
   launch: {
     title: string
     done: string
@@ -270,6 +278,15 @@ export function chosenLanguage(chosen: string | null | undefined, game: string |
 /** The words in the game's language `code` (English for one without). */
 export function wordsFor(code: string): Words {
   return WORDS[code] ?? WORDS.en_us
+}
+
+/** QQ Music's sign-in step, for a language whose words have none of its own yet (English: what `en_us` would
+ * say). QQ Music is the app's newest service, and its step is read from here until a language translates it. */
+export const QQ_MUSIC_STEP: NonNullable<Words['qqMusic']> = {
+  title: 'Sign in to QQ Music',
+  sub: 'Optional. Sign in to play QQ Music on the truck’s screen, with your own playlists and library. You sign in to QQ Music in a separate window, and WestPlay Plus never sees your account.',
+  finishInWindow: 'Finish signing in in the QQ Music window',
+  signingIn: { title: 'Signing in to QQ Music', text: 'Continue in the QQ Music window' },
 }
 
 /** The languages there are words for. */

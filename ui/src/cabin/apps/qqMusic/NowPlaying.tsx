@@ -11,12 +11,14 @@ import {
   useNow,
   useQqMusic,
 } from './qqMusic'
+import { useQqMusicWords } from './words'
 
 /**
  * Now Playing, over the app's pages: the song as large as the cab has room for, its time, and its controls
  * (shuffle, back, play, next, repeat). Pressed anywhere on the song, its page. Put away, what was under it.
  */
 export function NowPlaying() {
+  const words = useQqMusicWords()
   const playback = useQqMusic((state) => state.playback)
   const now = useNow(Boolean(playback?.playing && !playback.loading))
   const close = () => useQqMusic.setState({ nowPlaying: false })
@@ -24,14 +26,14 @@ export function NowPlaying() {
     return (
       <section className="qm-now-playing">
         <header className="qm-now-bar">
-          <button className="qm-now-down" aria-label="收起" onClick={close}>
+          <button className="qm-now-down" aria-label={words.collapse} onClick={close}>
             ⌄
           </button>
-          <span className="qm-now-heading">正在播放</span>
+          <span className="qm-now-heading">{words.nowPlaying}</span>
         </header>
         <div className="qm-none qm-now-empty">
-          <p>还没在放歌。</p>
-          <p className="qm-hint">去首页挑一首，或者搜一下。</p>
+          <p>{words.nothingPlaying}</p>
+          <p className="qm-hint">{words.pickSomething}</p>
         </div>
       </section>
     )
@@ -43,10 +45,10 @@ export function NowPlaying() {
   return (
     <section className="qm-now-playing">
       <header className="qm-now-bar">
-        <button className="qm-now-down" aria-label="收起" onClick={close}>
+        <button className="qm-now-down" aria-label={words.collapse} onClick={close}>
           ⌄
         </button>
-        <span className="qm-now-heading">正在播放</span>
+        <span className="qm-now-heading">{words.nowPlaying}</span>
       </header>
 
       <div className="qm-now-body">
@@ -62,7 +64,7 @@ export function NowPlaying() {
         <div
           className="qm-progress"
           role="slider"
-          aria-label="播放进度"
+          aria-label={words.position}
           aria-valuemin={0}
           aria-valuemax={Math.round(playback.duration)}
           aria-valuenow={Math.round(position)}
@@ -81,28 +83,28 @@ export function NowPlaying() {
         <div className="qm-controls">
           <button
             className={`qm-button qm-button-small${playback.shuffle ? ' qm-on' : ''}`}
-            aria-label="随机播放"
+            aria-label={words.shuffle}
             aria-pressed={playback.shuffle}
             onClick={() => setShuffle(!playback.shuffle)}
           >
             ⤨
           </button>
-          <button className="qm-button" aria-label="上一首" onClick={() => previous()}>
+          <button className="qm-button" aria-label={words.previous} onClick={() => previous()}>
             ⏮
           </button>
           <button
             className="qm-button qm-button-main"
-            aria-label={playback.playing ? '暂停' : '播放'}
+            aria-label={playback.playing ? words.pause : words.play}
             onClick={() => playOrPause()}
           >
             {playback.playing ? '❚❚' : '▶'}
           </button>
-          <button className="qm-button" aria-label="下一首" onClick={() => next()}>
+          <button className="qm-button" aria-label={words.next} onClick={() => next()}>
             ⏭
           </button>
           <button
             className={`qm-button qm-button-small${repeat !== 'off' ? ' qm-on' : ''}`}
-            aria-label={repeat === 'one' ? '单曲循环' : repeat === 'all' ? '列表循环' : '顺序播放'}
+            aria-label={repeat === 'one' ? words.repeatOne : repeat === 'all' ? words.repeatAll : words.repeatOff}
             onClick={() => setRepeat(repeat === 'off' ? 'all' : repeat === 'all' ? 'one' : 'off')}
           >
             {repeat === 'one' ? '🔂' : '🔁'}
@@ -111,12 +113,12 @@ export function NowPlaying() {
         {playback.queue > 1 && (
           <div className="qm-queue-note">
             {playback.index + 1} / {playback.queue}
-            {playback.shuffle ? ' · 随机' : ''}
+            {playback.shuffle ? ` · ${words.shuffled}` : ''}
           </div>
         )}
         {!playback.playing && (
           <button className="qm-resume" onClick={() => resume()}>
-            继续播放
+            {words.resume}
           </button>
         )}
       </div>

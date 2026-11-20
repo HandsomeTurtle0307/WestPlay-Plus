@@ -386,6 +386,19 @@
 
 /* --- The song playing under the pages ------------------------------------------------------------ */
 
+/* Why the song asked for won't play (a subscription it needs, an address refused): said at the foot, above
+   the mini player — the cab shouldn't look like it plays a song that never starts. */
+.qm-said {
+  flex: none;
+  margin: 0 14px 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #2a2118;
+  color: #e8c48a;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .qm-mini {
   flex: none;
   display: flex;

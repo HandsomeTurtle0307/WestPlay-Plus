@@ -12,7 +12,7 @@
 //! Its sound comes from the truck's own speakers, as the other players' does (`cab_sound.js`, told the truck's
 //! speakers, the driver's head and the camera).
 
-use std::cell::RefCell;
+use std::cell::{Cell, RefCell};
 use std::path::Path;
 
 use crate::signin::{self, Progress, SignInWindow};
@@ -21,6 +21,10 @@ use crate::webview::{self, OffscreenWebView, Stage};
 
 /// QQ Music's web player.
 pub const HOME: &str = "https://y.qq.com/";
+
+/// What its WebView shows while the app is closed: a page of nothing, which costs nothing (the browser, and
+/// its memory, stay: y.qq.com's own page is heavy).
+const PUT_AWAY: &str = "about:blank";
 
 /// What the cabin page asks of QQ Music (`qqMusic` in ui/src/shared/host.ts).
 #[derive(Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -50,13 +54,10 @@ pub enum Command {
     Seek {
         seconds: f64,
     },
-    /// The playing element's volume, 0 to 100.
+    /// The playing element's volume, 0 to 100 (the cab's fades go through this one, as the other players':
+    /// the level itself, not a factor of it).
     Volume {
         percent: f64,
-    },
-    /// The cab's fade, in the playing element: its volume times `level` (0 to 1; 1, as QQ Music has it).
-    Fade {
-        level: f64,
     },
     Shuffle {
         on: bool,
@@ -64,12 +65,15 @@ pub enum Command {
     Repeat {
         mode: Repeat,
     },
+    /// The app closed: its page put away (a light page in its place), so QQ Music's own work and memory go
+    /// while its browser stays — a browser made again is slow, a page loaded again is not.
+    Stop,
 }
 
 impl Command {
-    /// For QQ Music's page (all but the host's own: running, signing in and out).
+    /// For QQ Music's page (all but the host's own: running, signing in and out, being put away).
     fn for_page(&self) -> bool {
-        !matches!(self, Command::Start | Command::SignIn | Command::SignOut)
+        !matches!(self, Command::Start | Command::SignIn | Command::SignOut | Command::Stop)
     }
 }
 
@@ -232,6 +236,11 @@ pub struct Playback {
     pub repeat: Option<Repeat>,
     pub queue: u32,
     pub index: i32,
+    /// Why the song asked for can't play, when it can't (`subscription`: the account's doesn't cover it,
+    /// `unplayable`: QQ Music gave no address for it). The cab says it, rather than showing a song that never
+    /// starts.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub said: Option<String>,
 }
 
 /// Whether it's signed in, and playing.
@@ -248,6 +257,8 @@ pub struct QQMusic {
     pending: RefCell<Vec<Report>>,
     /// What the page was told of the cab, sent again when it loads anew.
     told: RefCell<Told>,
+    /// Put away (its app closed): its next `Start` loads its page again.
+    idle: Cell<bool>,
 }
 
 /// What the host tells QQ Music's page of the cab (never the cabin page's to send): the truck's speakers
@@ -305,12 +316,24 @@ impl QQMusic {
         // The truck speakers' sound first: the page's script makes its own of it.
         view.add_startup_script(concat!(include_str!("cab_sound.js"), "\n", include_str!("qq_music.js")))?;
         view.navigate(HOME)?;
-        Ok(Self { view, sign_in: RefCell::new(None), pending: RefCell::new(Vec::new()), told: RefCell::default() })
+        Ok(Self {
+            view,
+            sign_in: RefCell::new(None),
+            pending: RefCell::new(Vec::new()),
+            told: RefCell::default(),
+            idle: Cell::new(false),
+        })
     }
 
     pub fn command(&self, command: &Command) -> windows::core::Result<()> {
         match command {
-            Command::Start => Ok(()),
+            // Its page again, put away before (there's nothing to load otherwise: it's already there).
+            Command::Start => {
+                if self.idle.replace(false) {
+                    return self.view.navigate(HOME);
+                }
+                Ok(())
+            }
             Command::SignIn => {
                 self.open_sign_in(&signin::QQ_MUSIC);
                 Ok(())
@@ -318,6 +341,10 @@ impl QQMusic {
             Command::SignOut => {
                 self.view.delete_cookies()?;
                 self.view.navigate(HOME)
+            }
+            Command::Stop => {
+                self.idle.set(true);
+                self.view.navigate(PUT_AWAY)
             }
             _ if command.for_page() => self.view.post_json(&serde_json::to_string(command).unwrap_or_default()),
             _ => Ok(()),

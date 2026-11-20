@@ -17,6 +17,9 @@ import {
   appleMusicCheck,
   appleMusicSignIn,
   appleMusicSignOut,
+  qqMusicCheck,
+  qqMusicSignIn,
+  qqMusicSignOut,
   spotifyCheck,
   spotifySignIn,
   spotifySignOut,
@@ -69,7 +72,7 @@ import {
   useTour,
 } from '../room/screen'
 import { useDemo } from '../room/useDemo'
-import { chosenLanguage, count, list, percent, wordsFor } from './words'
+import { QQ_MUSIC_STEP, chosenLanguage, count, list, percent, wordsFor } from './words'
 
 const STEPS = [
   'welcome',
@@ -82,6 +85,7 @@ const STEPS = [
   'accounts',
   'spotify',
   'appleMusic',
+  'qqMusic',
   'tutorial',
 ] as const
 type StepId = (typeof STEPS)[number]
@@ -97,6 +101,7 @@ const POSES: Record<StepId, Pose> = {
   accounts: 'side',
   spotify: 'side',
   appleMusic: 'side',
+  qqMusic: 'side',
   tutorial: 'final',
 }
 
@@ -310,6 +315,7 @@ export function Onboarding({
             {step === 'accounts' && <Accounts status={status} next={next} back={back} />}
             {step === 'spotify' && <ServiceSignIn service="spotify" status={status} next={next} back={back} />}
             {step === 'appleMusic' && <ServiceSignIn service="appleMusic" status={status} next={next} back={back} />}
+            {step === 'qqMusic' && <ServiceSignIn service="qqMusic" status={status} next={next} back={back} />}
             {step === 'tutorial' && <TutorialIntro code={code} finish={finish} back={back} />}
             {over}
           </ScreenContext.Provider>
@@ -1012,6 +1018,16 @@ const SERVICE_STEPS = {
     signIn: appleMusicSignIn,
     signOut: appleMusicSignOut,
   },
+  qqMusic: {
+    name: 'QQ Music',
+    app: 'qqMusic',
+    glow: GLOW.qqMusic,
+    signedIn: (status: HostStatus | null) => status?.qqMusicSignedIn,
+    signingIn: (status: HostStatus | null) => status?.qqMusicSigningIn ?? false,
+    check: qqMusicCheck,
+    signIn: qqMusicSignIn,
+    signOut: qqMusicSignOut,
+  },
 } as const
 
 function ServiceSignIn({
@@ -1033,7 +1049,8 @@ function ServiceSignIn({
   const signOut = useSignOut(signedIn, it.signOut)
   const words = useWords()
   const w = words.accounts
-  const s = words[service]
+  // QQ Music's own step's words where the language has them (English until it translates them).
+  const s = words[service] ?? QQ_MUSIC_STEP
   useScreenAt(it.app, it.glow, signingIn ? banner(s.signingIn, true) : null)
   return (
     <Panel

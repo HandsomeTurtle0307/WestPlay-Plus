@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Service, SignedIn } from '../accounts'
-import type { Note, Words } from '../onboarding/words'
+import { QQ_MUSIC_STEP, type Note, type Words } from '../onboarding/words'
 import { Button, Checking, Group, Panel, Row } from '../room/parts'
 import { banner, useSignOut, useWords } from '../room/room'
 import { GLOW, useScreenAt } from '../room/screen'
@@ -9,6 +9,8 @@ import {
   type HostStatus,
   appleMusicSignIn,
   appleMusicSignOut,
+  qqMusicSignIn,
+  qqMusicSignOut,
   spotifySignIn,
   spotifySignOut,
   youtubeSignIn,
@@ -57,9 +59,19 @@ const SERVICES: Record<
     signingIn: (status) => status?.appleMusicSigningIn ?? false,
     words: (words) => words.appleMusic,
   },
+  qqMusic: {
+    name: 'QQ Music',
+    app: 'qqMusic',
+    glow: GLOW.qqMusic,
+    signIn: qqMusicSignIn,
+    signOut: qqMusicSignOut,
+    signingIn: (status) => status?.qqMusicSigningIn ?? false,
+    // Its own step's words where a language has them (English until then: it's the newest service).
+    words: (words) => words.qqMusic ?? QQ_MUSIC_STEP,
+  },
 }
 
-const ORDER: Service[] = ['youtube', 'spotify', 'appleMusic']
+const ORDER: Service[] = ['youtube', 'spotify', 'appleMusic', 'qqMusic']
 
 /**
  * The services WestPlay Plus plays from, each signed in (in its own window, on the desktop) or not. WestPlay Plus only
