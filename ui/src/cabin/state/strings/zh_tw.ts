@@ -486,6 +486,7 @@ export const strings: Strings = {
     spotify: 'Spotify',
     youtube: 'YouTube',
     youtubeMusic: 'YouTube Music',
+    qqMusic: 'QQ 音樂',
     player: 'Player',
     safari: 'Safari',
     podcasts: 'Podcast',

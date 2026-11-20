@@ -34,6 +34,7 @@ mod gpu_contention;
 pub mod settings;
 mod signin;
 pub mod speakers;
+mod qq_music;
 mod spotify;
 pub mod startup;
 mod typing;
@@ -445,6 +446,10 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
     let (mut youtube_window_open, mut youtube_confirming) = (false, false);
     let mut spotify_confirming = false;
     let mut spotify_playback: Option<String> = None;
+    // QQ Music's web player, the same way, and what it last said.
+    let mut qq_music: Option<qq_music::QQMusic> = None;
+    let mut qq_music_state: Option<qq_music::State> = None;
+    let mut qq_music_playback: Option<String> = None;
     // Apple Music's web player, the same way.
     let mut apple_music: Option<apple_music::AppleMusic> = None;
     let mut apple_music_state: Option<apple_music::State> = None;
@@ -744,6 +749,9 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                 if let Some(apple_music) = &apple_music {
                     profiles.push((performance::Profile::AppleMusic, apple_music.view().environment()));
                 }
+                if let Some(qq_music) = &qq_music {
+                    profiles.push((performance::Profile::QQMusic, qq_music.view().environment()));
+                }
                 let sample = status.game_connected.then(|| performance::Sample {
                     game_frames: plugin.heartbeat.load(Ordering::Relaxed),
                     in_view: status.screen_drawing,
@@ -939,6 +947,12 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                             let _ = webview.post_json(playback);
                         }
                     }
+                    if qq_music.is_some() {
+                        let _ = webview.post_json(&qq_music::state_message(qq_music_state.as_ref()));
+                        if let Some(playback) = &qq_music_playback {
+                            let _ = webview.post_json(playback);
+                        }
+                    }
                     if apple_music.is_some() {
                         let signing_in = apple_music_window_open || apple_music_confirming;
                         let message = apple_music::state_message(apple_music_state.as_ref(), signing_in);
@@ -1052,6 +1066,13 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                     if spotify.is_none() && matches!(command, spotify::Command::Pause) {
                         // Nothing to pause: Spotify isn't running.
                     } else if let Some(player) = start_spotify(&mut spotify, &stage, &config) {
+                        let _ = player.command(&command);
+                    }
+                }
+                Some(PageMessage::QqMusic { command }) => {
+                    if qq_music.is_none() && matches!(command, qq_music::Command::Pause) {
+                        // Nothing to pause: QQ Music isn't running.
+                    } else if let Some(player) = start_qq_music(&mut qq_music, &stage, &config) {
                         let _ = player.command(&command);
                     }
                 }
@@ -1370,6 +1391,54 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                     let message = youtube::state_message(Some(&state));
                     let _ = webview.post_json(&message);
                     youtube_message = Some(message);
+                }
+            }
+        }
+
+        // What QQ Music's page says (signed in, playing) and its sign-in window, for the page; its WebView
+        // failing closes it (the page opens it again).
+        if let Some(player) = &qq_music {
+            if player.failed() || players_closing {
+                if players_closing {
+                    log!("[qq music] closed with the game");
+                } else {
+                    log!("[qq music] its browser failed: closed, the page opens it again");
+                }
+                if let Some(failed) = qq_music.take() {
+                    failed.close(&stage);
+                }
+                qq_music_state = None;
+                qq_music_playback = None;
+                let _ = webview.post_json(&qq_music::state_message(None));
+                let _ = webview.post_json(&qq_music::playback_message(None));
+            } else {
+                let mut state_changed = false;
+                for report in player.take_reports() {
+                    match report {
+                        qq_music::Report::Spectrum(bars) => {
+                            let _ = webview.post_json(&speakers::spectrum_message(&bars));
+                        }
+                        qq_music::Report::State(state) => {
+                            qq_music_state = Some(state);
+                            state_changed = true;
+                        }
+                        // Its sign-in window closed: the page again, signed in or not (it says which itself).
+                        qq_music::Report::SignInWindow(signed_in) => {
+                            log!("[qq music] sign-in closed (signed in: {signed_in})")
+                        }
+                        qq_music::Report::Playback(playback) => {
+                            let message = qq_music::playback_message(playback.as_deref());
+                            let _ = webview.post_json(&message);
+                            qq_music_playback = Some(message);
+                        }
+                        // An answer to the app's question: its own to read, and not kept.
+                        qq_music::Report::Answer(answer) => {
+                            let _ = webview.post_json(&qq_music::answer_message(&answer));
+                        }
+                    }
+                }
+                if state_changed {
+                    let _ = webview.post_json(&qq_music::state_message(qq_music_state.as_ref()));
                 }
             }
         }
@@ -1753,6 +1822,9 @@ pub fn run(mut config: Config, stop: Arc<AtomicBool>) -> Result<(), Error> {
                 let _ = player.cab(truck_speakers, head, outside, distance, equalizer, spectrum);
             }
             if let Some(player) = &spotify {
+                let _ = player.cab(truck_speakers, head, outside, distance, equalizer, spectrum);
+            }
+            if let Some(player) = &qq_music {
                 let _ = player.cab(truck_speakers, head, outside, distance, equalizer, spectrum);
             }
             if let Some(player) = &music_player {
@@ -2316,6 +2388,24 @@ fn start_spotify<'a>(
     spotify.as_ref()
 }
 
+fn start_qq_music<'a>(
+    qq_music: &'a mut Option<qq_music::QQMusic>,
+    stage: &Stage,
+    config: &Config,
+) -> Option<&'a qq_music::QQMusic> {
+    if qq_music.is_none() {
+        let user_data = config.data_dir.join("webview2-qq-music");
+        match qq_music::QQMusic::start(stage, config.width, config.height, &user_data) {
+            Ok(started) => {
+                log!("[qq music] opened");
+                *qq_music = Some(started)
+            }
+            Err(e) => startup::mark(&format!("host: QQ Music couldn't start: {e}")),
+        }
+    }
+    qq_music.as_ref()
+}
+
 fn build_pipeline(
     config: &Config,
     stage: &Stage,
@@ -2484,6 +2574,8 @@ enum PageMessage {
     Youtube { command: youtube::Command },
     /// A command for Spotify's web player (`spotify`): its sign-in, a question, its controls.
     Spotify { command: spotify::Command },
+    /// A command for QQ Music's web player (`qqMusic`): its sign-in, its controls.
+    QqMusic { command: qq_music::Command },
     /// A command for Apple Music's web player (`appleMusic`): its sign-in, a question, its controls.
     AppleMusic { command: apple_music::Command },
     /// A command for YouTube Music's web player (`youtubeMusic`): its sign-in, a question, its controls.

@@ -227,6 +227,13 @@ export type HostMessage =
   | ({ type: 'spotifyAnswer'; id: number; failed?: boolean } & Partial<SpotifyAnswers>)
   /** What Spotify plays (on WestPlay Plus, or elsewhere on the account through Spotify Connect); `null`: nothing. */
   | { type: 'spotifyPlayback'; playback: SpotifyPlayback | null }
+  /** QQ Music's web player: whether it's signed in and playing (`null`: not running). Nothing else of the
+   * account. */
+  | { type: 'qqMusic'; signedIn: boolean | null; playing: boolean | null }
+  /** What QQ Music plays; `null`: nothing. */
+  | { type: 'qqMusicPlayback'; playback: QqMusicPlayback | null }
+  /** QQ Music's answer to one of the app's questions (its `id` at the top, as Apple Music's). */
+  | ({ type: 'qqMusicAnswer' } & QqMusicAnswer)
   /** Apple Music's web player: whether it's signed in and playing (`null`: not running), and whether its
    * sign-in window is open on the PC. */
   | {
@@ -360,6 +367,8 @@ export type PageMessage =
   /** A command for Spotify's web player (`westplay_host::spotify::Command`): `show` places it, in the frame's
    * pixels, where the Spotify app cuts the page open. */
   | { type: 'spotify'; command: SpotifyCommand }
+  /** A command for QQ Music's web player (`westplay_host::qq_music::Command`). */
+  | { type: 'qqMusic'; command: QqMusicCommand }
   /** A command for Apple Music's web player (`westplay_host::apple_music::Command`). */
   | { type: 'appleMusic'; command: AppleMusicCommand }
   /** A command for YouTube Music's web player (`westplay_host::youtube_music::Command`). */
@@ -516,6 +525,143 @@ export type SpotifyCommand =
   | { action: 'save'; uri: string; on: boolean }
 
 export type SpotifyRepeat = 'off' | 'all' | 'one'
+
+/** A command for QQ Music's web player (`westplay_host::qq_music::Command`): its own API answers the app's
+ * questions, and a song the app picks plays in an element of its own, so it plays at once. */
+export type QqMusicCommand =
+  /** Run (hidden), saying whether it's signed in (the QQ Music app opened). */
+  | { action: 'start' }
+  /** Its sign-in, in a window on the PC's desktop: the QR code is on its page there. */
+  | { action: 'signIn' }
+  | { action: 'signOut' }
+  /** One of the app's questions, answered with the same `id`. */
+  | { action: 'ask'; id: number; question: QqMusicQuestion }
+  /** A list of songs, from the one at `at`, in this app's own player. */
+  | { action: 'play'; songs?: QqMusicTrack[]; at?: number }
+  | { action: 'pause' }
+  | { action: 'next' }
+  | { action: 'previous' }
+  | { action: 'seek'; seconds: number }
+  /** The playing element's volume, 0 to 100. */
+  | { action: 'volume'; percent: number }
+  /** The cab's fade, in the playing element: its volume times `level` (0 to 1; 1, as QQ Music has it). */
+  | { action: 'fade'; level: number }
+  | { action: 'shuffle'; on: boolean }
+  | { action: 'repeat'; mode: QqMusicRepeat }
+
+/** What the app may ask of QQ Music (`westplay_host::qq_music::Question`): its page answers with its own
+ * API, in the page's session. */
+export type QqMusicQuestion =
+  /** What its search finds: songs, playlists, albums, singers (`page` from 1). */
+  | { ask: 'search'; query: string; page?: number }
+  /** A playlist's page (its songs), `page` 2 on being more of them. */
+  | { ask: 'playlist'; id: string; page?: number }
+  | { ask: 'album'; id: string }
+  | { ask: 'artist'; id: string }
+  /** What QQ Music recommends. */
+  | { ask: 'home' }
+  /** The account's own library: its playlists. */
+  | { ask: 'library' }
+  | { ask: 'lyrics'; id: string }
+
+/** A song of a list (a search's, a playlist's), as the cab shows it (`westplay_host::qq_music::Track`). */
+export interface QqMusicTrack {
+  id: string
+  title: string
+  artist: string
+  album: string
+  cover: string | null
+  duration: number
+  /** A song its account may not play without a subscription (the cab says so). */
+  vip: boolean
+}
+
+/** A playlist, album or singer, in a list or a search's results (`westplay_host::qq_music::Item`). */
+export interface QqMusicItem {
+  id: string
+  title: string
+  subtitle: string
+  image: string | null
+  /** `playlist`, `album`, `artist` or `chart`: which page it opens. */
+  kind: string
+}
+
+/** A row of a page: its title, and what it holds. */
+export interface QqMusicShelf {
+  title: string
+  items: QqMusicItem[]
+}
+
+/** A page of QQ Music's own (home, the library): rows of it. */
+export interface QqMusicSections {
+  shelves: QqMusicShelf[]
+  /** The library's: whether it's the account's. */
+  signedIn?: boolean
+}
+
+/** A search's results (`westplay_host::qq_music::Results`). */
+export interface QqMusicResults {
+  songs: QqMusicTrack[]
+  playlists: QqMusicItem[]
+  albums: QqMusicItem[]
+  artists: QqMusicItem[]
+  /** More songs than it sent: the next page's worth. */
+  more: boolean
+}
+
+/** A playlist's or album's page (`westplay_host::qq_music::Collection`). */
+export interface QqMusicCollection {
+  item: QqMusicItem
+  description: string
+  year: number | null
+  tracks: QqMusicTrack[]
+  /** More songs than it sent: the next page's worth. */
+  more: boolean
+}
+
+/** A singer's page (`westplay_host::qq_music::ArtistPage`). */
+export interface QqMusicArtistPage {
+  item: QqMusicItem
+  top: QqMusicTrack[]
+}
+
+/** A line of a song's words, at its second. */
+export interface QqMusicLine {
+  at: number
+  text: string
+}
+
+/** QQ Music's answer to one question (`westplay_host::qq_music::Answer`): the one field its question asked
+ * for, and `said` when it couldn't answer. */
+export interface QqMusicAnswer {
+  id: number
+  search?: QqMusicResults
+  collection?: QqMusicCollection
+  artist?: QqMusicArtistPage
+  home?: QqMusicSections
+  library?: QqMusicSections
+  lyrics?: QqMusicLine[]
+  said?: string
+}
+
+export type QqMusicRepeat = 'off' | 'all' | 'one'
+
+/** What QQ Music plays, and where in it (`westplay_host::qq_music::Playback`). */
+export interface QqMusicPlayback {
+  track: QqMusicTrack | null
+  playing: boolean
+  /** Asked to play, the sound not yet there: the app counts no time. */
+  loading: boolean
+  position: number
+  duration: number
+  /** The playing element's volume, 0 to 100 (`null`: not said). */
+  volume: number | null
+  /** The app's own queue: shuffled, and how it repeats; how many songs it holds, and where it is. */
+  shuffle: boolean
+  repeat: QqMusicRepeat | null
+  queue: number
+  index: number
+}
 
 /** What a row, a card or a shortcut shows: under its name, a card shows its description (or who it's by), a
  * row what it is and who it's by ("Playlist • Spotify", built in the cab's language). A song as a card (Home's

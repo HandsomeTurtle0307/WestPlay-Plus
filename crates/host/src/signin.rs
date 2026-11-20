@@ -90,6 +90,17 @@ pub const SPOTIFY_SIGN_UP: Site = Site {
     page_says: None,
 };
 
+/// QQ Music's sign-in: its own page (the QR code is on it, in the player's bar), on its own profile, so the
+/// page it plays in is signed in once the window is closed. The page doesn't come back to a different one, so
+/// there is no address to wait for: signed in or not is read from the page itself (`qq_music.js`).
+pub const QQ_MUSIC: Site = Site {
+    sign_in: "https://y.qq.com/portal/login.html",
+    title: "Sign in to QQ Music - WestPlay",
+    home: "https://y.qq.com/",
+    not_yet: None,
+    page_says: None,
+};
+
 /// Apple Music's sign-in: the dialog of its own web player, opened at once (`apple_music_sign_in.js`).
 pub const APPLE_MUSIC: Site = Site {
     sign_in: "https://music.apple.com/",

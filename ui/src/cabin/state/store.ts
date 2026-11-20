@@ -40,6 +40,11 @@ import {
   receiveTab as receiveSafariTab,
 } from '../apps/safari/safari'
 import {
+  receiveAnswer as receiveQqMusicAnswer,
+  receivePlayback as receiveQqMusicPlayback,
+  receiveState as receiveQqMusicState,
+} from '../apps/qqMusic/qqMusic'
+import {
   receiveAnswer as receiveYouTubeMusicAnswer,
   receivePlayback as receiveYouTubeMusicPlayback,
   receiveState as receiveYouTubeMusicState,
@@ -642,6 +647,15 @@ function receiveHostMessage(now: () => number): (message: HostMessage) => void {
         break
       case 'spotifyAnswer':
         receiveSpotifyAnswer(message)
+        break
+      case 'qqMusic':
+        receiveQqMusicState(message.signedIn)
+        break
+      case 'qqMusicPlayback':
+        receiveQqMusicPlayback(message.playback)
+        break
+      case 'qqMusicAnswer':
+        receiveQqMusicAnswer(message)
         break
       case 'spotifyPlayback':
         receivePlayback(message.playback)

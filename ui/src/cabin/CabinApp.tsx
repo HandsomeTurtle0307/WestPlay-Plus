@@ -3,6 +3,7 @@ import { isInHost, postToHost } from '../shared/host'
 import { appleMusicPlayer, pauseAppleMusicWithGame } from './apps/music/pauseWithGame'
 import { BRIGHTNESS_STEP, keybinds, stepped } from './apps/keybinds'
 import { oneAtATime } from './apps/oneAtATime'
+import { pauseQqMusicWithGame, qqMusicPlayer } from './apps/qqMusic/pauseWithGame'
 import { pauseSpotifyWithGame, spotifyPlayer } from './apps/spotify/pauseWithGame'
 import { pauseYouTubeWithGame, youtubePlayer } from './apps/youtube/pauseWithGame'
 import { pauseYouTubeMusicWithGame, youtubeMusicPlayer } from './apps/youtubeMusic/pauseWithGame'
@@ -33,7 +34,15 @@ import { followTimeZone } from './state/timeZone'
 const FOLLOW_POWER = isInHost() || new URLSearchParams(location.search).has('power')
 
 /** The cab's music players, and Safari's pages' sound (it plays one at a time with them, owner 2026-11-07). */
-const PLAYERS = [youtubePlayer, spotifyPlayer, appleMusicPlayer, youtubeMusicPlayer, playerAppPlayer, safariPlayer]
+const PLAYERS = [
+  youtubePlayer,
+  spotifyPlayer,
+  appleMusicPlayer,
+  youtubeMusicPlayer,
+  qqMusicPlayer,
+  playerAppPlayer,
+  safariPlayer,
+]
 
 /** The in-cabin screen: the shell around the screen for the current route, after the boot sequence. */
 export function CabinApp() {
@@ -44,6 +53,7 @@ export function CabinApp() {
   // on after.
   useEffect(() => pauseYouTubeWithGame(), [])
   useEffect(() => pauseSpotifyWithGame(), [])
+  useEffect(() => pauseQqMusicWithGame(), [])
   useEffect(() => pauseAppleMusicWithGame(), [])
   useEffect(() => pauseYouTubeMusicWithGame(), [])
   useEffect(() => pausePlayerWithGame(), [])

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import appleMusic from '../../crates/host/src/apple_music.js?raw'
 import appleMusicSignIn from '../../crates/host/src/apple_music_sign_in.js?raw'
 import cabSound from '../../crates/host/src/cab_sound.js?raw'
+import qqMusic from '../../crates/host/src/qq_music.js?raw'
 import spotify from '../../crates/host/src/spotify.js?raw'
 import youtube from '../../crates/host/src/youtube.js?raw'
 import youtubeMusic from '../../crates/host/src/youtube_music.js?raw'
@@ -16,6 +17,7 @@ const AS_RUN: Record<string, string[]> = {
   'Apple Music': [cabSound, appleMusic],
   'YouTube Music': [cabSound, youtubeMusic],
   Spotify: [cabSound, spotify],
+  'QQ Music': [cabSound, qqMusic],
   "Apple Music's sign-in": [appleMusicSignIn],
 }
 
