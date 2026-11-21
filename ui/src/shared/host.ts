@@ -559,6 +559,8 @@ export type QqMusicQuestion =
   | { ask: 'playlist'; id: string; page?: number }
   | { ask: 'album'; id: string }
   | { ask: 'artist'; id: string }
+  /** A chart's page: its songs, in its own order (what a home has without an account). */
+  | { ask: 'chart'; id: string }
   /** What QQ Music recommends. */
   | { ask: 'home' }
   /** The account's own library: its playlists. */
@@ -591,6 +593,8 @@ export interface QqMusicItem {
 export interface QqMusicShelf {
   title: string
   items: QqMusicItem[]
+  /** A row of songs (a chart's), played straight from it (`items` empty then). */
+  tracks?: QqMusicTrack[]
 }
 
 /** A page of QQ Music's own (home, the library): rows of it. */
@@ -638,6 +642,8 @@ export interface QqMusicAnswer {
   id: number
   search?: QqMusicResults
   collection?: QqMusicCollection
+  /** A chart's page (the same shape as a playlist's). */
+  chart?: QqMusicCollection
   artist?: QqMusicArtistPage
   home?: QqMusicSections
   library?: QqMusicSections

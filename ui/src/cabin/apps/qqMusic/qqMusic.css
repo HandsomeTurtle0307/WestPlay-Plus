@@ -9,13 +9,15 @@
   color: #f5f5f7;
 }
 
-/* --- Top: back, what's shown, sign in ------------------------------------------------------------ */
+/* --- Top: the tabs (or one page's name), back, sign in: one row ---------------------------------- */
 
 .qm-top {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 18px 4px;
+  padding: 10px 18px;
+  min-height: 58px;
+  box-sizing: border-box;
   flex: none;
 }
 
@@ -30,6 +32,8 @@
 }
 
 .qm-top-title {
+  flex: 1;
+  min-width: 0;
   font-size: 19px;
   font-weight: 600;
   overflow: hidden;
@@ -48,21 +52,21 @@
   flex: none;
 }
 
-/* --- Tabs ---------------------------------------------------------------------------------------- */
+/* --- Tabs: in the top row, as the cab's other players' -------------------------------------------- */
 
 .qm-tabs {
   display: flex;
-  gap: 6px;
-  padding: 0 18px 8px;
-  flex: none;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
 }
 
 .qm-tab {
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: 999px;
   background: #17171d;
   color: #b9b9c4;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .qm-tab-on {

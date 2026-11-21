@@ -103,6 +103,9 @@ pub enum Question {
     },
     /// An album's page.
     Album { id: String },
+    /// A chart's page (its id, as its home's cards have it): its songs, in its own order. What a home has
+    /// without an account.
+    Chart { id: String },
     /// A singer's page: their songs, and their albums.
     Artist { id: String },
     /// Home: what QQ Music recommends.
@@ -145,6 +148,9 @@ pub struct Item {
 pub struct Shelf {
     pub title: String,
     pub items: Vec<Item>,
+    /// A row of songs (a chart's), the cab playing one straight from it (`items` empty then): a home you
+    /// can play from without opening anything.
+    pub tracks: Vec<Track>,
 }
 
 /// A page of QQ Music's own (home, the library): rows of it.
@@ -207,6 +213,9 @@ pub struct Answer {
     pub search: Option<Results>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub collection: Option<Collection>,
+    /// A chart's page (the same as a playlist's: what it is, and its songs).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub chart: Option<Collection>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub artist: Option<ArtistPage>,
     #[serde(default, skip_serializing_if = "Option::is_none")]

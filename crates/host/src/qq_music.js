@@ -26,10 +26,13 @@
   }
   const account = () => ({ uin: cookie('uin').replace(/^o/, '') || '0', key: cookie('qm_keyst') || '' })
 
-  // Its `comm`: what every request of the page's own carries (its client, its account).
+  // Its `comm`: what every request of the page's own carries (its client, its account). The client is `19`
+  // and version `1859`, **as strings**: sent as the desktop app's (`ct` 24, `cv` 0, numbers) its search
+  // answers `code 0` with an estimate and no songs in it, which reads as "nothing found" rather than as the
+  // refusal it is. Measured against u.y.qq.com on 2026-11-20: `24`/`0` gave 0 songs, `19`/`1859` gave 1016.
   const comm = () => {
     const { uin, key } = account()
-    return { ct: 24, cv: 0, v: '1.0', uin, format: 'json', authst: key, tmeAppID: 'qqmusic' }
+    return { ct: '19', cv: '1859', uin, format: 'json', authst: key }
   }
 
   // A request of its own API, by a script tag: what its own pages do (a fetch of it is another origin's,
@@ -80,11 +83,12 @@
     return mid ? `https://y.gtimg.cn/music/photo_new/T002R300x300M000${mid}.jpg` : null
   }
 
-  // A song of its lists (a search's, a playlist's, an album's), as the cab shows it.
+  // A song of its lists (a search's, a playlist's, an album's, a chart's), as the cab shows it.
   const track = (song) => {
     if (!song) return null
     const singers = song.singer ?? song.singers ?? []
-    const album = song.album ?? {}
+    // Its older lists (a chart's) name the album in the song rather than in an album of its own.
+    const album = song.album ?? { mid: song.albummid, name: song.albumname }
     const mid = song.mid ?? song.songmid ?? song.songMid ?? ''
     return {
       id: mid,
@@ -94,7 +98,7 @@
       cover: cover(album),
       duration: Number(song.interval ?? song.duration ?? 0),
       // Its own list of what may not play without a subscription (shown, not hidden).
-      vip: Boolean(song.pay?.pay_play || song.pay?.pay_down === 2),
+      vip: Boolean(song.pay?.pay_play || song.pay?.payplay || song.pay?.pay_down === 2),
     }
   }
 
@@ -105,24 +109,33 @@
 
   // --- The app's questions ------------------------------------------------------------------------
 
+  // Its search: songs, and the playlists that match. It answers one kind of thing per call (`search_type` 0
+  // for songs, 3 for playlists), and nothing of the others, so the app asks twice.
   const search = async ({ query, page }) => {
-    const data = await call('music.search.SearchCgiService', 'DoSearchForQQMusicDesktop', {
-      query,
-      num_per_page: 30,
-      page_num: Math.max(1, Number(page) || 1),
-      search_type: 0,
-      grp: 1,
-    })
-    const body = data?.body ?? {}
-    // Its own grouping: songs first, then the playlists, albums and singers that match (all it sent).
+    const asked = { query, num_per_page: 30, page_num: Math.max(1, Number(page) || 1), grp: 1 }
+    const found = await call('music.search.SearchCgiService', 'DoSearchForQQMusicDesktop', { ...asked, search_type: 0 })
+    const body = found?.body ?? {}
+    // Its lists asked once (the app shows a search's lists with its songs, not a page of them at a time).
+    let lists = { list: [] }
+    if (Math.max(1, Number(page) || 1) === 1) {
+      try {
+        const playlists = await call('music.search.SearchCgiService', 'DoSearchForQQMusicDesktop', {
+          ...asked,
+          search_type: 3,
+        })
+        lists = playlists?.body?.songlist ?? lists
+      } catch {
+        // Its songs alone are a search's answer: its lists are the extra.
+      }
+    }
     return {
       songs: tracks(body.song?.list),
-      playlists: (body.songlist?.list ?? []).map((list) =>
+      playlists: (lists.list ?? body.songlist?.list ?? []).map((list) =>
         item({
-          id: String(list.dissid ?? list.content_id ?? ''),
+          id: String(list.dissid ?? list.content_id ?? list.diss_id ?? ''),
           title: list.dissname ?? list.title ?? '',
-          subtitle: list.creator?.name ?? '',
-          image: list.imgurl ?? null,
+          subtitle: list.creator?.name ?? list.creator_name ?? '',
+          image: list.imgurl ?? list.cover ?? null,
           kind: 'playlist',
         }),
       ),
@@ -226,6 +239,49 @@
   }
 
   // Home: what QQ Music recommends — its picks for today, and its charts.
+  // Its own artwork comes as `http://`: the page is `https://`, and a page may not load a plain one.
+  const secure = (url) => (typeof url === 'string' ? url.replace(/^http:\/\//, 'https://') : null)
+
+  // A chart of its own, by the id its pages give it: its name, and songs of it. This older endpoint answers
+  // without an account (and without the sign its newer one wants); it has no JSONP, only CORS — which it gives
+  // the page itself (`Access-Control-Allow-Origin: https://y.qq.com`).
+  const chart = async (id, songs) => {
+    const url =
+      `https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?topid=${encodeURIComponent(id)}` +
+      `&page=detail&type=top&song_begin=0&song_num=${songs}&format=json`
+    const response = await fetch(url, { credentials: 'include' })
+    if (!response.ok) throw new Error('qq music: no answer')
+    return response.json()
+  }
+
+  // The charts a home shows, by the ids its own pages give them (its names come with them: its own words).
+  const CHART_IDS = ['26', '27', '62', '3', '5']
+  const chartCards = async () => {
+    const cards = await Promise.all(
+      CHART_IDS.map(async (id) => {
+        try {
+          const info = (await chart(id, 1))?.topinfo ?? {}
+          return item({ id, title: info.ListName ?? '', subtitle: '', image: secure(info.pic), kind: 'chart' })
+        } catch {
+          return null
+        }
+      }),
+    )
+    return cards.filter(Boolean)
+  }
+
+  // A chart's page: its songs, in its own order.
+  const chartPage = async ({ id }) => {
+    const data = await chart(id, 100)
+    const info = data?.topinfo ?? {}
+    return {
+      item: item({ id: String(id), title: info.ListName ?? '', subtitle: '', image: secure(info.pic), kind: 'chart' }),
+      description: '',
+      tracks: tracks((data?.songlist ?? []).map((one) => one.data)),
+      more: false,
+    }
+  }
+
   const home = async () => {
     const shelves = []
     try {
@@ -248,6 +304,15 @@
     } catch {
       // Its own recommendations may need a signed-in account: the charts below are still worth showing.
     }
+    // The hot chart's songs, straight from the home: one press to play, nothing to open first — as the cab's
+    // other players' homes are a list of songs too. Its name is QQ Music's own.
+    try {
+      const hot = await chart('26', 12)
+      const songs = tracks((hot?.songlist ?? []).map((one) => one.data))
+      if (songs.length) shelves.push({ title: hot?.topinfo?.ListName ?? '', items: [], tracks: songs })
+    } catch {
+      // No chart of songs: the cards below are still a home.
+    }
     try {
       const charts = await call('music.musicToplist.Toplist', 'GetToplist', {})
       const lists = charts?.data?.toplist ?? charts?.toplist ?? []
@@ -266,7 +331,11 @@
         })
       }
     } catch {
-      // No charts: the recommendations alone are a home.
+      // Its own charts, by the ids its pages give them: what a home has without an account (`GetToplist`
+      // above refuses every call, 40000, signed in or not; this older endpoint still answers).
+      // The title is empty: the cab names this row in its own language (`words.charts`).
+      const cards = await chartCards()
+      if (cards.length) shelves.push({ title: '', items: cards })
     }
     return { home: { shelves } }
   }
@@ -320,7 +389,7 @@
     return lines.sort((a, b) => a.at - b.at)
   }
 
-  const QUESTIONS = { search, playlist, album, artist, home, library, lyrics }
+  const QUESTIONS = { search, playlist, album, artist, chart: chartPage, home, library, lyrics }
 
   // --- The app's own player -----------------------------------------------------------------------
 
@@ -373,8 +442,9 @@
       }
     }
     // A song the account may not play comes back without a file: said, not guessed at (`subscription`: the
-    // cab has its own words for it, `Playback.said`).
-    throw new Error('subscription')
+    // account's doesn't cover it; `signin`: there is no account to play it with — QQ Music answers 104009 to
+    // a signed-out vkey request, and an account is what it wants, not a subscription).
+    throw new Error(account().uin === '0' ? 'signin' : 'subscription')
   }
 
   // A song of the queue, ready to play: its address fetched as it's needed (they're short-lived).
@@ -397,7 +467,8 @@
     try {
       playing = await ready(at)
     } catch (error) {
-      trouble = String(error?.message) === 'subscription' ? 'subscription' : 'unplayable'
+      const said = String(error?.message)
+      trouble = said === 'signin' || said === 'subscription' ? said : 'unplayable'
     }
     if (!playing) {
       // Nothing to play: the element silenced, and the page's own player too (the cab is to be told of the song

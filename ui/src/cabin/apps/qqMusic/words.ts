@@ -59,6 +59,8 @@ export interface Words {
   album: string
   artist: string
   chart: string
+  /** The home's row of charts, whose own names come from QQ Music (`title` empty). */
+  charts: string
   noRecommendations: string
   nothingFound(query: string): string
   emptyPlaylist: string
@@ -66,7 +68,10 @@ export interface Words {
   emptyLibrary: string
   signInNote: string
   signInWhere: string
-  /** Why a song it was asked to play won't: its address came back without a file. */
+  /** Why a song it was asked to play won't: its address came back without a file, because there is no
+   * account to play it with. */
+  needsSignIn: string
+  /** The same, an account that has one: the song needs a subscription. */
   needsVip: string
   cannotPlay: string
 }
@@ -113,6 +118,7 @@ const ENGLISH: Words = {
   album: 'Album',
   artist: 'Singer',
   chart: 'Chart',
+  charts: 'Charts',
   noRecommendations: 'QQ Music sent no recommendations.',
   nothingFound: (query) => `Nothing found for “${query}”.`,
   emptyPlaylist: 'No songs in this playlist.',
@@ -120,6 +126,7 @@ const ENGLISH: Words = {
   emptyLibrary: 'This account has no playlists yet.',
   signInNote: 'Sign in to QQ Music and your playlists show here.',
   signInWhere: 'Press Sign In, then scan the QR code in the window on the PC.',
+  needsSignIn: 'Sign in to QQ Music to play songs.',
   needsVip: 'This song needs a QQ Music membership.',
   cannotPlay: 'This song can’t be played.',
 }
@@ -166,6 +173,7 @@ const SIMPLIFIED: Partial<Words> = {
   album: '专辑',
   artist: '歌手',
   chart: '排行榜',
+  charts: '排行榜',
   noRecommendations: 'QQ 音乐没有送推荐内容。',
   nothingFound: (query) => `没找到「${query}」。`,
   emptyPlaylist: '这个歌单里没有歌。',
@@ -173,6 +181,7 @@ const SIMPLIFIED: Partial<Words> = {
   emptyLibrary: '这个账号还没有歌单。',
   signInNote: '登录 QQ 音乐后，这里会显示你的歌单。',
   signInWhere: '点右上角的「登录」，在电脑上弹出的窗口里扫码。',
+  needsSignIn: '登录 QQ 音乐后才能播放歌曲。',
   needsVip: '这首歌需要 QQ 音乐会员。',
   cannotPlay: '这首歌放不了。',
 }
@@ -219,6 +228,7 @@ const TRADITIONAL: Partial<Words> = {
   album: '專輯',
   artist: '歌手',
   chart: '排行榜',
+  charts: '排行榜',
   noRecommendations: 'QQ 音樂沒有推薦內容。',
   nothingFound: (query) => `找不到「${query}」。`,
   emptyPlaylist: '這個歌單裡沒有歌曲。',
@@ -226,6 +236,7 @@ const TRADITIONAL: Partial<Words> = {
   emptyLibrary: '這個帳號還沒有歌單。',
   signInNote: '登入 QQ 音樂後，這裡會顯示你的歌單。',
   signInWhere: '點右上角的「登入」，在電腦上彈出的視窗裡掃碼。',
+  needsSignIn: '登入 QQ 音樂後才能播放歌曲。',
   needsVip: '這首歌需要 QQ 音樂會員。',
   cannotPlay: '這首歌無法播放。',
 }

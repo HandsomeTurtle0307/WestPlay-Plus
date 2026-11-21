@@ -170,6 +170,7 @@ interface Answers {
   playlist: QqMusicCollection
   album: QqMusicCollection
   artist: QqMusicArtistPage
+  chart: QqMusicCollection
   home: QqMusicSections
   library: QqMusicSections
   lyrics: QqMusicLine[]
@@ -197,6 +198,8 @@ export function receiveAnswer(answer: QqMusicAnswer): void {
     search: answer.search,
     playlist: answer.collection,
     album: answer.collection,
+    // A chart's page is a playlist's shape too: both names are given it.
+    chart: answer.chart,
     artist: answer.artist,
     home: answer.home,
     library: answer.library,

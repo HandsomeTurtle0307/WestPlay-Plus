@@ -71,14 +71,33 @@ export function Card({ item }: { item: Item }) {
   )
 }
 
-/** A row of cards, under what it is. */
-export function Shelf({ title, items, children }: { title: string; items?: Item[]; children?: ReactNode }) {
+/** A row of cards under what it is, or a row of songs (a chart's), played from it. */
+export function Shelf({
+  title,
+  items,
+  tracks,
+  children,
+}: {
+  title: string
+  items?: Item[]
+  tracks?: Track[]
+  children?: ReactNode
+}) {
   const all = items ?? []
-  if (!all.length && !children) return null
+  const songs = tracks ?? []
+  if (!all.length && !songs.length && !children) return null
   return (
     <section className="qm-shelf">
       <h2 className="qm-shelf-title">{title}</h2>
-      <div className="qm-shelf-row">{children ?? all.map((item) => <Card key={`${item.kind}:${item.id}`} item={item} />)}</div>
+      {songs.length ? (
+        <div className="qm-songs">
+          {songs.map((track, at) => (
+            <TrackRow key={`${track.id}:${at}`} track={track} tracks={songs} at={at} />
+          ))}
+        </div>
+      ) : (
+        <div className="qm-shelf-row">{children ?? all.map((item) => <Card key={`${item.kind}:${item.id}`} item={item} />)}</div>
+      )}
     </section>
   )
 }

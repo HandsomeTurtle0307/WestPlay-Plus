@@ -25,7 +25,13 @@ export function Home({ shown }: { shown: boolean }) {
     <div className="qm-page">
       {signedIn === false && <SignInNote />}
       {answer.shelves.map((shelf) => (
-        <Shelf key={shelf.title} title={shelf.title} items={shelf.items} />
+        // A row whose title came empty is the charts (`qq_music.js`): the cab names it in its own language.
+        <Shelf
+          key={shelf.title}
+          title={shelf.title || words.charts}
+          items={shelf.items}
+          tracks={shelf.tracks}
+        />
       ))}
       {!answer.shelves.length && <p className="qm-none">{words.noRecommendations}</p>}
     </div>
@@ -53,7 +59,10 @@ export function Results({ query }: { query: string }) {
 export function Collection({ item }: { item: Item }) {
   const words = useQqMusicWords()
   const album = item.kind === 'album'
-  const first = useAsked(album ? { ask: 'album', id: item.id } : { ask: 'playlist', id: item.id })
+  const chart = item.kind === 'chart'
+  const first = useAsked(
+    album ? { ask: 'album', id: item.id } : chart ? { ask: 'chart', id: item.id } : { ask: 'playlist', id: item.id },
+  )
   // A playlist's songs come a hundred at a time: each page asked after, and added as it comes.
   const [more, setMore] = useState<QqMusicCollection | null>(null)
   const [page, setPage] = useState(0)
@@ -109,7 +118,7 @@ export function Collection({ item }: { item: Item }) {
           <TrackRow key={`${track.id}:${at}`} track={track} tracks={collection.tracks} at={at} />
         ))}
       </div>
-      {hasMore && !album && (
+      {hasMore && !album && !chart && (
         <button className="qm-more" onClick={() => setPage((n) => n + 1)} disabled={loading}>
           {loading ? words.loading : words.loadMore}
         </button>

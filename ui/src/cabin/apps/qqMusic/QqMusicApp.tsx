@@ -60,35 +60,41 @@ export function QqMusicApp() {
   const back = () => {
     if (!goBack()) go({ type: 'pressHome' })
   }
-  const tabBar = !top && !typing
+  // The tabs stay in the top row while any tab is shown — typing included: the row is the only way back to
+  // the others, and a keyboard that came up by itself shouldn't take it away.
+  const tabBar = !top
 
   return (
     <section className="app-panel qm-app">
       <header className="qm-top">
-        <button className="qm-back" aria-label={words.back} onClick={back}>
-          ‹
-        </button>
-        <span className="qm-top-title">{top ? viewTitle(top) : tabName(tab, words)}</span>
+        {top && (
+          <button className="qm-back" aria-label={words.back} onClick={back}>
+            ‹
+          </button>
+        )}
+        {/* One row, as the cab's other players: the tabs while a tab is shown, what's open once a page is
+            (Back at the left), and signing in at the right. */}
+        {tabBar ? (
+          <nav className="qm-tabs">
+            {TABS.map((each) => (
+              <button
+                key={each}
+                className={`qm-tab${tab === each ? ' qm-tab-on' : ''}`}
+                onClick={() => openTab(each)}
+              >
+                {tabName(each, words)}
+              </button>
+            ))}
+          </nav>
+        ) : (
+          <span className="qm-top-title">{top ? viewTitle(top) : tabName(tab, words)}</span>
+        )}
         {signedIn === false && (
           <button className="qm-sign-in" onClick={() => signIn()}>
             {words.signIn}
           </button>
         )}
       </header>
-
-      {tabBar && (
-        <nav className="qm-tabs">
-          {TABS.map((each) => (
-            <button
-              key={each}
-              className={`qm-tab${tab === each ? ' qm-tab-on' : ''}`}
-              onClick={() => openTab(each)}
-            >
-              {tabName(each, words)}
-            </button>
-          ))}
-        </nav>
-      )}
 
       <main className="qm-body">
         {tab === 'search' && (
@@ -101,6 +107,8 @@ export function QqMusicApp() {
               hint={words.searchHint}
               label={words.searchLabel}
               returnKind="search"
+              // Search picked: the keyboard comes up with the field, one press rather than two.
+              autoSelect
             />
           </div>
         )}
@@ -117,7 +125,11 @@ export function QqMusicApp() {
 
       {playback?.said && (
         <div className="qm-said" role="status">
-          {playback.said === 'subscription' ? words.needsVip : words.cannotPlay}
+          {playback.said === 'signin'
+            ? words.needsSignIn
+            : playback.said === 'subscription'
+              ? words.needsVip
+              : words.cannotPlay}
         </div>
       )}
 
